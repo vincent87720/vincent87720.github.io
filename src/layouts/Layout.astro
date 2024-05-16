@@ -1,0 +1,41 @@
+---
+import { siteConfig } from "@/config";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+const { title, description } = Astro.props;
+
+const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hant" >
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || htmlTitle} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{htmlTitle}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root{
+		--accent-color: #52768E;
+	}
+	html {
+		display: block;
+		font-family: 'Fira Sans', sans-serif;
+		/* background: #648564; */
+		background: #222426;
+	}
+	body{
+		/* font-size: 0.5rem; */
+		margin: 0;
+	}
+</style>
