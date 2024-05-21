@@ -1,0 +1,60 @@
+<div class="pagination-box">
+    <a class="pagination-btn" href="">
+        <i class="icon-arrow icon-arrow-left"></i>
+        <span class="pagination-label">Newer Posts</span>
+    </a>
+    <span class="pagination-info">Page 2 of 8</span>
+    <a class="pagination-btn" href="">
+        <span class="pagination-label">Older Posts</span>
+        <i class="icon-arrow icon-arrow-right"></i>
+    </a>
+</div>
+<style>
+.pagination-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	padding: calc(1.25rem + 1vw) 0;
+    color: var(--color-content-secondary);
+}
+.pagination-btn{
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-background-contrast);
+    border-radius: 4rem;
+    margin: 0;
+    padding: 0 1rem;
+    height: 2.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-content-secondary);
+    transition:all 0.2s linear 0s;
+    cursor: pointer;
+}
+.pagination-btn:hover{
+    border: 1px solid var(--color-accent);
+    color: var(--color-content-lead);
+}
+.pagination-info{
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+.pagination-label{
+    margin: 0 0.25rem;
+}
+.icon-arrow{
+    margin: 0 0.25rem;
+    font-size: 1.3rem;
+}
+.icon-arrow::before{
+    position: relative;
+    width: auto;
+    margin: auto;
+}
+.icon-arrow-left::before{
+    content: '\e803';
+}
+.icon-arrow-right::before{
+    content: '\e804';
+}
+</style>
