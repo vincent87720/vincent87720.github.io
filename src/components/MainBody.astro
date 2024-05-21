@@ -1,0 +1,38 @@
+---
+import PostBox from "@/components/PostBox.astro"
+import PaginationBox from "@/components/PaginationBox.astro"
+
+---
+
+<main>
+    <article>
+        <div class="content">
+            <PostBox
+                href="https://vincent87720.github.io/solid-srp/index.html"
+                title="單一職責原則（Single Responsibility Principle，SRP）"
+                author="Katsuobushi"
+                authorHref="https://vincent87720.github.io/author/katsuobushi/index.html"
+                mainTag="SOLID"
+                mainTagHref="https://vincent87720.github.io/tag/solid/index.html"
+                createAt="2024-04-01T00:00:01+08:00"
+                body="在CleanArchitecture中提到了SRP的定義： A module should have one, and only one, reason to change. 書中的定義是「一個模組應該只有一個被改變的原因」。…"
+            ></PostBox>
+
+            <PostBox
+                href="https://vincent87720.github.io/solid-srp/index.html"
+                title="單一職責原則（Single Responsibility Principle，SRP）"
+                author="Katsuobushi"
+                authorHref="https://vincent87720.github.io/author/katsuobushi/index.html"
+                mainTag="SOLID"
+                mainTagHref="https://vincent87720.github.io/tag/solid/index.html"
+                createAt="2024-04-01T00:00:01+08:00"
+                body="在CleanArchitecture中提到了SRP的定義： A module should have one, and only one, reason to change. 書中的定義是「一個模組應該只有一個被改變的原因」。…"
+            ></PostBox>
+        </div>
+    </article>
+    <div>
+        <div class="content">
+            <PaginationBox></PaginationBox>
+        </div>
+    </div>
+</main>

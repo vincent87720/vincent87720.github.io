@@ -1,0 +1,40 @@
+---
+import PaginationBox from '../../components/Pagination.astro';
+import PostBox from '../../components/PostBox.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob('../posts/*.md*');
+  const orderByCreateDateTimeDescPosts = allPosts.sort((a, b) => 
+    new Date(a.frontmatter.create).valueOf() - new Date(b.frontmatter.create).valueOf()
+  ).reverse();
+  return paginate(orderByCreateDateTimeDescPosts, { pageSize: 8 });
+}
+const { page } = Astro.props;
+
+---
+<PaginationBox 
+currentPage={page.currentPage} 
+lastPage={page.lastPage}
+url={page.url}
+/>
+<div>
+  <!-- {
+    page.data.map(((post)=>
+      <PostBox
+        href={post.url}
+        title={post.frontmatter.title}
+        author="Katsuobushi"
+        authorHref="author/Katsuobushi"
+        mainTag={post.frontmatter.tags[0]}
+        createAt={post.frontmatter.create}
+        body={post.frontmatter.abstract}
+      />
+    ))
+  } -->
+</div>
+
+<PaginationBox 
+  currentPage={page.currentPage} 
+  lastPage={page.lastPage}
+  url={page.url}
+/>

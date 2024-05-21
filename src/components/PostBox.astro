@@ -1,0 +1,63 @@
+---
+interface Props {
+	href: string;
+	title: string;
+	author: string;
+	authorHref: string;
+	mainTag: string;
+	mainTagHref: string;
+	createAt: string;
+	body: string;
+}
+
+const { href, title, author, authorHref, mainTag, mainTagHref, createAt, body } = Astro.props;
+---
+<div class="post-box">
+	<h2 class="post-title">
+		<a href={href}>{title}</a>
+	</h2>
+	<span class="post-metadata">
+		By
+		<a href={authorHref}>{author}</a>
+		in <a href={mainTagHref}>{mainTag}</a>
+		on
+		<time datetime={createAt}>{createAt}</time>
+	</span>
+	<p class="post-abstract">{body}</p>
+</div>
+
+<style>
+.post-box{
+	padding: calc(2.5rem + 2vw) 0;
+	border-bottom: 1px solid var(--color-background-contrast);
+}
+.post-title {
+    position: relative;
+    margin: 0 0 1rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-indent: -1px;
+    color: var(--color-content-lead);
+}
+.post-title a{    
+	text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+}
+.post-metadata {    
+	font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.8rem;
+    color: var(--color-content-secondary);
+}
+.post-metadata a{    
+	text-decoration: none;
+    color: inherit;
+}
+.post-abstract {
+    margin: 1rem 0 0;
+    font-size: 1.1rem;
+    line-height: 2rem;
+	font-family: 'Libre Baskerville';
+}
+</style>
