@@ -1,18 +1,39 @@
+---
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  prevURL: string;
+  nextURL: string;
+}
+
+const { currentPage, lastPage, prevURL, nextURL } = Astro.props;
+const prevUrl = currentPage == 2 ? "/" : prevURL;
+const hasPrev = currentPage > 1;
+const hasNext = currentPage < lastPage;
+---
+
 <div class="pagination-box">
-    <a class="pagination-btn" href="">
-        <i class="icon-arrow icon-arrow-left"></i>
-        <span class="pagination-label">Newer Posts</span>
-    </a>
+    {
+        hasPrev && 
+        <a class="pagination-btn pagination-left" href={prevUrl}>
+            <i class="icon-arrow icon-arrow-left"></i>
+            <span class="pagination-label">Newer Posts</span>
+        </a>
+    }
     <span class="pagination-info">Page 2 of 8</span>
-    <a class="pagination-btn" href="">
-        <span class="pagination-label">Older Posts</span>
-        <i class="icon-arrow icon-arrow-right"></i>
-    </a>
+    {
+        hasNext &&
+        <a class="pagination-btn pagination-right" href={nextURL}>
+            <span class="pagination-label">Older Posts</span>
+            <i class="icon-arrow icon-arrow-right"></i>
+        </a>
+    }
 </div>
 <style>
 .pagination-box{
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 	padding: calc(1.25rem + 1vw) 0;
     color: var(--color-content-secondary);
@@ -35,7 +56,15 @@
     border: 1px solid var(--color-accent);
     color: var(--color-content-lead);
 }
+.pagination-left{
+    margin-right: auto;
+}
+.pagination-right{
+    margin-left: auto;
+}
 .pagination-info{
+    position: absolute;
+    margin: auto;
     font-size: 0.9rem;
     font-weight: 300;
 }

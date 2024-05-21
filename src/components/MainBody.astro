@@ -1,7 +1,6 @@
 ---
 import PostBox from "@/components/PostBox.astro"
 import PaginationBox from "@/components/PaginationBox.astro"
-
 ---
 
 <main>
@@ -32,7 +31,12 @@ import PaginationBox from "@/components/PaginationBox.astro"
     </article>
     <div>
         <div class="content">
-            <PaginationBox></PaginationBox>
+            <PaginationBox 
+            currentPage={1}
+            lastPage={7}
+            prevURL=""
+            nextURL="/page/1"
+            />
         </div>
     </div>
 </main>
