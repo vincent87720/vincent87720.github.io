@@ -3,16 +3,18 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import MainHeader from '@/components/MainHeader.astro';
 import MainBody from '@/components/MainBody.astro';
 import { siteConfig } from "@/config";
+import { orderByDateDesc } from "@/lib/sort"
 
-const allPosts = await Astro.glob('./posts/*.md');
-const titleLizt = allPosts.sort((a, b) => 
-      new Date(a.frontmatter.create).valueOf() - new Date(b.frontmatter.create).valueOf()
-    ).reverse().map((post)=>post.frontmatter.title);
+const allPosts = await Astro.glob('../pages/posts/*.md*');
+const sortedPosts = orderByDateDesc(allPosts);
+const slicedPosts = sortedPosts.slice(0, 7);
+const lastPage = Math.ceil(sortedPosts.length / 8);
 ---
 
 <MainLayout title="首頁">
 	<MainHeader title={siteConfig.title} description={siteConfig.description}></MainHeader>
-	<MainBody></MainBody>
+	<MainBody posts={slicedPosts} currentPage={1} lastPage={lastPage} prevUrl="" nextUrl="page/2">
+	</MainBody>
 </MainLayout>
 
 <style>

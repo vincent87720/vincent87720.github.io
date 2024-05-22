@@ -20,7 +20,7 @@ const hasNext = currentPage < lastPage;
             <span class="pagination-label">Newer Posts</span>
         </a>
     }
-    <span class="pagination-info">Page 2 of 8</span>
+    <span class="pagination-info">Page {currentPage} of {lastPage}</span>
     {
         hasNext &&
         <a class="pagination-btn pagination-right" href={nextURL}>

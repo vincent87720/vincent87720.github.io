@@ -1,5 +1,9 @@
 ---
-import PaginationBox from '../../components/Pagination.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import MainHeader from '@/components/MainHeader.astro';
+import MainBody from '@/components/MainBody.astro';
+import { siteConfig } from "@/config";
+import PaginationBox from '../../components/PaginationBox.astro';
 import PostBox from '../../components/PostBox.astro';
 
 export async function getStaticPaths({ paginate }) {
@@ -12,13 +16,14 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 
 ---
-<PaginationBox 
+<!-- <PaginationBox 
 currentPage={page.currentPage} 
 lastPage={page.lastPage}
-url={page.url}
+prevURL={page.url.prev}
+nextURL={page.url.next}
 />
 <div>
-  <!-- {
+  {
     page.data.map(((post)=>
       <PostBox
         href={post.url}
@@ -26,15 +31,16 @@ url={page.url}
         author="Katsuobushi"
         authorHref="author/Katsuobushi"
         mainTag={post.frontmatter.tags[0]}
+        mainTagHref="https://vincent87720.github.io/tag/solid/index.html"
         createAt={post.frontmatter.create}
         body={post.frontmatter.abstract}
       />
     ))
-  } -->
-</div>
+  }
+</div> -->
 
-<PaginationBox 
-  currentPage={page.currentPage} 
-  lastPage={page.lastPage}
-  url={page.url}
-/>
+<MainLayout title="首頁">
+	<MainHeader title={siteConfig.title} description={siteConfig.description}></MainHeader>
+	<MainBody posts={page.data} currentPage={page.currentPage} lastPage={page.lastPage} prevUrl={page.url.prev} nextUrl={page.url.next}>
+	</MainBody>
+</MainLayout>
