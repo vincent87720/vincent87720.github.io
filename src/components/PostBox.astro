@@ -1,4 +1,11 @@
 ---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 interface Props {
 	href: string;
 	title: string;
@@ -21,7 +28,7 @@ const { href, title, author, authorHref, mainTag, mainTagHref, createAt, body } 
 		<a href={authorHref}>{author}</a>
 		in <a href={mainTagHref}>{mainTag}</a>
 		on
-		<time datetime={createAt}>{createAt}</time>
+		<span>{dayjs(createAt).tz('Asia/Taipei').format()}</span>
 	</span>
 	<p class="post-abstract">{body}</p>
 </div>
