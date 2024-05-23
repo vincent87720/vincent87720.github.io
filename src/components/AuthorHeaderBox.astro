@@ -1,0 +1,60 @@
+---
+interface Props {
+	author: string;
+	avatarUrl: string;
+	archiveCount: string;
+}
+const { author, avatarUrl, archiveCount } = Astro.props;
+---
+<div class="author-info">
+    <span class="author-avatar author-item-space">
+        <img src={avatarUrl}></img>
+    </span>
+    <div class="author-item-space">
+        <span class="author-metadata">
+            <span>Author</span>
+            <span class="author-metadata-dash">－</span>
+            <span>{archiveCount} Posts</span>
+        </span>
+        <h2 class="author-name">{author}</h2>
+    </div>
+</div>
+
+<style>
+    .author-info{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-bottom: calc(2rem + 2vw);
+        z-index: 1024;
+    }
+    .author-avatar img{
+        display: block;
+        height: 6rem;
+        width: 6rem;
+        border: 2px solid var(--color-background-contrast);
+        background-color: var(--color-background-contrast);
+        border-radius: 8rem;
+    }
+    .author-item-space{
+        padding: 0 1.3rem;
+    }
+    .author-metadata{
+        display: block;
+        margin-bottom: 1rem;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.3rem;
+    }
+    .author-metadata-dash{
+        color: var(--color-background-contrast);
+    }
+    .author-name{
+        margin: 0;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        font-weight: bold;
+    }
+</style>

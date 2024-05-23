@@ -1,19 +1,8 @@
----
-interface Props {
-	title: string;
-	description?: string;
-}
-const { title, description } = Astro.props;
----
-
 <header class="main-header has-cover">
     <div class="content">
-        <div class="main-info">
-            <h1 class="main-title">{title}</h1>
-            <span class="main-description">{description}</span>
-        </div>
+        <slot />
         <div class="main-cover">
-            <img src="/src/assets/MainCover/IMG_2313.jpg" alt={title}>
+            <img src="/src/assets/MainCover/IMG_2313.jpg">
         </div>
     </div>
 </header>
@@ -27,13 +16,6 @@ const { title, description } = Astro.props;
     padding-top: calc(15rem + 8vw);
     background: black;
 }
-.main-info{
-    position: relative;
-    padding-bottom: calc(5rem + 4vw);
-    text-align: center;
-    color: white;
-    z-index: 1024;
-}
 .main-cover{    
     position: absolute;
     width: 100%;
@@ -45,14 +27,6 @@ const { title, description } = Astro.props;
     animation: 0.5s ease-in forwards fadein;
     display: flex;
     align-items: center;
-}
-@keyframes fadein {
-    0% {
-        opacity: 0.2
-    }
-    100% {
-        opacity: 0.9
-    }
 }
 
 .main-cover::after{
@@ -71,16 +45,4 @@ const { title, description } = Astro.props;
     height: 100%;
     object-fit: cover;
 }
-.main-title{
-    margin: 0;
-    font-size: 3.8rem;
-    line-height: 1;
-}
-.main-description{
-    display: block;
-    margin-top: 1rem;
-    font-size: 1.9rem;
-    line-height: 1;
-}
-
 </style>
