@@ -1,37 +1,37 @@
 ---
-import PostBox from "@/components/PostBox.astro"
-import PaginationBox from "@/components/PaginationBox.astro"
+import PostBox from "@/components/PostBox.astro";
+import PaginationBox from "@/components/PaginationBox.astro";
 
 const { posts, currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
 ---
 
 <main>
-    <article>
-        <div class="content">
-            {
-                posts.map(post=>
-                    <PostBox
-                        href={post.url}
-                        title={post.frontmatter.title}
-                        author="Katsuobushi"
-                        authorHref="author/katsuobushi/index.html"
-                        mainTag={post.frontmatter.tags[0]}
-                        mainTagHref={"tags/"+post.frontmatter.tags[0]}
-                        createAt={post.frontmatter.create}
-                        body={post.frontmatter.abstract}
-                    ></PostBox>
-                )
-            }
-        </div>
-    </article>
-    <div>
-        <div class="content">
-            <PaginationBox 
-            currentPage={currentPage}
-            lastPage={lastPage}
-            prevURL={prevUrl}
-            nextURL={nextUrl}
-            />
-        </div>
+  <article>
+    <div class="content">
+      {
+        posts.map((post) => (
+          <PostBox
+            href={post.url}
+            title={post.frontmatter.title}
+            author="Katsuobushi"
+            authorHref="author/katsuobushi/index.html"
+            mainTag={post.frontmatter.tags[0]}
+            mainTagHref={"tags/" + post.frontmatter.tags[0]}
+            createAt={post.frontmatter.create}
+            body={post.frontmatter.abstract}
+          />
+        ))
+      }
     </div>
+  </article>
+  <div>
+    <div class="content">
+      <PaginationBox
+        currentPage={currentPage}
+        lastPage={lastPage}
+        prevURL={prevUrl}
+        nextURL={nextUrl}
+      />
+    </div>
+  </div>
 </main>

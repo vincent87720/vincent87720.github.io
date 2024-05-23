@@ -2,110 +2,141 @@
 import { siteConfig } from "@/config";
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
 }
 const { title, description } = Astro.props;
 
 const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
 ---
 
-<!DOCTYPE html>
-<html lang="zh-Hant" >
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description || htmlTitle} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{htmlTitle}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || htmlTitle} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{htmlTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 <style is:global>
-	:root{
-		--font-primary: 'Fira Sans', sans-serif;
-		--font-secondary: 'Libre Baskerville', serif;
-    	--color-accent: #52768E;
-		--color-background-main: #222426;
-        --color-background-secondary: #1D1F20;
-        --color-background-contrast: #3B3D40;
-        --color-background-overlay: rgba(9,10,13,0.9);
-        --color-content-lead: #FFF;
-        --color-content-main: #E1E3E6;
-        --color-content-secondary: #909499;
-	}
-	html {
-		display: block;
-		font-family: 'Fira Sans', sans-serif;
-		/* background: #648564; */
-		background: #222426;
-	}
-	body{
-		/* font-size: 0.5rem; */
-		margin: 0;
-		color: var(--color-content-main);
-		font-family: var(--font-primary);
-	}
-	.content{
-		margin: 0 auto;
-		padding: 0 5rem;
-		max-width: calc(40rem + 8vw);
-	}
-	@font-face {
-		font-family: 'icon';
-		src: url("../assets/Font/icon.eot");
-		src: url("../assets/Font/icon.eot#iefix") format("embedded-opentype"),url("../assets/Font/icon.woff2") format("woff2"),url("../assets/Font/icon.woff") format("woff"),url("../assets/Font/icon.ttf") format("truetype"),url("../assets/Font/icon.svg#icon") format("svg");
-		font-weight: normal;
-		font-style: normal
-	}
-	@font-face {
-		font-family: 'Fira Sans';
-		font-style: normal;
-		font-weight: 400;
-		src: url("../assets/Font/fira-sans-v8-latin-regular.eot");
-		src: local("Fira Sans Regular"),local("FiraSans-Regular"),url("../assets/Font/fira-sans-v8-latin-regular.eot?#iefix") format("embedded-opentype"),url("../assets/Font/fira-sans-v8-latin-regular.woff2") format("woff2"),url("../assets/Font/fira-sans-v8-latin-regular.woff") format("woff"),url("../assets/Font/fira-sans-v8-latin-regular.ttf") format("truetype"),url("../assets/Font/fira-sans-v8-latin-regular.svg#FiraSans") format("svg")
-	}
-	@font-face {
-		font-family: 'Fira Sans';
-		font-style: normal;
-		font-weight: 500;
-		src: url("../assets/Font/fira-sans-v8-latin-500.eot");
-		src: local("Fira Sans Medium"),local("FiraSans-Medium"),url("../assets/Font/fira-sans-v8-latin-500.eot?#iefix") format("embedded-opentype"),url("../assets/Font/fira-sans-v8-latin-500.woff2") format("woff2"),url("../assets/Font/fira-sans-v8-latin-500.woff") format("woff"),url("../assets/Font/fira-sans-v8-latin-500.ttf") format("truetype"),url("../assets/Font/fira-sans-v8-latin-500.svg#FiraSans") format("svg")
-	}
+  :root {
+    --font-primary: "Fira Sans", sans-serif;
+    --font-secondary: "Libre Baskerville", serif;
+    --color-accent: #52768e;
+    --color-background-main: #222426;
+    --color-background-secondary: #1d1f20;
+    --color-background-contrast: #3b3d40;
+    --color-background-overlay: rgba(9, 10, 13, 0.9);
+    --color-content-lead: #fff;
+    --color-content-main: #e1e3e6;
+    --color-content-secondary: #909499;
+  }
+  html {
+    display: block;
+    font-family: "Fira Sans", sans-serif;
+    /* background: #648564; */
+    background: #222426;
+  }
+  body {
+    /* font-size: 0.5rem; */
+    margin: 0;
+    color: var(--color-content-main);
+    font-family: var(--font-primary);
+  }
+  .content {
+    margin: 0 auto;
+    padding: 0 5rem;
+    max-width: calc(40rem + 8vw);
+  }
+  @font-face {
+    font-family: "icon";
+    src: url("../assets/Font/icon.eot");
+    src:
+      url("../assets/Font/icon.eot#iefix") format("embedded-opentype"),
+      url("../assets/Font/icon.woff2") format("woff2"),
+      url("../assets/Font/icon.woff") format("woff"),
+      url("../assets/Font/icon.ttf") format("truetype"),
+      url("../assets/Font/icon.svg#icon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/Font/fira-sans-v8-latin-regular.eot");
+    src:
+      local("Fira Sans Regular"),
+      local("FiraSans-Regular"),
+      url("../assets/Font/fira-sans-v8-latin-regular.eot?#iefix")
+        format("embedded-opentype"),
+      url("../assets/Font/fira-sans-v8-latin-regular.woff2") format("woff2"),
+      url("../assets/Font/fira-sans-v8-latin-regular.woff") format("woff"),
+      url("../assets/Font/fira-sans-v8-latin-regular.ttf") format("truetype"),
+      url("../assets/Font/fira-sans-v8-latin-regular.svg#FiraSans")
+        format("svg");
+  }
+  @font-face {
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../assets/Font/fira-sans-v8-latin-500.eot");
+    src:
+      local("Fira Sans Medium"),
+      local("FiraSans-Medium"),
+      url("../assets/Font/fira-sans-v8-latin-500.eot?#iefix")
+        format("embedded-opentype"),
+      url("../assets/Font/fira-sans-v8-latin-500.woff2") format("woff2"),
+      url("../assets/Font/fira-sans-v8-latin-500.woff") format("woff"),
+      url("../assets/Font/fira-sans-v8-latin-500.ttf") format("truetype"),
+      url("../assets/Font/fira-sans-v8-latin-500.svg#FiraSans") format("svg");
+  }
 
-	@font-face {
-		font-family: 'Fira Sans';
-		font-style: normal;
-		font-weight: 700;
-		src: url("../assets/Font/fira-sans-v8-latin-700.eot");
-		src: local("Fira Sans Bold"),local("FiraSans-Bold"),url("../assets/Font/fira-sans-v8-latin-700.eot?#iefix") format("embedded-opentype"),url("../assets/Font/fira-sans-v8-latin-700.woff2") format("woff2"),url("../assets/Font/fira-sans-v8-latin-700.woff") format("woff"),url("../assets/Font/fira-sans-v8-latin-700.ttf") format("truetype"),url("../assets/Font/fira-sans-v8-latin-700.svg#FiraSans") format("svg")
-	}
-	[class^="icon-"]:before,[class*=" icon-"]:before {
-		font-family: "icon";
-		font-style: normal;
-		font-weight: normal;
-		speak: none;
-		display: inline-block;
-		text-decoration: inherit;
-		width: 1em;
-		margin-right: 0.2em;
-		text-align: center;
-		font-variant: normal;
-		text-transform: none;
-		line-height: 1em;
-		margin-left: 0.2em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale
-	}
-	@keyframes fadein {
-		0% {
-			opacity: 0.2
-		}
-		100% {
-			opacity: 0.9
-		}
-	}
+  @font-face {
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../assets/Font/fira-sans-v8-latin-700.eot");
+    src:
+      local("Fira Sans Bold"),
+      local("FiraSans-Bold"),
+      url("../assets/Font/fira-sans-v8-latin-700.eot?#iefix")
+        format("embedded-opentype"),
+      url("../assets/Font/fira-sans-v8-latin-700.woff2") format("woff2"),
+      url("../assets/Font/fira-sans-v8-latin-700.woff") format("woff"),
+      url("../assets/Font/fira-sans-v8-latin-700.ttf") format("truetype"),
+      url("../assets/Font/fira-sans-v8-latin-700.svg#FiraSans") format("svg");
+  }
+  [class^="icon-"]:before,
+  [class*=" icon-"]:before {
+    font-family: "icon";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @keyframes fadein {
+    0% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.9;
+    }
+  }
 </style>

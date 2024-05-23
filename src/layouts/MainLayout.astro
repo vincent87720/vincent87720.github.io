@@ -1,15 +1,15 @@
 ---
-import Layout from "./Layout.astro"
-import Navigation from "@/components/Navigation.astro"
+import Layout from "./Layout.astro";
+import Navigation from "@/components/Navigation.astro";
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
 }
 const { title, description } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-    <Navigation />
-	<slot />
+  <Navigation />
+  <slot />
 </Layout>

@@ -16,29 +16,6 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 
 ---
-<!-- <PaginationBox 
-currentPage={page.currentPage} 
-lastPage={page.lastPage}
-prevURL={page.url.prev}
-nextURL={page.url.next}
-/>
-<div>
-  {
-    page.data.map(((post)=>
-      <PostBox
-        href={post.url}
-        title={post.frontmatter.title}
-        author="Katsuobushi"
-        authorHref="author/Katsuobushi"
-        mainTag={post.frontmatter.tags[0]}
-        mainTagHref="https://vincent87720.github.io/tag/solid/index.html"
-        createAt={post.frontmatter.create}
-        body={post.frontmatter.abstract}
-      />
-    ))
-  }
-</div> -->
-
 <MainLayout title="首頁">
 	<MainHeader title={siteConfig.title} description={siteConfig.description}></MainHeader>
 	<MainBody posts={page.data} currentPage={page.currentPage} lastPage={page.lastPage} prevUrl={page.url.prev} nextUrl={page.url.next}>

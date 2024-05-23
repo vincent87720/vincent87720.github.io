@@ -1,33 +1,33 @@
 ---
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
 }
 const { title, description } = Astro.props;
 ---
+
 <div class="main-info">
-    <h1 class="main-title">{title}</h1>
-    <span class="main-description">{description}</span>
+  <h1 class="main-title">{title}</h1>
+  <span class="main-description">{description}</span>
 </div>
 
 <style>
-.main-info{
+  .main-info {
     position: relative;
     padding-bottom: calc(5rem + 4vw);
     text-align: center;
     color: white;
     z-index: 1024;
-}
-.main-title{
+  }
+  .main-title {
     margin: 0;
     font-size: 3.8rem;
     line-height: 1;
-}
-.main-description{
+  }
+  .main-description {
     display: block;
     margin-top: 1rem;
     font-size: 1.9rem;
     line-height: 1;
-}
-
+  }
 </style>

@@ -1,67 +1,67 @@
 ---
-import { navConfig } from "@/config"
+import { navConfig } from "@/config";
 
 const currentPath = Astro.url.pathname;
 ---
 
 <div class="nav-outer">
-    <nav class="nav-inner">
-        <span class="logo">
-            <a href="/">
-                <img src="/favicon.svg"/>
+  <nav class="nav-inner">
+    <span class="logo">
+      <a href="/">
+        <img src="/favicon.svg" />
+      </a>
+    </span>
+    <ul>
+      {
+        navConfig.items.map((x) => (
+          <li class:list={[{ active: currentPath === x.url }]}>
+            <a href={x.url}>
+              <span>{x.name}</span>
             </a>
-        </span>
-        <ul>
-            {
-                navConfig.items.map(x =>
-                    <li class:list={[{ active: currentPath ===  x.url}]}>
-                        <a href={x.url}>
-                            <span>{x.name}</span>
-                        </a>
-                    </li>
-                )
-            }
-        </ul>
-    </nav>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </div>
 <style>
-.nav-outer{
+  .nav-outer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1024;
-}
-.nav-inner{
+  }
+  .nav-inner {
     display: flex;
     padding: 1.5rem 2.5rem;
     max-height: calc(100vh - 6rem);
-}
-.nav-inner ul{
+  }
+  .nav-inner ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-.nav-inner li{
+  }
+  .nav-inner li {
     margin-right: 2rem;
     position: relative;
-}
-.nav-inner li a{
-    color: rgba(255,255,255,0.8);
+  }
+  .nav-inner li a {
+    color: rgba(255, 255, 255, 0.8);
     padding: 1rem 0;
     font-size: 1rem;
     line-height: 0.5rem;
     text-decoration: none;
     display: block;
-}
-.nav-inner li.active a{
-    color: rgba(255,255,255);
+  }
+  .nav-inner li.active a {
+    color: rgba(255, 255, 255);
     font-weight: 500;
-}
-.nav-inner li.active a::before{    
+  }
+  .nav-inner li.active a::before {
     position: absolute;
-    content: '';
+    content: "";
     width: 100%;
     height: 3px;
     left: 0;
@@ -69,15 +69,14 @@ const currentPath = Astro.url.pathname;
     padding: 0 0.5rem;
     margin-left: -0.5rem;
     margin-top: -1.5rem;
-    background: #52768E;
-}
-.logo a{
+    background: #52768e;
+  }
+  .logo a {
     display: block;
     height: 2.5rem;
-    
-}
-.logo a img{
+  }
+  .logo a img {
     margin-right: 2rem;
     height: 2.5rem;
-}
+  }
 </style>
