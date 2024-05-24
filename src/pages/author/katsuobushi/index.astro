@@ -1,23 +1,33 @@
 ---
-import MainLayout from '@/layouts/MainLayout.astro';
-import MainHeader from '@/components/MainHeader.astro';
-import AuthorHeaderBox from '@/components/AuthorHeaderBox.astro';
-import MainBody from '@/components/MainBody.astro';
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainHeader from "@/components/MainHeader.astro";
+import AuthorHeaderBox from "@/components/AuthorHeaderBox.astro";
+import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
-import { orderByDateDesc } from "@/lib/sort"
+import { orderByDateDesc } from "@/lib/sort";
 
-const allPosts = await Astro.glob('@/pages/posts/*.md*');
+const allPosts = await Astro.glob("@/pages/posts/*.md*");
 const sortedPosts = orderByDateDesc(allPosts);
 const slicedPosts = sortedPosts.slice(0, 7);
 const lastPage = Math.ceil(sortedPosts.length / 8);
 
-const author = "Katsuobushi";
+const currentPath = Astro.url.pathname;
 ---
 
-<MainLayout title="首頁">
-    <MainHeader>
-        <AuthorHeaderBox author={author} avatarUrl="/favicon.svg" archiveCount="7"></AuthorHeaderBox>
-    </MainHeader>
-	<MainBody posts={slicedPosts} currentPage={1} lastPage={lastPage} prevUrl="" nextUrl="page/2">
-	</MainBody>
+<MainLayout title={siteConfig.author}>
+  <MainHeader>
+    <AuthorHeaderBox
+      author={siteConfig.author}
+      avatarUrl="/favicon.svg"
+      archiveCount="7"
+    />
+  </MainHeader>
+  <MainBody
+    posts={slicedPosts}
+    currentPage={1}
+    lastPage={lastPage}
+    authorURL={"/author/" + siteConfig.author}
+    prevUrl=""
+    nextUrl={currentPath + "/page/2"}
+  />
 </MainLayout>

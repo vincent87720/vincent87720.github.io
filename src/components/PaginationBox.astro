@@ -2,12 +2,13 @@
 interface Props {
   currentPage: number;
   lastPage: number;
+  firstPageURL: string;
   prevURL: string;
   nextURL: string;
 }
 
-const { currentPage, lastPage, prevURL, nextURL } = Astro.props;
-const prevUrl = currentPage == 2 ? "/" : prevURL;
+const { currentPage, lastPage, firstPageURL, prevURL, nextURL } = Astro.props;
+const prevUrl = currentPage == 2 ? firstPageURL : prevURL;
 const hasPrev = currentPage > 1;
 const hasNext = currentPage < lastPage;
 ---

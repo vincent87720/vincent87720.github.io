@@ -2,7 +2,7 @@
 import PostBox from "@/components/PostBox.astro";
 import PaginationBox from "@/components/PaginationBox.astro";
 
-const { posts, currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
+const { posts, currentPage, lastPage, firstPageURL, prevUrl, nextUrl } = Astro.props;
 ---
 
 <main>
@@ -29,6 +29,7 @@ const { posts, currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
       <PaginationBox
         currentPage={currentPage}
         lastPage={lastPage}
+        firstPageURL={firstPageURL}
         prevURL={prevUrl}
         nextURL={nextUrl}
       />

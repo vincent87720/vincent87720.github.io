@@ -9,14 +9,14 @@ const { author, avatarUrl, archiveCount } = Astro.props;
 
 <div class="author-info">
   <span class="author-avatar author-item-space"> <img src={avatarUrl} /></span>
-</div>
-<div class="author-item-space">
-  <span class="author-metadata">
-    <span>Author</span>
-    <span class="author-metadata-dash">－</span>
-    <span>{archiveCount} Posts</span>
-  </span>
-  <h2 class="author-name">{author}</h2>
+  <div class="author-item-space">
+    <span class="author-metadata">
+      <span>Author</span>
+      <span class="author-metadata-dash">－</span>
+      <span>{archiveCount} Posts</span>
+    </span>
+    <h2 class="author-name">{author}</h2>
+  </div>
 </div>
 
 <style>
