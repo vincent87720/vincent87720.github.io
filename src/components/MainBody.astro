@@ -18,7 +18,7 @@ const { posts, currentPage, lastPage, firstPageURL, prevUrl, nextUrl } = Astro.p
             mainTag={post.frontmatter.tags[0]}
             mainTagHref={"tags/" + post.frontmatter.tags[0]}
             createAt={post.frontmatter.create}
-            body={post.frontmatter.abstract}
+            abstract={post.frontmatter.abstract}
           />
         ))
       }

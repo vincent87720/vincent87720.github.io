@@ -14,7 +14,7 @@ interface Props {
   mainTag: string;
   mainTagHref: string;
   createAt: string;
-  body: string;
+  abstract: string;
 }
 
 const {
@@ -25,7 +25,7 @@ const {
   mainTag,
   mainTagHref,
   createAt,
-  body,
+  abstract,
 } = Astro.props;
 ---
 
@@ -40,7 +40,7 @@ const {
     on
     <span>{dayjs(createAt).tz("Asia/Taipei").format()}</span>
   </span>
-  <p class="post-abstract">{body}</p>
+  {abstract && <p class="post-abstract">{abstract}</p>}
 </div>
 
 <style>

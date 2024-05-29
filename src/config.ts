@@ -24,3 +24,18 @@ export const navConfig: NavBarConfig = {
     },
   ],
 };
+
+export const tagConfig = {
+  "ASP.NET Core": {
+    name: "ASP.NET Core",
+    url: "asp-net-core",
+  },
+  "C#": {
+    name: "C#",
+    url: "csharp",
+  },
+  "Golang": {
+    name: "Golang",
+    url: "golang",
+  },
+};

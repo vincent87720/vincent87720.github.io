@@ -1,0 +1,44 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainHeader from "@/components/MainHeader.astro";
+import TagHeaderBox from "@/components/TagHeaderBox.astro";
+import MainBody from "@/components/MainBody.astro";
+import { tagConfig } from "@/config";
+import { orderByDateDesc } from "@/lib/sort";
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("@/pages/posts/*.md*");
+  const tags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ];
+  return tags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.frontmatter.tags.includes(tag)
+    );
+    const sortedPosts = orderByDateDesc(filteredPosts);
+    const tagURL = tagConfig[tag] == undefined ? tag : tagConfig[tag].url;
+    return {
+      params: { tag: tagURL },
+      props: {
+        posts: sortedPosts.slice(0, 7),
+        totalCount: filteredPosts.length,
+        lastPage: Math.ceil(sortedPosts.length / 8),
+      },
+    };
+  });
+}
+const params = Astro.params;
+const { posts, totalCount, lastPage } = Astro.props;
+---
+<MainLayout title={params.tag}>
+  <MainHeader>
+    <TagHeaderBox tagName={params.tag} postCount={totalCount}/>
+  </MainHeader>
+  <MainBody
+    posts={posts}
+    currentPage={1}
+    lastPage={lastPage}
+    firstPageURL={"/tag/" + params.tag}
+    prevUrl=""
+    nextUrl={params.tag + "/page/2"}
+  />
+</MainLayout>

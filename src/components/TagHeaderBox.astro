@@ -1,0 +1,48 @@
+---
+interface Props {
+  tagName: string;
+  postCount: string;
+}
+const { tagName, postCount } = Astro.props;
+---
+
+<div class="tag-info">
+  <div class="tag-info-inner">
+    <span class="tag-metadata">
+      <span>Topic</span>
+      <span class="tag-metadata-dash">－</span>
+      <span>{postCount} {postCount == "1" ? "Post" : "Posts"}</span>
+    </span>
+    <h2 class="tag-name">{tagName}</h2>
+  </div>
+</div>
+<style>
+  .tag-info {
+    position: relative;
+    display: flex;
+    padding-bottom: calc(2rem + 2vw);
+    clear: both;
+    z-index: 1024;
+  }
+  .tag-info-inner{
+    margin: 0.73rem 0;
+  }
+  .tag-metadata {
+    position: relative;
+    display: block;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.3rem;
+  }
+  .tag-metadata-dash {
+    color: var(--color-background-contrast);
+  }
+  .tag-name {
+    margin: 0;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    font-weight: bold;
+  }
+</style>
