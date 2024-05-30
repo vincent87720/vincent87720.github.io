@@ -1,0 +1,66 @@
+---
+import { subNavConfig } from "@/config";
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+
+const beginYear = 2019;
+const currentYear = new Date().getFullYear();
+---
+
+<div class="nav-outer">
+  <nav class="nav-inner">
+    <span>{title} © {beginYear}-{currentYear}</span>
+    <div class="nav-external-link">
+      {subNavConfig.items.map((x) => <a href={x.url}>{x.name}</a>)}
+    </div>
+    <div class="nav-item-grow"></div>
+    <span class="nav-pubinfo">
+        Published with 
+        <a href="https://astro.build">Astro</a>
+        • Theme modified from 
+        <a href="https://github.com/zutrinken/attila">Attila</a>
+    </span>
+  </nav>
+</div>
+<style>
+  .nav-outer {
+    padding: 14rem 0 2.5rem 0;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    padding: 0 2.5rem;
+    color: var(--color-content-secondary);
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 200;
+  }
+  .nav-pubinfo a{
+    text-decoration: none;
+    color: var(--color-content-secondary);
+    transition: all 0.2s linear 0s;
+    font-weight: 600;
+  }
+  .nav-pubinfo a:hover{
+    color: var(--color-content-main);
+  }
+  .nav-item-grow {
+    flex-grow: 1;
+  }
+  .nav-external-link{
+    display: flex;
+    margin: 0 1rem;
+  }
+  .nav-external-link a{
+    display: block;
+    margin: 0 1rem;
+    text-decoration: none;
+    color: var(--color-content-secondary);
+    transition: all 0.2s linear 0s;
+  }
+  .nav-external-link a:hover{
+    color: var(--color-content-main);
+  }
+</style>

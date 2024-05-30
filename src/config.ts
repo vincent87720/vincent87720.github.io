@@ -25,6 +25,19 @@ export const navConfig: NavBarConfig = {
   ],
 };
 
+export const subNavConfig: NavBarConfig = {
+  items: [
+    {
+      name: "Github",
+      url: "https://github.com/vincent87720",
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/vincent87720",
+    },
+  ],
+};
+
 export const tagConfig = {
   "ASP.NET Core": {
     name: "ASP.NET Core",
