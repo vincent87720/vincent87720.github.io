@@ -22,6 +22,7 @@ export async function getStaticPaths({ paginate }) {
 const params = Astro.params;
 const { page } = Astro.props;
 ---
+
 <MainLayout title={params.tag}>
   <MainHeader>
     <TagListHeaderBox />
@@ -30,8 +31,9 @@ const { page } = Astro.props;
     posts={page.data}
     currentPage={page.currentPage}
     lastPage={page.lastPage}
-    firstPageURL={"/tag/"+params.tag}
+    firstPageURL={"/tag/" + params.tag}
     prevUrl={page.url.prev}
     nextUrl={page.url.next}
+    extraPagination={true}
   />
 </MainLayout>

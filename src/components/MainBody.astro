@@ -2,10 +2,32 @@
 import PostBox from "@/components/PostBox.astro";
 import PaginationBox from "@/components/PaginationBox.astro";
 
-const { posts, currentPage, lastPage, firstPageURL, prevUrl, nextUrl } = Astro.props;
+const {
+  posts,
+  currentPage,
+  lastPage,
+  firstPageURL,
+  prevUrl,
+  nextUrl,
+  extraPagination = false,
+} = Astro.props;
 ---
 
 <main>
+  {
+    extraPagination && (
+      <div class="content">
+        <PaginationBox
+          currentPage={currentPage}
+          lastPage={lastPage}
+          firstPageURL={firstPageURL}
+          prevURL={prevUrl}
+          nextURL={nextUrl}
+          extraPagination={true}
+        />
+      </div>
+    )
+  }
   <article>
     <div class="content">
       {
@@ -24,15 +46,14 @@ const { posts, currentPage, lastPage, firstPageURL, prevUrl, nextUrl } = Astro.p
       }
     </div>
   </article>
-  <div>
-    <div class="content">
-      <PaginationBox
-        currentPage={currentPage}
-        lastPage={lastPage}
-        firstPageURL={firstPageURL}
-        prevURL={prevUrl}
-        nextURL={nextUrl}
-      />
-    </div>
+  <div class="content">
+    <PaginationBox
+      currentPage={currentPage}
+      lastPage={lastPage}
+      firstPageURL={firstPageURL}
+      prevURL={prevUrl}
+      nextURL={nextUrl}
+      extraPagination={false}
+    />
   </div>
 </main>

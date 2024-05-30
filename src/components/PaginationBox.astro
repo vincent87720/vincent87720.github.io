@@ -5,15 +5,23 @@ interface Props {
   firstPageURL: string;
   prevURL: string;
   nextURL: string;
+  extraPagination: boolean;
 }
 
-const { currentPage, lastPage, firstPageURL, prevURL, nextURL } = Astro.props;
+const {
+  currentPage,
+  lastPage,
+  firstPageURL,
+  prevURL,
+  nextURL,
+  extraPagination,
+} = Astro.props;
 const prevUrl = currentPage == 2 ? firstPageURL : prevURL;
 const hasPrev = currentPage > 1;
 const hasNext = currentPage < lastPage;
 ---
 
-<div class="pagination-box">
+<div class:list={["pagination-box", { "extra-pagination": extraPagination }]}>
   {
     hasPrev && (
       <a class="pagination-btn pagination-left" href={prevUrl}>
@@ -88,5 +96,8 @@ const hasNext = currentPage < lastPage;
   }
   .icon-arrow-right::before {
     content: "\e804";
+  }
+  .extra-pagination {
+    border-bottom: 1px solid var(--color-background-contrast);
   }
 </style>
