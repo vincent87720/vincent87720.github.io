@@ -52,3 +52,10 @@ export const tagConfig = {
     url: "golang",
   },
 };
+
+export const bannerConfig = {
+  "/": "/src/assets/MainCover/IMG_2313.jpg",
+  "/author/Katsuobushi": "/src/assets/MainCover/INSTAIMG_0049.jpg",
+  "/tags": "/src/assets/MainCover/IMG_8174.jpg",
+  "/tag/uploaded": "/src/assets/MainCover/IMG_8174.jpg",
+}

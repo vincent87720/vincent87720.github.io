@@ -1,9 +1,19 @@
-<header class="main-header has-cover">
+---
+import {bannerConfig} from "@/config"
+const currentPath = Astro.url.pathname;
+const banner = bannerConfig[currentPath];
+---
+<header class:list={["main-header", {"has-cover": banner}]}>
   <div class="content">
-    <slot />
-    <div class="main-cover">
-      <img src="/src/assets/MainCover/IMG_2313.jpg" />
+    <div class="header-box">
+      <slot />
     </div>
+    {
+      banner && 
+      <div class="main-cover">
+        <img src={banner} />
+      </div>
+    }
   </div>
 </header>
 
@@ -16,6 +26,9 @@
     padding-top: calc(15rem + 8vw);
     background: black;
   }
+  .has-cover .header-box{
+    border: none;
+  }
   .main-cover {
     position: absolute;
     width: 100%;
@@ -23,8 +36,8 @@
     left: 0;
     top: 0;
     z-index: 5;
-    background: no-repeat scroll center center / cover #000;
-    animation: 0.5s ease-in forwards fadein;
+    background: no-repeat scroll center center / cover #222426;
+    animation: 0.3s ease-in forwards fadein;
     display: flex;
     align-items: center;
   }
