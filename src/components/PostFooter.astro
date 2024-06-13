@@ -1,0 +1,195 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { tagConfig } from "@/config";
+interface Props {
+  tags: Array<string>;
+  prevPost: any;
+  nextPost: any;
+}
+
+const { tags, prevPost, nextPost } = Astro.props;
+
+const tagList = (tags ?? []).map((tag) => {
+  return {
+    name: tag,
+    url: tagConfig[tag] == undefined ? tag : tagConfig[tag].url,
+  };
+});
+---
+
+<div class="post-footer">
+  {
+    tagList.length > 0 && (
+      <div class="post-tags">
+        <span class="post-tags-label">Topic</span>
+        <div class="post-tags-list">
+          {tagList.map((tag) => (
+            <a class="post-tag-badge" href={"/tag/" + tag.url}>
+              {tag.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+  <div class="post-nav">
+    <div class="post-nav-half">
+      {
+        prevPost && (
+          <a class="post-nav-prev" href={prevPost.frontmatter.slug}>
+            <span class="post-nav-icon-left" />
+            <h2 class="post-nav-title">{prevPost.frontmatter.title}</h2>
+            <p class="post-nav-abstract">{prevPost.frontmatter.abstract}</p>
+            <p class="post-nav-metadata">
+              {dayjs(prevPost.frontmatter.create).tz("Asia/Taipei").format()}
+            </p>
+          </a>
+        )
+      }
+    </div>
+    <div class="post-nav-half">
+      {
+        nextPost && (
+          <a class="post-nav-next" href={nextPost.frontmatter.slug}>
+            <span class="post-nav-icon-right" />
+            <h2 class="post-nav-title">{nextPost.frontmatter.title}</h2>
+            <p class="post-nav-abstract">{nextPost.frontmatter.abstract}</p>
+            <p class="post-nav-metadata">
+              {dayjs(nextPost.frontmatter.create).tz("Asia/Taipei").format()}
+            </p>
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <div class="post-comments">
+    <script
+      src="https://utteranc.es/client.js"
+      repo="vincent87720/BlogComments"
+      issue-term="pathname"
+      theme="github-dark"
+      crossorigin="anonymous"
+      async></script>
+  </div>
+</div>
+
+<style>
+  .post-tags {
+    margin: 7.5rem 0 3.8rem 0;
+    display: flex;
+  }
+  .post-tags-label {
+    padding: 0.4rem 0;
+    margin: 0 0.7rem 0.5rem 0;
+    font-size: 1rem;
+    color: var(--color-content-secondary);
+  }
+  .post-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .post-tag-badge {
+    display: block;
+    padding: 0.4rem 1rem;
+    margin: 0 0.5rem 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-content-lead);
+    background-color: var(--color-accent);
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: all ease 0.2s;
+  }
+  .post-tag-badge:hover {
+    filter: brightness(90%);
+  }
+  .post-nav {
+    margin: 3.8rem 0;
+    position: relative;
+    border-top: 1px solid var(--color-background-contrast);
+    border-bottom: 1px solid var(--color-background-contrast);
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .post-nav::after {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    background: var(--color-background-contrast);
+  }
+  .post-nav-half {
+    width: 50%;
+  }
+  .post-nav-prev {
+    display: block;
+    padding: 1.25rem 1.85rem 1.25rem 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-content-lead);
+  }
+  .post-nav-icon-left {
+    margin-left: -2.5rem;
+    margin-top: -1.25rem;
+    width: 2.5rem;
+    font-size: 2.5rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    color: var(--color-background-contrast);
+    transition: all ease-out 0.2s;
+  }
+  .post-nav-icon-left::before {
+    font-family: "icon";
+    content: "\e803";
+  }
+  .post-nav-icon-right {
+    margin-top: -1.25rem;
+    width: 2.5rem;
+    font-size: 2.5rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    right: -2.5rem;
+    color: var(--color-background-contrast);
+    transition: all ease-out 0.2s;
+  }
+  .post-nav-icon-right::before {
+    font-family: "icon";
+    content: "\e804";
+  }
+  .post-nav-prev:hover .post-nav-icon-left,
+  .post-nav-next:hover .post-nav-icon-right {
+    color: var(--color-accent);
+  }
+  .post-nav-next {
+    display: block;
+    padding: 1.25rem 0 1.25rem 1.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-content-lead);
+  }
+  .post-nav-title {
+    margin: 0 0 0.4rem 0;
+  }
+  .post-nav-abstract {
+    margin: 0 0 0.7rem 0;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    height: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .post-nav-metadata {
+    margin: 0;
+    color: var(--color-content-secondary);
+  }
+</style>
