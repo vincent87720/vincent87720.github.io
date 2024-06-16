@@ -7,12 +7,11 @@ import { tagConfig } from "@/config";
 import { orderByDateDesc } from "@/lib/sort";
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob("@/pages/posts/*.md*");
-  const tags = [
-    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
-  ];
+  let tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+  tags = tags.filter((tag) => tag != null);
   return tags.flatMap((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.frontmatter.tags.includes(tag)
+      post.frontmatter.tags?.includes(tag)
     );
     const sortedPosts = orderByDateDesc(filteredPosts);
     const tagURL = tagConfig[tag] == undefined ? tag : tagConfig[tag].url;

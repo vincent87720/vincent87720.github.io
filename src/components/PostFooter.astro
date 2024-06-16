@@ -43,7 +43,8 @@ const tagList = (tags ?? []).map((tag) => {
             <h2 class="post-nav-title">{prevPost.frontmatter.title}</h2>
             <p class="post-nav-abstract">{prevPost.frontmatter.abstract}</p>
             <p class="post-nav-metadata">
-              {dayjs(prevPost.frontmatter.create).tz("Asia/Taipei").format()}
+              {prevPost.frontmatter.createAt &&
+                dayjs(prevPost.frontmatter.createAt).tz("Asia/Taipei").format()}
             </p>
           </a>
         )
@@ -57,7 +58,8 @@ const tagList = (tags ?? []).map((tag) => {
             <h2 class="post-nav-title">{nextPost.frontmatter.title}</h2>
             <p class="post-nav-abstract">{nextPost.frontmatter.abstract}</p>
             <p class="post-nav-metadata">
-              {dayjs(nextPost.frontmatter.create).tz("Asia/Taipei").format()}
+              {nextPost.frontmatter.createAt &&
+                dayjs(nextPost.frontmatter.createAt).tz("Asia/Taipei").format()}
             </p>
           </a>
         )

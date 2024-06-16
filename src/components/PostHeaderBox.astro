@@ -1,0 +1,86 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+interface Props {
+  postTitle: string;
+  postMainTag: string;
+  postUpdateAt: string;
+  author: string;
+  avatarUrl: string;
+}
+const { postTitle, postMainTag, postUpdateAt, author, avatarUrl } = Astro.props;
+---
+
+<div class="post-info">
+  <div class="post-type">
+    <span>Article</span>
+    {
+      postMainTag && (
+        <>
+          <span class="post-type-dash">－</span>
+          <span>{postMainTag}</span>
+        </>
+      )
+    }
+  </div>
+  <h1 class="post-title">{postTitle}</h1>
+  <div class="post-metadata">
+    <span class="author-avatar">
+      <img src={avatarUrl} />
+    </span>
+    <div class="metadata-right">
+      <h4 class="metadata-author">{author}</h4>
+      {
+        postUpdateAt && (
+          <span>{dayjs(postUpdateAt).tz("Asia/Taipei").format()}</span>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .post-info {
+    position: relative;
+    z-index: 1024;
+  }
+  .post-type {
+    margin-bottom: 1.3rem;
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-content-lead);
+  }
+  .post-type-dash {
+    padding: 0 0.5rem;
+  }
+  .post-title {
+    font-size: 3.8rem;
+    line-height: 4.4rem;
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+  }
+  .post-metadata {
+    display: flex;
+    align-items: center;
+    line-height: 1.2rem;
+  }
+  .metadata-author {
+    margin: 0;
+  }
+  .author-avatar {
+    margin-right: 0.6rem;
+  }
+  .author-avatar img {
+    display: block;
+    height: 2.3rem;
+    width: 2.3rem;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 8rem;
+  }
+</style>

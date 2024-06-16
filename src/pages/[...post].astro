@@ -1,32 +1,50 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import MainHeader from "@/components/MainHeader.astro";
+import PostHeader from "@/components/PostHeader.astro";
+import PostHeaderBox from "@/components/PostHeaderBox.astro";
 import PostBody from "@/components/PostBody.astro";
 import PostFooter from "@/components/PostFooter.astro";
+import { siteConfig } from "@/config";
 // import BaseLayout from '@/layouts/BaseLayout.astro'
 export async function getStaticPaths() {
   const allPosts = await Astro.glob("@/pages/posts/*.md*");
   return allPosts.map((post, index) => {
     return {
       params: { post: post.frontmatter.slug },
-      props: { post, prevPost: allPosts[index - 1], nextPost: allPosts[index + 1] },
+      props: {
+        post,
+        prevPost: allPosts[index - 1],
+        nextPost: allPosts[index + 1],
+      },
     };
   });
 }
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content } = post;
-// const { title, description } = post.data
+const postMainTag = post.frontmatter.tags?.[0];
 ---
 
 <MainLayout title="">
-  <MainHeader />
+  <PostHeader>
+    <PostHeaderBox
+      postTitle={post.frontmatter.title}
+      postMainTag={postMainTag}
+      postUpdateAt={post.frontmatter.createAt}
+      author={siteConfig.author}
+      avatarUrl="/favicon.svg"
+    />
+  </PostHeader>
   <article>
     <div class="content">
       <PostBody>
         <Content />
       </PostBody>
-      <PostFooter tags={post.frontmatter.tags} prevPost={prevPost} nextPost={nextPost}/>
+      <PostFooter
+        tags={post.frontmatter.tags}
+        prevPost={prevPost}
+        nextPost={nextPost}
+      />
     </div>
   </article>
 </MainLayout>

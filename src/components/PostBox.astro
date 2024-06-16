@@ -36,9 +36,10 @@ const {
   <span class="post-metadata">
     By
     <a href={authorHref}>{author}</a>
-    in <a href={mainTagHref}>{mainTag}</a>
-    on
-    <span>{dayjs(createAt).tz("Asia/Taipei").format()}</span>
+    {mainTag && "in"}
+    {mainTag && <a href={mainTagHref}>{mainTag}</a>}
+    {createAt && "on"}
+    {createAt && <span>{dayjs(createAt).tz("Asia/Taipei").format()}</span>}
   </span>
   {abstract && <p class="post-abstract">{abstract}</p>}
 </div>

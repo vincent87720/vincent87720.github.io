@@ -10,8 +10,8 @@ export async function getStaticPaths({ paginate }) {
   const orderByCreateDateTimeDescPosts = allPosts
     .sort(
       (a, b) =>
-        new Date(a.frontmatter.create).valueOf() -
-        new Date(b.frontmatter.create).valueOf()
+        new Date(a.frontmatter.createAt).valueOf() -
+        new Date(b.frontmatter.createAt).valueOf()
     )
     .reverse();
   return paginate(orderByCreateDateTimeDescPosts, { pageSize: 8 });
