@@ -1,5 +1,8 @@
 ---
-import {bannerConfig} from "@/config"
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import {bannerConfig} from "@/config";
+const images = import.meta.glob<{ default: ImageMetadata }>('@/assets/Cover/**/*.*');
 const currentPath = Astro.url.pathname;
 const banner = bannerConfig[currentPath];
 ---
@@ -11,7 +14,7 @@ const banner = bannerConfig[currentPath];
     {
       banner && 
       <div class="main-cover">
-        <img src={banner} />
+        <Image src={images[banner]()} alt=""/>
       </div>
     }
   </div>

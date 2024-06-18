@@ -54,9 +54,9 @@ export const tagConfig = {
 };
 
 export const bannerConfig = {
-  "/": "../assets/MainCover/IMG_2313.jpg",
-  "/author/Katsuobushi": "../assets/MainCover/INSTAIMG_0049.jpg",
-  "/tags": "../assets/MainCover/IMG_8174.jpg",
-  "/tag/uploaded": "../assets/MainCover/IMG_8174.jpg",
-  "/ghost-github-webpage": "../assets/PostCover/GhostBlog.svg",
+  "/": "/src/assets/Cover/MainCover/IMG_2313.jpg",
+  "/author/Katsuobushi": "/src/assets/Cover/MainCover/INSTAIMG_0049.jpg",
+  "/tags": "/src/assets/Cover/MainCover/IMG_8174.jpg",
+  "/tag/uploaded": "/src/assets/Cover/MainCover/IMG_8174.jpg",
+  "/ghost-github-webpage": "/src/assets/Cover/PostCover/GhostBlog.svg",
 }
