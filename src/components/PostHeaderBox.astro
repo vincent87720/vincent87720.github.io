@@ -36,7 +36,7 @@ const { postTitle, postMainTag, postUpdateAt, author, avatarUrl } = Astro.props;
       <h4 class="metadata-author">{author}</h4>
       {
         postUpdateAt && (
-          <span>{dayjs(postUpdateAt).tz("Asia/Taipei").format()}</span>
+          <span class="metadata-datetime">{dayjs(postUpdateAt).tz("Asia/Taipei").format()}</span>
         )
       }
     </div>
@@ -47,6 +47,7 @@ const { postTitle, postMainTag, postUpdateAt, author, avatarUrl } = Astro.props;
   .post-info {
     position: relative;
     z-index: 1024;
+    color: var(--color-content-lead);
   }
   .post-type {
     margin-bottom: 1.3rem;
@@ -71,6 +72,9 @@ const { postTitle, postMainTag, postUpdateAt, author, avatarUrl } = Astro.props;
   }
   .metadata-author {
     margin: 0;
+  }
+  .metadata-datetime{
+    filter: brightness(90%);
   }
   .author-avatar {
     margin-right: 0.6rem;

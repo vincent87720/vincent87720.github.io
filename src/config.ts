@@ -53,10 +53,29 @@ export const tagConfig = {
   },
 };
 
+const mainCoverPath = "/src/assets/Cover/MainCover";
+const postCoverPath = "/src/assets/Cover/PostCover";
+
 export const bannerConfig = {
-  "/": "/src/assets/Cover/MainCover/IMG_2313.jpg",
-  "/author/Katsuobushi": "/src/assets/Cover/MainCover/INSTAIMG_0049.jpg",
-  "/tags": "/src/assets/Cover/MainCover/IMG_8174.jpg",
-  "/tag/uploaded": "/src/assets/Cover/MainCover/IMG_8174.jpg",
-  "/ghost-github-webpage": "/src/assets/Cover/PostCover/GhostBlog.svg",
+  "/": `${mainCoverPath}/IMG_2313.jpg`,
+  "/author/Katsuobushi": `${mainCoverPath}/INSTAIMG_0049.jpg`,
+  "/tags": `${mainCoverPath}/IMG_8174.jpg`,
+  "/tag/uploaded": `${mainCoverPath}/IMG_8174.jpg`,
+
+  "/ghost-github-webpage": `${postCoverPath}/GhostBlog.svg`,
+  "/wildcard-mask": `${postCoverPath}/BinaryCode_kalhh_pxhere.jpg`,
+  "/golang-function": `${postCoverPath}/Gopher.jpeg`,
+  "/golang-kill-goroutine": `${postCoverPath}/Gopher.jpeg`,
+  "/python-web-crawler": `${postCoverPath}/Python.jpg`,
+  "/clock-and-bandwidth": `${postCoverPath}/BinaryCode_kalhh_pxhere.jpg`,
+  "/golang-package-excelize": `${postCoverPath}/Gopher.jpeg`,
+  "/golang-channel": `${postCoverPath}/Gopher.jpeg`,
+  "/clover-package-err": `${postCoverPath}/Clover.png`,
+  "/cpp-array-pointer-address": `${postCoverPath}/C++.jpg`,
+  "/golang-package-goversioninfo": `${postCoverPath}/Gopher.jpeg`,
+  "/qt-key-mouse-press-event": `${postCoverPath}/DarkCyan.jpg`,
+  "/golang-package-walk": `${postCoverPath}/Gopher.jpeg`,
+  "/golang-sort-traditionalchinese": `${postCoverPath}/Gopher.jpeg`,
+  "/csharp-connect-to-postgresql": `${postCoverPath}/VisualStudioGray.png`,
+  "/vue-vuecli-init": `${postCoverPath}/Vue_wallpaperflare.jpg`,
 }
