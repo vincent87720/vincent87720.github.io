@@ -6,7 +6,7 @@ import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
 import { orderByDateDesc } from "@/lib/sort";
 
-const allPosts = await Astro.glob("#/posts/**/*.md*");
+const allPosts = await Astro.glob("/src/posts/**/*.md");
 const sortedPosts = orderByDateDesc(allPosts);
 const slicedPosts = sortedPosts.slice(0, 7);
 const lastPage = Math.ceil(sortedPosts.length / 8);

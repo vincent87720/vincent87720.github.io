@@ -11,6 +11,12 @@ const banner = bannerConfig[currentPath];
     <div class="header-box">
       <slot />
     </div>
+    <!-- <div style="z-index: 1024; position: relative">{currentPath}</div>
+    {
+      Object.keys(bannerConfig).map(x=><div>{x}</div>)
+    }
+    <div style="z-index: 1024; position: relative">{bannerConfig[currentPath]}</div>
+    <div style="z-index: 1024; position: relative">{images[banner]}</div> -->
     {
       banner && 
       <div class="main-cover">

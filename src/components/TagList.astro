@@ -3,7 +3,7 @@ import TagBox from "@/components/TagBox.astro";
 import { sortTag } from "@/lib/sort";
 import { tagConfig } from "@/config";
 import { countItems } from "@/lib/tagHelper";
-const allPosts = await Astro.glob("#/posts/**/*.md*");
+const allPosts = await Astro.glob("/src/posts/**/*.md");
 const allTags = allPosts
   .map((post) => post.frontmatter.tags)
   .flat() as string[];

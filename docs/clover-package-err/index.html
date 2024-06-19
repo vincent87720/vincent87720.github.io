@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.D-yFUAAt.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Clover</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>開啟Clover時顯示錯誤訊息：Cannot install without ensuring the file system is read-write</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2020-02-22T00:00:00+08:00</span> </div> </div> </div>   </div> <!-- <div style="z-index: 1024; position: relative">{currentPath}</div>
+    {
+      Object.keys(bannerConfig).map(x=><div>{x}</div>)
+    }
+    <div style="z-index: 1024; position: relative">{bannerConfig}</div>
+    <div style="z-index: 1024; position: relative">{images[banner]}</div> --> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Clover.CtqO6_BX_11RSEw.webp" alt="" data-astro-cid-yl355ysp width="4000" height="1000" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p><img  src="/assets/10.D9XZR3V7_ZlCih8.webp" alt="10" width="831" height="256" loading="lazy" decoding="async"></p>
+<h2 id="版本">版本</h2>
+<ul>
+<li>OS：macOs Catalina  Version 10.15.3</li>
+<li>Clover：Clover_v2.5k_r5104</li>
+</ul>
+<h2 id="問題">問題</h2>
+<p>在開啟Clover時會跳出”Cannot install without ensuring the file system is read-write”錯誤訊息</p>
+<h2 id="解決方法及步驟">解決方法及步驟</h2>
+<ol>
+<li>Click the Apple symbol in the Menu bar.</li>
+<li>Click Restart…</li>
+<li>Hold down Command-R to reboot into Recovery Mode.</li>
+<li>Click Utilities.</li>
+<li>Select Terminal.</li>
+<li>Type csrutil disable.</li>
+<li>Press Return or Enter on your keyboard.</li>
+<li>Click the Apple symbol in the Menu bar.</li>
+<li>Click Restart…</li>
+</ol>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://www.reddit.com/r/hackintosh/comments/d9pbhy/clover_cannot_install_wo_ensuring_file_system_is/?utm_source=embedv2&#x26;utm_medium=post_embed&#x26;utm_content=post_title&#x26;embed_host_url=https://vincent87720.github.io/clover-package-err/index.html">Clover - Cannot Install w/o Ensuring File System is Read/Write</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/Clover" data-astro-cid-ctzdi7mj> Clover </a><a class="post-tag-badge" href="/tag/Hackintosh" data-astro-cid-ctzdi7mj> Hackintosh </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="golang-channel" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>Golang channel簡介</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>在golang裡可使用channel在多個執行緒與主程式之間傳送資料，channel可設定不同型態的buffer，並指定緩衝區大小</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2020-01-27T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="cpp-array-pointer-address" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>陣列與指標的位址</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>首先宣告名稱為arr大小為10的int陣列，接著分別輸出arr、&amp;arr[0]和&amp;arr</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2020-03-18T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

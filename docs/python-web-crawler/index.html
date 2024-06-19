@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.D-yFUAAt.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Python</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>使用Python爬蟲抓取網站資料</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2020-01-04T00:00:00+08:00</span> </div> </div> </div>   </div> <!-- <div style="z-index: 1024; position: relative">{currentPath}</div>
+    {
+      Object.keys(bannerConfig).map(x=><div>{x}</div>)
+    }
+    <div style="z-index: 1024; position: relative">{bannerConfig}</div>
+    <div style="z-index: 1024; position: relative">{images[banner]}</div> --> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Python.BaUjkUdX_2nTmef.webp" alt="" data-astro-cid-yl355ysp width="1890" height="800" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>使用python抓取網站或網頁資料是再方便不過的了，常見的抓取方法包含抓取網站回應的JSON檔，或是直接抓取網頁內容並進行分析，以下紀錄兩種方法該如何實作。</p>
+<h2 id="建立請求">建立請求</h2>
+<p>載入requests模組以建立HTTP請求</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> requests</span></span>
+<span class="line"></span></code></pre>
+<p>建立GET請求</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">url </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ''</span><span style="color:#F97583"> //</span><span style="color:#E1E4E8">填入目標網址以取得網頁內容</span></span>
+<span class="line"><span style="color:#E1E4E8">resp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> requests.get(url) </span><span style="color:#F97583">//</span><span style="color:#E1E4E8">建立get請求</span></span>
+<span class="line"></span></code></pre>
+<h2 id="解析請求">解析請求</h2>
+<h3 id="目標為json">目標為JSON</h3>
+<p>使用json()方法解析內容，返回值(data)為字典</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resp.json()</span></span>
+<span class="line"></span></code></pre>
+<h3 id="目標為html網頁內容">目標為HTML網頁內容</h3>
+<p>需使用BeautifulSoup模組裡的方法，使用以下指令載入該模組</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> bs4 </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> BeautifulSoup</span></span>
+<span class="line"></span></code></pre>
+<p>使用BeautifulSoup(htmlMarkup,‘html5lib’)方法解析網頁內容，返回值(soup)為&#x3C;class ‘bs4.BeautifulSoup’></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">soup </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BeautifulSoup(resp.text,</span><span style="color:#9ECBFF">'html5lib'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<h2 id="取得內容">取得內容</h2>
+<h3 id="目標為json-1">目標為JSON</h3>
+<p>以台灣證券交易所-201901月個股日成交資訊為例，網址為<a href="https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&#x26;date=20190101&#x26;stockNo=2881">https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&#x26;date=20190101&#x26;stockNo=2881</a>，該請求返回的內容如下圖</p>
+<p><img  src="/assets/10.NQCH_Zrs_1EyBfR.webp" alt="10" width="770" height="651" loading="lazy" decoding="async"></p>
+<p>需使用Pandas模組裡的方法，使用以下指令載入該模組</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> pandas </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> pd</span></span>
+<span class="line"></span></code></pre>
+<p>我們需要取得data裡的0~20所有資訊做為內容，將其放入pandas的dataframe裡，並使用fields作為其欄位的標籤</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#6A737D"># data[]為先前取得的資料，型態為字典</span></span>
+<span class="line"><span style="color:#E1E4E8">df </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> pd.DataFrame(data[</span><span style="color:#9ECBFF">'data'</span><span style="color:#E1E4E8">],</span><span style="color:#FFAB70">columns</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> data[</span><span style="color:#9ECBFF">'fields'</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"></span></code></pre>
+<p>若要使用foreach迴圈讀取或印出dataframe的內容時，需使用df.values作為範圍，若只使用df作為範圍會得到錯誤的結果</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> df:</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(row)</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8">日期</span></span>
+<span class="line"><span style="color:#B392F0">成交股數</span></span>
+<span class="line"><span style="color:#B392F0">成交金額</span></span>
+<span class="line"><span style="color:#B392F0">開盤價</span></span>
+<span class="line"><span style="color:#B392F0">最高價</span></span>
+<span class="line"><span style="color:#B392F0">最低價</span></span>
+<span class="line"><span style="color:#B392F0">收盤價</span></span>
+<span class="line"><span style="color:#B392F0">漲跌價差</span></span>
+<span class="line"><span style="color:#B392F0">成交筆數</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> df.values:</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(row)</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">'108/10/01'</span><span style="color:#9ECBFF"> '8,895,183'</span><span style="color:#9ECBFF"> '399,156,974'</span><span style="color:#9ECBFF"> '44.85'</span><span style="color:#9ECBFF"> '45.00'</span><span style="color:#9ECBFF"> '44.75'</span><span style="color:#9ECBFF"> '45.00'</span><span style="color:#9ECBFF"> '+0.45'</span><span style="color:#9ECBFF"> '3,310'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">'108/10/02'</span><span style="color:#9ECBFF"> '4,399,985'</span><span style="color:#9ECBFF"> '196,735,002'</span><span style="color:#9ECBFF"> '44.55'</span><span style="color:#9ECBFF"> '44.85'</span><span style="color:#9ECBFF"> '44.55'</span><span style="color:#9ECBFF"> '44.75'</span><span style="color:#9ECBFF"> '-0.25'</span><span style="color:#9ECBFF"> '1,745'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#79B8FF">    ...</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">'108/10/31'</span><span style="color:#9ECBFF"> '17,527,040'</span><span style="color:#9ECBFF"> '787,119,996'</span><span style="color:#9ECBFF"> '45.40'</span><span style="color:#9ECBFF"> '45.40'</span><span style="color:#9ECBFF"> '44.55'</span><span style="color:#9ECBFF"> '44.55'</span><span style="color:#9ECBFF"> '-0.90'</span><span style="color:#9ECBFF"> '5,017'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span></code></pre>
+<h3 id="目標為html網頁內容-1">目標為HTML網頁內容</h3>
+<p>類別為’bs4.BeautifulSoup’的物件可使用以下方法</p>
+<p>find()	//查詢第一筆符合的資料
+find(htmlTag)	//查詢標籤類型為htmlTag的第一筆元素
+find(id=‘elementID’)	//查詢id為elementID的元素
+find(htmlTag,class_=‘className’)	//查詢標籤為htmlTag且class為className的第一筆元素
+find(htmlTag,className)	//查詢標籤為htmlTag且class為className的第一筆元素</p>
+<p>find_all()	//查詢所有符合的元素
+find_all(htmlTag)	//查詢所有符合標籤類型為htmlTag的元素
+find_all(id=‘elementID’)	//查詢id為elementID的元素
+find_all(htmlTag,class_=‘className’)	//查詢標籤為htmlTag且class為className的所有元素
+find_all(htmlTag,className)	//查詢標籤為htmlTag且class為className的所有元素</p>
+<p>若使用find_all()查詢，可使用foreach迴圈歷遍所有查找到的元素</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> content </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> soup.find_all(</span><span style="color:#9ECBFF">'li'</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(content.string)</span></span>
+<span class="line"></span></code></pre>
+<p>使用.string方法取得元素的內容</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">soup </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BeautifulSoup(</span><span style="color:#9ECBFF">'&#x3C;h1 id="thisish1">content&#x3C;/h1>'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'html5lib'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(soup.h1)</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#E1E4E8">>&#x3C;</span><span style="color:#B392F0">h1</span><span style="color:#9ECBFF"> id="thisish1"</span><span style="color:#F97583">></span><span style="color:#9ECBFF">content</span><span style="color:#F97583">&#x3C;</span><span style="color:#9ECBFF">/h</span><span style="color:#F97583">1></span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">soup </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BeautifulSoup(</span><span style="color:#9ECBFF">'&#x3C;h1 id="thisish1">content&#x3C;/h1>'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'html5lib'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(soup.h1.string)</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8">content</span></span>
+<span class="line"></span></code></pre>
+<p>使用get(‘href’)方法取得元素的href屬性</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">soup </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BeautifulSoup(</span><span style="color:#9ECBFF">'&#x3C;h1 href="katsuobushi.com">content&#x3C;/h1>'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'html5lib'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(soup.h1.get(</span><span style="color:#9ECBFF">'href'</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8">katsuobushi.com</span></span>
+<span class="line"></span></code></pre>
+<h2 id="輸出為檔案">輸出為檔案</h2>
+<h3 id="輸出為csv檔案">輸出為csv檔案</h3>
+<p>需載入os及csv模組以使用open及writer方法</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> os</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> csv</span></span>
+<span class="line"></span></code></pre>
+<p>使用w模式開啟檔案，w模式為打開一個文件只用於寫入，若文件已存在則打开文件，並從頭開始編輯，原有内容會被刪除。若文件不存在，則創建新文件。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#FFAB70">file</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> open</span><span style="color:#E1E4E8">(filepath,</span><span style="color:#9ECBFF">'w'</span><span style="color:#E1E4E8">,</span><span style="color:#FFAB70">newline</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">''</span><span style="color:#E1E4E8">,</span><span style="color:#FFAB70">encoding</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'utf-8-sig'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p>使用csv.writer()創建一個writer</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">csvWriter </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> csv.writer(</span><span style="color:#FFAB70">file</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p>writerow()方法可將一列資料寫入到檔案中</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">csvWriter.writerow(row)</span></span>
+<span class="line"></span></code></pre>
+<p>寫入完畢後須關閉檔案，釋放資源</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#FFAB70">file</span><span style="color:#E1E4E8">.close()</span></span>
+<span class="line"></span></code></pre>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/Python" data-astro-cid-ctzdi7mj> Python </a><a class="post-tag-badge" href="/tag/Crawler" data-astro-cid-ctzdi7mj> Crawler </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="golang-kill-goroutine" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>從外部中斷Goroutine</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>想要從外部終止一個正在執行中或無限迴圈的goroutine，必須使用channel將中斷訊息傳入使之中斷</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2019-12-24T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="clock-and-bandwidth" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>記憶體的時脈與頻寬</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>記憶體的時脈與頻寬</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2020-01-15T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

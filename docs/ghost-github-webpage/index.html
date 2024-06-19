@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.D-yFUAAt.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Ghost</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>使用Ghost和GitHub Pages建立網頁</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2019-12-01T00:00:00+08:00</span> </div> </div> </div>   </div> <!-- <div style="z-index: 1024; position: relative">{currentPath}</div>
+    {
+      Object.keys(bannerConfig).map(x=><div>{x}</div>)
+    }
+    <div style="z-index: 1024; position: relative">{bannerConfig}</div>
+    <div style="z-index: 1024; position: relative">{images[banner]}</div> --> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/GhostBlog.D-bQiuSt_1iSLPP.svg" alt="" data-astro-cid-yl355ysp width="672" height="288" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>一直以來都有個困擾，就是查個程式寫法或是軟體操作方法每次都很快就忘記，所以想寫個Blog紀錄自己的手順，先前曾想過直接寫個網頁PUSH到GitHub上，但實在有點累( ˘･з･)，偶然又看到有個很喜歡的排版是用Ghost建立的，因此使用Ghost+GitHub的形式建立部落格</p>
+<hr>
+<h2 id="安裝ghost">安裝Ghost</h2>
+<h3 id="安裝ghost-cli">安裝Ghost-CLI‌‌</h3>
+<p>使用npm或yarn指令安裝Ghost-CLI</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install ghost-cli@latest -g</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="初始化ghost目錄">初始化Ghost‌‌目錄</h3>
+<p>開啟終端機，移動到要建立Ghost的目錄並使用指令安裝Ghost</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ghost install local</span></span>
+<span class="line"><span></span></span></code></pre>
+<p><img  src="/assets/10.Blzv8PF8_Z16K47H.webp" alt="10" width="722" height="330" loading="lazy" decoding="async"></p>
+<p>安裝完成後開啟git bash切換到同一目錄並初始化目錄</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git init</span></span>
+<span class="line"><span>git add -A</span></span>
+<span class="line"><span>git commit -m "Initial repository"</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>安裝npm並更新repository</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install</span></span>
+<span class="line"><span>git add -A</span></span>
+<span class="line"><span>git commit -m 'Installed Node dependencies'</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>安裝knex-migrator並更新repository</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install -g knex-migrator</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>初始化資料庫</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>knex-migrator</span></span>
+<span class="line"><span></span></span></code></pre>
+<h2 id="設定ghost">設定Ghost</h2>
+<p>移動到已安裝Ghost的目錄並輸入指令開啟Ghost</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ghost start</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>一般使用<code>http://localhost:2368/ghost</code>開啟Ghost的管理介面，但因為先前已經在另一個地方裝過一個Ghost，所以畫面顯示以<code>http://localhost:2369/ghost/</code>開啟管理介面</p>
+<p><img  src="/assets/20.lfUGR7jK_omRj2.webp" alt="20" width="634" height="200" loading="lazy" decoding="async"></p>
+<p><img  src="/assets/30.DqVB7OvD_elC13.webp" alt="30" width="739" height="814" loading="lazy" decoding="async"></p>
+<p>填寫網站名稱及作者基本資料</p>
+<p><img  src="/assets/40.D-AkfbrC_1GjKXv.webp" alt="40" width="739" height="814" loading="lazy" decoding="async"></p>
+<p>可輸入email邀請其他作者一起協作，只有自己使用的話則按下方直接進入管理介面</p>
+<p><img  src="/assets/50.DoTE-ofs_Z26vyUs.webp" alt="50" width="739" height="814" loading="lazy" decoding="async"></p>
+<p>更新repository</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git add -A</span></span>
+<span class="line"><span>git commit -m 'Finished local Ghost setup'</span></span>
+<span class="line"><span></span></span></code></pre>
+<h2 id="將網頁輸出為檔案">將網頁輸出為檔案</h2>
+<p>使用wget輸出網頁到docs資料夾內</p>
+<ul>
+<li>—mirror : 鏡像下載所有檔案相當於-N -r -l inf —no-remove-listing選項
+<ul>
+<li>-N : 若遠端檔案較新則下載檔案</li>
+<li>-r : 遞迴下載</li>
+<li>-l : 最大搜尋深度(0或inf表示無限)</li>
+<li>—no-remove-listing : 不刪除.listing檔案</li>
+</ul>
+</li>
+<li>—convert-links : 轉換檔案內路徑為符合本地目錄的路徑</li>
+<li>—page-requisites : 下載所有顯示網頁所需的檔案，例如圖片等</li>
+<li>-nH : 不建立名稱為網站名稱的目錄，直接在當前目錄建立檔案</li>
+<li>—no-parent : 不進入上層目錄</li>
+<li>-P : 指定下載目錄</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>wget --mirror --convert-links --page-requisites -nH --no-parent -P docs http://localhost:2368/</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>由於從Ghost抓下來的css、js的檔名和html內的相關路徑都會被加上類似下圖.css後方的字串，若直接傳到GitHub Pages上的話會讀不到，我們可使用Notepad++將目錄中所有檔案中有包括此字串的替換為空字串</p>
+<p><img  src="/assets/60.C2QiwWyL_Z1d4V3J.webp" alt="60" width="705" height="64" loading="lazy" decoding="async"></p>
+<p>開啟Notepad++，點選<strong>在檔案中尋找</strong></p>
+<p><img  src="/assets/70.htUdEUQQ_Z12Rg7c.webp" alt="70" width="1082" height="690" loading="lazy" decoding="async"></p>
+<p>輸入要刪除的字串並按下在多個檔案中取代</p>
+<p><img  src="/assets/80.Bo4VtgSR_1jCHfg.webp" alt="80" width="579" height="362" loading="lazy" decoding="async"></p>
+<p>更改docs/assets內built、css和js資料夾內所有包含該字串的檔名</p>
+<p><img  src="/assets/90.h0TFzoU5_txtcS.webp" alt="90" width="790" height="507" loading="lazy" decoding="async"></p>
+<p>更新repository</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git add -A</span></span>
+<span class="line"><span>git commit -m "Export website to docs file;"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h2 id="push檔案到github">PUSH檔案到GitHub</h2>
+<p>設定遠端倉庫</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git remote add origin &#x3C;webURL|SSH Key></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>將master分支推送到origin倉庫</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git push -u origin master</span></span>
+<span class="line"><span></span></span></code></pre>
+<h2 id="設定github-pages">設定GitHub Pages</h2>
+<p>進入剛剛上傳的GitHub的Repository，點選settings標籤
+<img  src="/assets/100.CbaPBttI_23aQRM.webp" alt="100" width="1295" height="66" loading="lazy" decoding="async"></p>
+<p>尋找GitHub Pages區塊，選擇master branch /docs folder作為網頁來源
+<img  src="/assets/110.DeB5WPnt_ZEkG0a.webp" alt="110" width="1100" height="765" loading="lazy" decoding="async"></p>
+<h2 id="已可瀏覽網頁">已可瀏覽網頁</h2>
+<p>在網址列輸入<code>http://帳號.github.io/RepositoryName</code>即可瀏覽網頁</p>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/Ghost" data-astro-cid-ctzdi7mj> Ghost </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj>  </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="wildcard-mask" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>計算Wildcard Mask</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>在設置ACL(Access Control List)時，會用到Wildcard Mask標示在範圍內的IP位址，這篇筆記記錄如何使用wildcard mask計算IP範圍的起點及終點</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2019-12-14T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

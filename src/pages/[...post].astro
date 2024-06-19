@@ -7,7 +7,7 @@ import PostFooter from "@/components/PostFooter.astro";
 import { siteConfig } from "@/config";
 // import BaseLayout from '@/layouts/BaseLayout.astro'
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob("#/posts/**/*.md*");
+  const allPosts = await Astro.glob("/src/posts/**/*.md");
   return allPosts.map((post, index) => {
     return {
       params: { post: post.frontmatter.slug },

@@ -5,7 +5,7 @@ import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob("#/posts/**/*.md*");
+  const allPosts = await Astro.glob("/src/posts/**/*.md");
   const orderByCreateDateTimeDescPosts = allPosts
     .sort(
       (a, b) =>
