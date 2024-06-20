@@ -1,6 +1,7 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import MainHeader from "@/components/MainHeader.astro";
+import HomeHeaderBox from "@/components/HomeHeaderBox.astro";
 import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
 
@@ -19,7 +20,12 @@ const { page } = Astro.props;
 ---
 
 <MainLayout title="">
-  <MainHeader title={siteConfig.title} description={siteConfig.description} />
+  <MainHeader customPath="/">
+    <HomeHeaderBox
+      title={siteConfig.title}
+      description={siteConfig.description}
+    />
+  </MainHeader>
   <MainBody
     posts={page.data}
     currentPage={page.currentPage}

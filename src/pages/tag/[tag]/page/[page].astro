@@ -23,7 +23,7 @@ const { page } = Astro.props;
 ---
 
 <MainLayout title={params.tag}>
-  <MainHeader>
+  <MainHeader customPath={"/tag/" + params.tag}>
     <TagListHeaderBox />
   </MainHeader>
   <MainBody

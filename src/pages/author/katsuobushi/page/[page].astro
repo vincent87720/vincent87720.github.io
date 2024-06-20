@@ -20,7 +20,7 @@ const { page } = Astro.props;
 ---
 
 <MainLayout title={siteConfig.author}>
-  <MainHeader>
+  <MainHeader customPath={"/author/" + siteConfig.author}>
     <AuthorHeaderBox
       author={siteConfig.author}
       avatarUrl="/favicon.svg"
