@@ -37,14 +37,14 @@ const tagList = (tags ?? []).map((tag) => {
   <div class="post-nav">
     <div class="post-nav-half">
       {
-        prevPost && (
-          <a class="post-nav-prev" href={prevPost.frontmatter.slug}>
+        nextPost && (
+          <a class="post-nav-prev" href={nextPost.frontmatter.slug}>
             <span class="post-nav-icon-left" />
-            <h2 class="post-nav-title">{prevPost.frontmatter.title}</h2>
-            <p class="post-nav-abstract">{prevPost.frontmatter.abstract}</p>
+            <h2 class="post-nav-title">{nextPost.frontmatter.title}</h2>
+            <p class="post-nav-abstract">{nextPost.frontmatter.abstract}</p>
             <p class="post-nav-metadata">
-              {prevPost.frontmatter.createAt &&
-                dayjs(prevPost.frontmatter.createAt).tz("Asia/Taipei").format()}
+              {nextPost.frontmatter.createAt &&
+                dayjs(nextPost.frontmatter.createAt).tz("Asia/Taipei").format()}
             </p>
           </a>
         )
@@ -52,14 +52,14 @@ const tagList = (tags ?? []).map((tag) => {
     </div>
     <div class="post-nav-half">
       {
-        nextPost && (
-          <a class="post-nav-next" href={nextPost.frontmatter.slug}>
+        prevPost && (
+          <a class="post-nav-next" href={prevPost.frontmatter.slug}>
             <span class="post-nav-icon-right" />
-            <h2 class="post-nav-title">{nextPost.frontmatter.title}</h2>
-            <p class="post-nav-abstract">{nextPost.frontmatter.abstract}</p>
+            <h2 class="post-nav-title">{prevPost.frontmatter.title}</h2>
+            <p class="post-nav-abstract">{prevPost.frontmatter.abstract}</p>
             <p class="post-nav-metadata">
-              {nextPost.frontmatter.createAt &&
-                dayjs(nextPost.frontmatter.createAt).tz("Asia/Taipei").format()}
+              {prevPost.frontmatter.createAt &&
+                dayjs(prevPost.frontmatter.createAt).tz("Asia/Taipei").format()}
             </p>
           </a>
         )
