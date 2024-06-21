@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.HZtN7SYH.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>C#</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>Generic Delegates 泛型委派</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2024-06-13T00:00:00+08:00</span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/VisualStudioGray.BNL0rM63_1nMgSj.webp" alt="" data-astro-cid-yl355ysp width="1920" height="1080" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>泛型允許我們在定義時先不決定型別，在實例化時才依照呼叫者傳入的型別決定其型別。而泛型委派就是將委派以泛型的方式實作，使得委派可以在實例化時才指定其回傳值及型別。</p>
+<p>.NET提供兩個好用的泛型委派，分別是 System.Action 和 System.Func，多數情況下不需要自定義泛型委派。</p>
+<h2 id="泛型委派的優點">泛型委派的優點</h2>
+<p>泛型委派好用的地方在於可以不用在程式內宣告任何委派，可以直接使用Action&#x3C;>或Func&#x3C;>作為參數在多個函式間傳遞，方便好用。</p>
+<h2 id="action">Action&#x3C;></h2>
+<p>Action的尖括弧內可放入最多16個型別參數，若需要將參數傳入委派除了需要在呼叫時在括弧內填入參數，也必須在定義時就將參數型別放入尖括弧中定義委派的型別。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">// 定義委派</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> delegate</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">SendDrinks</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>以<code>SendDrinks</code>這個委派為例，我們可以將其由Action改寫。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">// 簡化定義委派，直接在CreateGroupBuying的參數中使用Action即可</span></span>
+<span class="line"><span style="color:#6A737D">// public delegate void SendDrinks(string order);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 直接使用Action定義委派型態，簡化定義委派寫法</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Action</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>以Action定義委派使我們不需在程式中額外定義委派，顯得更為簡潔且方便。</p>
+<p>使用Action無法定義回傳值，使用Func則可以定義回傳值。</p>
+<h2 id="func">Func&#x3C;></h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">// 簡化定義委派，直接在CreateGroupBuying的參數中使用Func即可</span></span>
+<span class="line"><span style="color:#6A737D">// public delegate string SendDrinks(string order);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 直接使用Func定義委派型態，簡化定義委派寫法</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Func</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">string</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">	var</span><span style="color:#B392F0"> result</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(result);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p><code>CreateGroupBuying</code>方法中使用到<code>Func&#x3C;string, string> send</code>作為參數，<code>Func&#x3C;string, string></code>尖括弧內的最後一個<code>string</code>為回傳值，第一個<code>string</code>為傳入參數的型別。</p>
+<p>需注意，Func會將回傳值型別參數視為必填，在Func的尖括弧內只有一個型別參數的情況下，該型別參數會視為回傳值型別參數，若需要只使用一個型別參數但該型別參數不是回傳值的情況，則必須使用Action進行定義。</p>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.action-1?view=net-8.0">Action</a></li>
+<li><a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.func-2?view=net-8.0">Func</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10270964">D-21 委派 ? delegate ? Action ? Linq</a></li>
+<li><a href="https://jeffprogrammer.wordpress.com/2015/12/30/%E8%A7%80%E5%BF%B5-generic-delegate-action-func/">觀念 Generic Delegate, Action, Func</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/csharp" data-astro-cid-ctzdi7mj> C# </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="solid-srp" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>單一職責原則（Single Responsibility Principle，SRP）</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>在CleanArchitecture中提到了SRP的定義：A module should have one, and only one, reason to change.書中的定義是「一個模組應該只有一個被改變的原因」。當某個模組會因為多個角色而改變，換句話說就是某個模組有多個「reason to change」時，則違反SRP。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2024-04-01T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj>  </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.HZtN7SYH.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Network</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>TCP 三方交握</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2021-06-14T00:00:00+08:00</span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Communication.CoHLOBLI_wVP4F.webp" alt="" data-astro-cid-yl355ysp width="6000" height="2000" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>三方交握(Three-Way Handshake)是TCP(Transmission Control Protocol)在傳送資料前的一個儀式，用來確認雙方都有收到訊息並建立連線</p>
+<p>而在解釋三方交握之前，先來看看三方交握會用到的三個概念：請求、確認和同步</p>
+<h2 id="請求確認">請求/確認</h2>
+<p>假設有A和B兩台電腦，A電腦要傳送封包給B電腦，為了確認B電腦是否收到封包，B電腦在收到A傳過來的封包之後會返回一個確認(Acknowledgment,ACK)封包，以告知A電腦已經有收到封包了，步驟如下：</p>
+<ol>
+<li>A電腦傳送封包給B電腦</li>
+<li>B電腦回傳一個帶有ACK欄位資訊的封包給A電腦</li>
+</ol>
+<p>這可以使TCP變成可靠的傳輸，但是另外一個問題出現了，若A電腦向B電腦發送多個封包，B電腦照樣送回多個ACK封包給A電腦，A電腦將會無法得知這些ACK是對應到哪個已發送的封包，就會不知道哪個對方已經收到，而哪個對方沒收到，這時我們可以用序列號(sequence number,SEQ)來解決這個問題。</p>
+<h2 id="序列號">序列號</h2>
+<p>但是這邊又遇到一個問題了，因為A電腦和B電腦的起始序列號不一定會一樣，所以A電腦發送出去的封包的序列號不等於B電腦發送出去的封包的ACK的序號，例如A電腦初始序列號為7，B電腦初始序列號為1000。所以在開始傳送封包前AB雙方會進行同步(synchronization)來確認彼此的初始序列號(Initial Sequence Number,ISN)是多少，以作為後續在收到請求後要發送確認封包時，可以確認對方的序號是否正確。</p>
+<h2 id="同步">同步</h2>
+<p>同步為同步序列號(Synchronize sequence numbers,SYN)，用意就是在於確認彼此的初始序列號，假設A電腦的初始序列號是7，B電腦的初始序列號是1000，同步的步驟如下：</p>
+<ol>
+<li>A電腦傳送SYN為7的封包給B</li>
+<li>B電腦收到A電腦傳送SYN為7的封包，回傳ACK為8(7+1=8)的封包給A電腦</li>
+<li>B電腦傳送SYN為1000的封包給A</li>
+<li>A電腦收到B電腦傳送SYN為1000的封包，A電腦回傳ACK為1001(1000+1)的封包給B電腦</li>
+</ol>
+<h2 id="三方交握">三方交握</h2>
+<p>如此一來雙方便知道彼此的初始序列號了，而將四個步驟中的2和3合併成一個封包便是我們俗稱的三方交握</p>
+<ol>
+<li>A電腦傳送SYN給B電腦</li>
+<li>B電腦收到A電腦傳送的SYN，傳回SYN+ACK給A電腦</li>
+<li>A電腦送回ACK給B電腦</li>
+</ol>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/Network" data-astro-cid-ctzdi7mj> Network </a><a class="post-tag-badge" href="/tag/TCP" data-astro-cid-ctzdi7mj> TCP </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="pattern-rest-api-design" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>REST API 設計規範</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>REST是一種架構風格，類似設計模式，使用一些原則規範應用程式的設計，以下為REST風格的一些特徵</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2021-06-14T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="python-pyinstaller-django-runserver-does-not-exist-error" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>使用Pyinstaller打包Django專案發生&quot;RuntimeError：Script runserver does not exist.&quot;錯誤</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>使用pyinstaller將manage.py打包後會產生manage.exe可執行檔，在執行manage.exe runserver指令時發生RuntimeError：Script runserver does not exist. 錯誤</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2021-11-24T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

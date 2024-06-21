@@ -4,6 +4,7 @@ import MainHeader from "@/components/MainHeader.astro";
 import MainBody from "@/components/MainBody.astro";
 import AuthorHeaderBox from "@/components/AuthorHeaderBox.astro";
 import { siteConfig } from "@/config";
+const allPosts = await Astro.glob("/src/posts/**/*.md");
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob("/src/posts/**/*.md");
@@ -24,7 +25,7 @@ const { page } = Astro.props;
     <AuthorHeaderBox
       author={siteConfig.author}
       avatarUrl="/favicon.svg"
-      archiveCount="7"
+      archiveCount={allPosts.length.toString()}
     />
   </MainHeader>
   <MainBody

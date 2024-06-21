@@ -1,7 +1,7 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import MainHeader from "@/components/MainHeader.astro";
-import TagListHeaderBox from "@/components/TagListHeaderBox.astro";
+import TagHeaderBox from "@/components/TagHeaderBox.astro";
 import MainBody from "@/components/MainBody.astro";
 import { tagConfig } from "@/config";
 import { orderByDateDesc } from "@/lib/sort";
@@ -15,16 +15,22 @@ export async function getStaticPaths({ paginate }) {
     );
     const sortedPosts = orderByDateDesc(filteredPosts);
     const tagURL = tagConfig[tag] == undefined ? tag : tagConfig[tag].url;
-    return paginate(sortedPosts, { params: { tag: tagURL }, pageSize: 8 });
+    return paginate(sortedPosts, {
+      params: { tag: tagURL },
+      props: {
+        totalCount: filteredPosts.length,
+      },
+      pageSize: 8,
+    });
   });
 }
 const params = Astro.params;
-const { page } = Astro.props;
+const { page, totalCount } = Astro.props;
 ---
 
 <MainLayout title={params.tag}>
   <MainHeader customPath={"/tag/" + params.tag}>
-    <TagListHeaderBox />
+    <TagHeaderBox tagName={params.tag} postCount={totalCount} />
   </MainHeader>
   <MainBody
     posts={page.data}

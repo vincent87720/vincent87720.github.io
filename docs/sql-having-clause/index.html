@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.HZtN7SYH.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>SQL</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>HAVING語句</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2024-02-18T00:00:00+08:00</span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/BrownWoodenDrawer_JanAntoninKolar_unsplash.DO7kdAST_2sruch.webp" alt="" data-astro-cid-yl355ysp width="3859" height="2679" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p><code>HAVING</code>語句用來篩選聚合函數執行後的結果</p>
+<h2 id="為什麼不使用where篩選">為什麼不使用WHERE篩選</h2>
+<p>使用<code>HAVING</code>而不使用<code>WHERE</code>來篩選聚合函數執行後的結果與SQL語句的執行順序有關，各個SQL語句的執行順序如下：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>順序</th><th>語句</th></tr></thead><tbody><tr><td>1</td><td>FROM</td></tr><tr><td>2</td><td>WHERE</td></tr><tr><td>3</td><td>GROUP BY</td></tr><tr><td>4</td><td>HAVING</td></tr><tr><td>5</td><td>SELECT</td></tr><tr><td>6</td><td>ORDER BY</td></tr><tr><td>7</td><td>LIMIT</td></tr></tbody></table>
+<p>要拿到聚合函數執行過後的結果，我們必須使用聚合函數進行運算，而要使用聚合函數又必須得使用<code>GROUP BY</code>語句來限定我們要用來分組的條件。</p>
+<p>從執行順序表中我們可以看到<code>WHERE</code>會在<code>GROUP BY</code>之前執行，但是聚合函數執行過後的結果會在<code>GROUP BY</code>且執行完聚合函數計算之後才會拿到，在<code>WHERE</code>執行的時候還沒有執行<code>GROUP BY</code>，也還沒有執行聚合函數運算，更不可能拿得到聚合函數執行後的結果，這就是為甚麼我們無法在<code>WHERE</code>執行時就使用聚合函數的結果作為篩選條件的原因。</p>
+<h2 id="如何使用having篩選">如何使用HAVING篩選</h2>
+<p>假設我們有一個員工資料表（Employee），包含編號、姓名及部門欄位，其中財務部有三個人，品管部有三個人，企劃部有四個人。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Index</th><th>Name</th><th>Department</th></tr></thead><tbody><tr><td>1</td><td>林水珠</td><td>財務部</td></tr><tr><td>2</td><td>鄭法歡</td><td>財務部</td></tr><tr><td>3</td><td>葉佩芳</td><td>財務部</td></tr><tr><td>4</td><td>蔡佩舜</td><td>品管部</td></tr><tr><td>5</td><td>程桂卿</td><td>品管部</td></tr><tr><td>6</td><td>王雅筑</td><td>品管部</td></tr><tr><td>7</td><td>陳秋南</td><td>企劃部</td></tr><tr><td>8</td><td>趙志偉</td><td>企劃部</td></tr><tr><td>9</td><td>錢智傑</td><td>企劃部</td></tr><tr><td>10</td><td>謝敬達</td><td>企劃部</td></tr></tbody></table>
+<p>如果我們想得到部門人數大於3人的部門，我們必須先使用<code>GROUP BY</code>將部門分組，再使用<code>Count()</code>這個聚合函數計算每個部門的人數，接著使用<code>HAVING</code>比較各部門人數是否大於3，挑出大於3人的部門，最後使用SELECT取出部門的名稱以及人數。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#F97583">SELECT</span><span style="color:#E1E4E8"> Department, </span><span style="color:#79B8FF">COUNT</span><span style="color:#E1E4E8">(Department)</span></span>
+<span class="line"><span style="color:#F97583">FROM</span><span style="color:#E1E4E8"> Employee</span></span>
+<span class="line"><span style="color:#F97583">GROUP BY</span><span style="color:#E1E4E8"> Department</span></span>
+<span class="line"><span style="color:#F97583">HAVING</span><span style="color:#79B8FF"> COUNT</span><span style="color:#E1E4E8">(Department) </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://blog.csdn.net/zhaomengszu/article/details/80784096">SQL中where子句中不能出现聚合函数的原因</a></li>
+<li><a href="https://www.w3schools.com/sql/sql_having.asp">SQL HAVING Clause</a></li>
+<li><a href="https://www.sisense.com/blog/sql-query-order-of-operations/">SQL Query Order of Execution</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/SQL" data-astro-cid-ctzdi7mj> SQL </a><a class="post-tag-badge" href="/tag/Database" data-astro-cid-ctzdi7mj> Database </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="csharp-virtual" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>Virtual</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>設定Virtual關鍵字後，允許衍生類別（Derived Class）覆寫（override）其狀態或行為。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2024-01-15T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="csharp-delegates" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>Delegates 委派</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>我們可以把委派想像成是一個沒有內容的函式，可以被用來當作是某個函式的臨時替身，當我們決定好要用哪個函式時再將真正的函式變成委派實體，並呼叫委派實體以執行該函式。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2024-02-20T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>

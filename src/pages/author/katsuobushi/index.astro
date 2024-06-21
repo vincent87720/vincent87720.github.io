@@ -19,7 +19,7 @@ const currentPath = Astro.url.pathname;
     <AuthorHeaderBox
       author={siteConfig.author}
       avatarUrl="/favicon.svg"
-      archiveCount="7"
+      archiveCount={allPosts.length.toString()}
     />
   </MainHeader>
   <MainBody

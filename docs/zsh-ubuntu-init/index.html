@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="柴魚筆記"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>柴魚筆記</title><link rel="stylesheet" href="/assets/style.HZtN7SYH.css"></head> <body>  <div class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> </div>   <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Tools</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>使用Zsh更改Ubuntu終端機樣式</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j>2021-06-05T00:00:00+08:00</span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Zsh.DQQqkArY_ZghxUd.webp" alt="" data-astro-cid-yl355ysp width="1083" height="221" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>近期無意間在網路上發現<a href="https://github.com/caiogondim/bullet-train.zsh">Bullet Train</a>這個theme，一下子就被燒到了，覺得非常好看，於是決定來將自己的terminal也改成那樣子，提昇<del>爽度</del>工作效率</p>
+<h2 id="環境">環境</h2>
+<ul>
+<li>Ubuntu 20.04.2LTS</li>
+</ul>
+<h2 id="安裝">安裝</h2>
+<p>更新套件清單</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sudo</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> update</span><span style="color:#6A737D"> #更新套件清單</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sudo</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> upgrade</span><span style="color:#6A737D"> #根據已經更新的套件清單，比對是否更新套件</span></span>
+<span class="line"></span></code></pre>
+<p>安裝Zsh</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sudo</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> zsh</span></span>
+<span class="line"></span></code></pre>
+<p>查看Zsh是否成功安裝</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> cat</span><span style="color:#9ECBFF"> /etc/shells</span></span>
+<span class="line"></span></code></pre>
+<p>安裝oh-my-zsh</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sh</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> "$(</span><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -fsSL</span><span style="color:#9ECBFF"> https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</span></span>
+<span class="line"></span></code></pre>
+<p>安裝完會顯示oh-my-zsh的歡迎畫面</p>
+<h2 id="修改設定">修改設定</h2>
+<p>目前預設的還是Bash Shell，要將它改成Zsh</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> chsh</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> /bin/zsh</span></span>
+<span class="line"></span></code></pre>
+<p>修改完成後須重新登入</p>
+<h2 id="安裝theme">安裝Theme</h2>
+<p>前往<a href="https://github.com/caiogondim/bullet-train.zsh">Bullet train</a>下載<a href="https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme">主題</a></p>
+<p>將下載好的主題<strong>bullet-train.zsh-theme</strong>放入<code>.oh-my-zsh/themes</code>目錄內</p>
+<p>接著編輯<code>~/.zshrc</code>，將<strong>ZSH_THEME</strong>設定為”bullet-train”</p>
+<h2 id="安裝powerline">安裝powerline</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sudo</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> powerline</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> sudo</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> fonts-powerline</span></span>
+<span class="line"></span></code></pre>
+<h2 id="安裝melso字型">安裝Melso字型</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/powerline/fonts.git</span><span style="color:#79B8FF"> --depth=1</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> cd</span><span style="color:#9ECBFF"> fonts</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> ./install.sh</span></span>
+<span class="line"></span></code></pre>
+<p>右鍵點選Terminal>偏好設定>文字>自訂字型，選擇<strong>Meslo LG S for Powerline Bold</strong>更改字型</p>
+<h2 id="參考資料">參考資料</h2>
+<ul>
+<li><a href="https://medium.com/@wifferlin0505/%E5%9C%A8-ubuntu-16-04-lts-%E4%B8%AD%E5%AE%89%E8%A3%9D%E4%BD%BF%E7%94%A8-oh-my-zsh-cf92203ca8a2">在 Ubuntu 18.04 LTS / 16.04 LTS 中安裝使用 Oh-My-Zsh</a></li>
+<li><a href="https://medium.com/@hazelwu/%E7%94%A8oh-my-zsh%E6%8A%8Aiterm%E8%AE%8A%E7%BE%8E%E7%BE%8E-8a18daa8eac">用Oh My Zsh把iTerm變美美</a></li>
+<li><a href="https://github.com/caiogondim/bullet-train.zsh">Github - Bullet Train for oh-my-zsh</a></li>
+<li><a href="https://github.com/powerline/fonts">Github - Powerline fonts</a></li>
+<li><a href="https://github.com/agnoster/agnoster-zsh-theme">agnoster.zsh-theme</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/Tools" data-astro-cid-ctzdi7mj> Tools </a><a class="post-tag-badge" href="/tag/Ubuntu" data-astro-cid-ctzdi7mj> Ubuntu </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="flash-firmware-on-esp01" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>ESP-01韌體燒錄</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>在使用ESP8266有時會遇到兩種情況，原廠出貨的韌體怪怪的導致無法使用AT指令跟ESP8266溝通，或是已經把自己的程式燒進去之後又想重新使用AT指令的功能，這時候就需要重新燒錄韌體，這篇筆記紀錄使用ESP-01作為範例的韌體燒錄及AT指令驗證步驟</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2021-02-22T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="golang-mysql-error-1040" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>MySQL Error 1040：Too Many Connections 錯誤處理</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>前陣子寫了一個golang程式用來上傳資料到MySQL，起初程式運作都非常良好，過了一陣子開始出現代號為1040的Too Many Connections錯誤，我們一起來看看發生了甚麼事。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2021-06-09T00:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <span data-astro-cid-bpgok6sl>柴魚筆記 © 2019-2024</span> <div class="nav-external-link" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> <div class="nav-item-grow" data-astro-cid-bpgok6sl></div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a>
+• Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a>
+• Technical support by
+<a href="https://millieattic-millieqius-projects.vercel.app" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </span> </nav> </div>   </body></html>
