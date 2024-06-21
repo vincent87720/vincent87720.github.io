@@ -19,18 +19,19 @@ export async function getStaticPaths({ paginate }) {
       params: { tag: tagURL },
       props: {
         totalCount: filteredPosts.length,
+        tagName: tag,
       },
       pageSize: 8,
     });
   });
 }
 const params = Astro.params;
-const { page, totalCount } = Astro.props;
+const { page, tagName, totalCount } = Astro.props;
 ---
 
-<MainLayout title={params.tag}>
+<MainLayout title={tagName}>
   <MainHeader customPath={"/tag/" + params.tag}>
-    <TagHeaderBox tagName={params.tag} postCount={totalCount} />
+    <TagHeaderBox tagName={tagName} postCount={totalCount} />
   </MainHeader>
   <MainBody
     posts={page.data}

@@ -19,6 +19,7 @@ export async function getStaticPaths({ paginate }) {
       params: { tag: tagURL },
       props: {
         posts: sortedPosts.slice(0, 7),
+        tagName: tag,
         totalCount: filteredPosts.length,
         lastPage: Math.ceil(sortedPosts.length / 8),
       },
@@ -26,12 +27,12 @@ export async function getStaticPaths({ paginate }) {
   });
 }
 const params = Astro.params;
-const { posts, totalCount, lastPage } = Astro.props;
+const { posts, tagName, totalCount, lastPage } = Astro.props;
 ---
 
-<MainLayout title={params.tag}>
+<MainLayout title={tagName}>
   <MainHeader>
-    <TagHeaderBox tagName={params.tag} postCount={totalCount} />
+    <TagHeaderBox tagName={tagName} postCount={totalCount} />
   </MainHeader>
   <MainBody
     posts={posts}
