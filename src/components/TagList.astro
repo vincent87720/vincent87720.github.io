@@ -13,7 +13,7 @@ const sortedTagObjList = sortTag(tagObjList);
 
 <main>
   <article>
-    <div class="content tag-box-wrapper">
+    <div class="content">
       {
         sortedTagObjList.map((tag) => (
           <TagBox
@@ -26,9 +26,3 @@ const sortedTagObjList = sortTag(tagObjList);
     </div>
   </article>
 </main>
-
-<style>
-  .tag-box-wrapper {
-    padding: calc(0.05rem + 2vw) 0;
-  }
-</style>

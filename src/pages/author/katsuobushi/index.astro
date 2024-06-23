@@ -5,17 +5,19 @@ import AuthorHeaderBox from "@/components/AuthorHeaderBox.astro";
 import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
 import { orderByDateDesc } from "@/lib/sort";
+import { getBanner } from "@/lib/bannerHelper";
 
 const allPosts = await Astro.glob("/src/posts/**/*.md");
 const sortedPosts = orderByDateDesc(allPosts);
 const slicedPosts = sortedPosts.slice(0, 8);
 const lastPage = Math.ceil(sortedPosts.length / 8);
-
 const currentPath = Astro.url.pathname;
+const bannerImage = await getBanner(currentPath);
 ---
 
 <MainLayout title={siteConfig.author}>
-  <MainHeader>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
     <AuthorHeaderBox
       author={siteConfig.author}
       avatarUrl="/favicon.svg"

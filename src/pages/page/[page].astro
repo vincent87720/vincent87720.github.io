@@ -4,6 +4,7 @@ import MainHeader from "@/components/MainHeader.astro";
 import HomeHeaderBox from "@/components/HomeHeaderBox.astro";
 import MainBody from "@/components/MainBody.astro";
 import { siteConfig } from "@/config";
+import { getBanner } from "@/lib/bannerHelper";
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob("/src/posts/**/*.md");
@@ -16,11 +17,13 @@ export async function getStaticPaths({ paginate }) {
     .reverse();
   return paginate(orderByCreateDateTimeDescPosts, { pageSize: 8 });
 }
+const bannerImage = await getBanner("/");
 const { page } = Astro.props;
 ---
 
 <MainLayout title="">
-  <MainHeader customPath="/">
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
     <HomeHeaderBox
       title={siteConfig.title}
       description={siteConfig.description}

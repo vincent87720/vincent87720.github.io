@@ -5,7 +5,8 @@ import PostHeaderBox from "@/components/PostHeaderBox.astro";
 import PostBody from "@/components/PostBody.astro";
 import PostFooter from "@/components/PostFooter.astro";
 import { siteConfig } from "@/config";
-// import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getBanner } from "@/lib/bannerHelper";
+
 export async function getStaticPaths() {
   const allPosts = await Astro.glob("/src/posts/**/*.md");
   return allPosts.map((post, index) => {
@@ -20,13 +21,15 @@ export async function getStaticPaths() {
   });
 }
 
+const bannerImage = await getBanner(Astro.url.pathname);
 const { post, prevPost, nextPost } = Astro.props;
 const { Content } = post;
 const postMainTag = post.frontmatter.tags?.[0];
 ---
 
 <MainLayout title="">
-  <PostHeader>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <PostHeader bannerImage={bannerImage}>
     <PostHeaderBox
       postTitle={post.frontmatter.title}
       postMainTag={postMainTag}

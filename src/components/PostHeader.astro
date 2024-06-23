@@ -1,21 +1,22 @@
 ---
-import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import { bannerConfig } from "@/config";
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/Cover/**/*.{jpeg,jpg,png,gif,svg}");
-const currentPath = Astro.url.pathname;
-const banner = bannerConfig[currentPath];
+
+interface Props {
+  bannerImage?: any;
+}
+
+const { bannerImage } = Astro.props;
 ---
 
-<header class:list={["main-header", { "has-cover": banner }]}>
+<header class:list={["main-header", { "has-cover": bannerImage }]}>
   <div class="content">
     <div class="header-box">
       <slot />
     </div>
     {
-      banner && 
+      bannerImage && 
         <div class="main-cover">
-          <Image src={images[banner]()} alt="" />
+        <Image src={bannerImage.src} alt="" width={bannerImage.attributes.width} height={bannerImage.attributes.height} />
         </div>
     }
   </div>

@@ -3,10 +3,14 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import MainHeader from "@/components/MainHeader.astro";
 import TagListHeaderBox from "@/components/TagListHeaderBox.astro";
 import TagList from "@/components/TagList.astro";
+import { getBanner } from "@/lib/bannerHelper";
+
+const bannerImage = await getBanner(Astro.url.pathname);
 ---
 
 <MainLayout title="Tags">
-  <MainHeader>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
     <TagListHeaderBox />
   </MainHeader>
   <TagList />

@@ -5,6 +5,7 @@ import TagHeaderBox from "@/components/TagHeaderBox.astro";
 import MainBody from "@/components/MainBody.astro";
 import { tagConfig } from "@/config";
 import { orderByDateDesc } from "@/lib/sort";
+import { getBanner } from "@/lib/bannerHelper";
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob("/src/posts/**/*.md");
   let tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
@@ -27,11 +28,13 @@ export async function getStaticPaths({ paginate }) {
   });
 }
 const params = Astro.params;
+const bannerImage = await getBanner("/tag/" + params.tag);
 const { posts, tagName, totalCount, lastPage } = Astro.props;
 ---
 
 <MainLayout title={tagName}>
-  <MainHeader>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
     <TagHeaderBox tagName={tagName} postCount={totalCount} />
   </MainHeader>
   <MainBody
