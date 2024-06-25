@@ -4,7 +4,7 @@ import { navConfig } from "@/config";
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="nav-outer">
+<div id="navOuter" class="nav-outer">
   <nav class="nav-inner">
     <span class="logo">
       <a href="/">
@@ -23,14 +23,43 @@ const currentPath = Astro.url.pathname;
       }
     </ul>
   </nav>
+  <div class="nav-control">
+    <a id="MenuBtn" class="nav-control-inner">
+      <span class="icon icon-menu">Menu</span>
+    </a>
+  </div>
 </div>
+<div id="navOverlay"></div>
+<script>
+  let menuIsActive = false;
+  function handleMenu() {
+    menuIsActive = !menuIsActive;
+    if (menuIsActive) {
+      document.getElementById("navOuter").classList.add("menu-active");
+      document.getElementById("navOverlay").classList.add("nav-close");
+    } else {
+      document.getElementById("navOuter").classList.remove("menu-active");
+      document.getElementById("navOverlay").classList.remove("nav-close");
+    }
+  }
+  function handleMenuClose() {
+    menuIsActive = false;
+    document.getElementById("navOuter").classList.remove("menu-active");
+    document.getElementById("navOverlay").classList.remove("nav-close");
+  }
+  document.getElementById("MenuBtn").addEventListener("click", handleMenu);
+  document
+    .getElementById("navOverlay")
+    .addEventListener("click", handleMenuClose);
+</script>
 <style>
   .nav-outer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1024;
+    z-index: 2048;
+    transition: all ease-out 0.3s;
   }
   .nav-inner {
     display: flex;
@@ -71,6 +100,9 @@ const currentPath = Astro.url.pathname;
     margin-top: -1.5rem;
     background: #52768e;
   }
+  .nav-control {
+    display: none;
+  }
   .logo a {
     display: block;
     height: 2.5rem;
@@ -78,5 +110,87 @@ const currentPath = Astro.url.pathname;
   .logo a img {
     margin-right: 2rem;
     height: 2.5rem;
+  }
+  @media screen and (max-width: 640px) {
+    .nav-outer {
+      transform: translate3d(0, -100%, 0);
+    }
+    .logo {
+      display: none;
+    }
+    .nav-inner {
+      background-color: var(--color-background-main);
+    }
+    .nav-inner ul {
+      width: 100%;
+      flex-direction: column;
+      padding: 1rem 0;
+    }
+    .nav-inner li {
+      margin: 0;
+    }
+    .nav-inner li a {
+      padding-left: 2.5rem;
+      font-size: 1.2rem;
+    }
+    .nav-inner li.active a::before {
+      left: 0;
+      top: 50%;
+      width: 1rem;
+      height: 2px;
+      margin-left: 6px;
+      margin-top: -1px;
+      border-radius: 2px;
+      padding: 0;
+    }
+    .nav-inner li a::before {
+      position: absolute;
+      content: "";
+      left: 0;
+      padding: 0 0.5rem;
+      margin-left: -0.5rem;
+      margin-top: -1.5rem;
+      top: 50%;
+      width: 1rem;
+      height: 2px;
+      margin-left: 6px;
+      margin-top: -1px;
+      border-radius: 2px;
+      padding: 0;
+      background: var(--color-background-contrast);
+    }
+    .menu-active {
+      transform: translate3d(0, 0, 0);
+    }
+    .menu-active .nav-control {
+      background-color: var(--color-background-main);
+    }
+    .nav-control {
+      border-top: 1px solid var(--color-background-contrast);
+      width: 100%;
+      padding: 1.25rem 0;
+      display: block;
+      position: absolute;
+      font-size: 1.2rem;
+    }
+    .nav-control-inner {
+      padding: 0 2.5rem;
+      left: 0;
+      width: 100%;
+    }
+    .icon-menu::before {
+      padding-right: 0.8rem;
+      content: "\f0c9";
+    }
+    .nav-close {
+      z-index: 1536;
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: var(--color-background-overlay);
+    }
   }
 </style>

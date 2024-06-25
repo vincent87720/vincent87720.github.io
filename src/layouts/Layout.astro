@@ -15,11 +15,11 @@ const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description || htmlTitle} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{htmlTitle}</title>
-    <slot name="head"></slot>
+    <slot name="head" />
   </head>
   <body>
     <slot />
@@ -56,6 +56,11 @@ const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
     margin: 0 auto;
     padding: 0 5rem;
     max-width: calc(40rem + 8vw);
+  }
+  @media only screen and (max-width: 640px) {
+    .content {
+      padding: 0 2.5rem;
+    }
   }
   .header-box {
     padding-bottom: 2.5rem;

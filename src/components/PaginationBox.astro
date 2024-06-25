@@ -26,7 +26,9 @@ const hasNext = currentPage < lastPage;
     hasPrev && (
       <a class="pagination-btn pagination-left" href={prevUrl}>
         <i class="icon-arrow icon-arrow-left" />
-        <span class="pagination-label">Newer Posts</span>
+        <span id="pagination-prev-btn-content" class="pagination-label">
+          Newer Posts
+        </span>
       </a>
     )
   }
@@ -34,7 +36,9 @@ const hasNext = currentPage < lastPage;
   {
     hasNext && (
       <a class="pagination-btn pagination-right" href={nextURL}>
-        <span class="pagination-label">Older Posts</span>
+        <span id="pagination-next-btn-content" class="pagination-label">
+          Older Posts
+        </span>
         <i class="icon-arrow icon-arrow-right" />
       </a>
     )
@@ -99,5 +103,13 @@ const hasNext = currentPage < lastPage;
   }
   .extra-pagination {
     border-bottom: 1px solid var(--color-background-contrast);
+  }
+  @media screen and (max-width: 640px) {
+    #pagination-prev-btn-content {
+      display: none;
+    }
+    #pagination-next-btn-content {
+      display: none;
+    }
   }
 </style>

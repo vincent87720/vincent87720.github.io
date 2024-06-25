@@ -9,7 +9,7 @@ const { author, avatarUrl, archiveCount } = Astro.props;
 
 <div class="author-info">
   <span class="author-avatar author-item-space"> <img src={avatarUrl} /></span>
-  <div class="author-item-space">
+  <div>
     <span class="author-metadata">
       <span>Author</span>
       <span class="author-metadata-dash">－</span>
@@ -37,7 +37,12 @@ const { author, avatarUrl, archiveCount } = Astro.props;
     border-radius: 8rem;
   }
   .author-item-space {
-    padding: 0 1.3rem;
+    padding: 0 2.6rem 0 0;
+  }
+  @media screen and (max-width: 640px) {
+    .author-avatar {
+      margin-bottom: 1rem;
+    }
   }
   .author-metadata {
     display: block;

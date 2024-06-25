@@ -38,7 +38,7 @@ const tagList = (tags ?? []).map((tag) => {
     <div class="post-nav-half">
       {
         nextPost && (
-          <a class="post-nav-prev" href={"/"+nextPost.frontmatter.slug}>
+          <a class="post-nav-prev" href={"/" + nextPost.frontmatter.slug}>
             <span class="post-nav-icon-left" />
             <h2 class="post-nav-title">{nextPost.frontmatter.title}</h2>
             <p class="post-nav-abstract">{nextPost.frontmatter.abstract}</p>
@@ -53,7 +53,7 @@ const tagList = (tags ?? []).map((tag) => {
     <div class="post-nav-half">
       {
         prevPost && (
-          <a class="post-nav-next" href={"/"+prevPost.frontmatter.slug}>
+          <a class="post-nav-next" href={"/" + prevPost.frontmatter.slug}>
             <span class="post-nav-icon-right" />
             <h2 class="post-nav-title">{prevPost.frontmatter.title}</h2>
             <p class="post-nav-abstract">{prevPost.frontmatter.abstract}</p>
@@ -115,17 +115,30 @@ const tagList = (tags ?? []).map((tag) => {
     display: flex;
     flex-wrap: nowrap;
   }
-  .post-nav::after {
-    position: absolute;
-    content: "";
-    width: 1px;
-    height: 100%;
-    left: 50%;
-    top: 0;
-    background: var(--color-background-contrast);
+  @media screen and (max-width: 640px) {
+    .post-nav {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (min-width: 640px) {
+    .post-nav::after {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      background: var(--color-background-contrast);
+    }
   }
   .post-nav-half {
+    position: inherit;
     width: 50%;
+  }
+  @media screen and (max-width: 640px) {
+    .post-nav-half {
+      width: 100%;
+    }
   }
   .post-nav-prev {
     display: block;
@@ -133,6 +146,11 @@ const tagList = (tags ?? []).map((tag) => {
     cursor: pointer;
     text-decoration: none;
     color: var(--color-content-lead);
+  }
+  @media screen and (max-width: 640px) {
+    .post-nav-prev {
+      padding: 1.25rem 0 1.25rem 0;
+    }
   }
   .post-nav-icon-left {
     margin-left: -2.5rem;
@@ -174,6 +192,11 @@ const tagList = (tags ?? []).map((tag) => {
     cursor: pointer;
     text-decoration: none;
     color: var(--color-content-lead);
+  }
+  @media screen and (max-width: 640px) {
+    .post-nav-next {
+      padding: 1.25rem 0 1.25rem 0;
+    }
   }
   .post-nav-title {
     margin: 0 0 0.4rem 0;

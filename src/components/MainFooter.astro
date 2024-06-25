@@ -11,21 +11,32 @@ const currentYear = new Date().getFullYear();
 
 <div class="nav-outer">
   <nav class="nav-inner">
-    <span>{title} © {beginYear}-{currentYear}</span>
-    <div class="nav-external-link">
-      {subNavConfig.items.map((x) => <a href={x.url}>{x.name}</a>)}
+    <div class="nav-inner-left">
+      <span class="nav-copyright nav-margin">
+        {title} © {beginYear}-{currentYear}
+      </span>
+      <div class="nav-external-link nav-margin">
+        {subNavConfig.items.map((x) => <a href={x.url}>{x.name}</a>)}
+      </div>
     </div>
-    <div class="nav-item-grow"></div>
     <span class="nav-pubinfo">
-      Published with
-      <a href="https://astro.build" target="_blank">Astro</a>
-      • Theme modified from
-      <a href="https://github.com/zutrinken/attila" target="_blank">Attila</a>
-      • Technical support by
-      <a
-        href="https://millieattic-millieqius-projects.vercel.app"
-        target="_blank">Millie</a
-      >
+      <div class="nav-mb-sm">
+        Published with
+        <a href="https://astro.build" target="_blank">Astro</a>
+      </div>
+      <div class="dot">・</div>
+      <div class="nav-mb-sm">
+        Theme modified from
+        <a href="https://github.com/zutrinken/attila" target="_blank">Attila</a>
+      </div>
+      <div class="dot">・</div>
+      <div class="nav-mb-sm">
+        Tech support by
+        <a
+          href="https://millieattic-millieqius-projects.vercel.app"
+          target="_blank">Millie</a
+        >
+      </div>
     </span>
   </nav>
 </div>
@@ -35,12 +46,23 @@ const currentYear = new Date().getFullYear();
   }
   .nav-inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     padding: 0 2.5rem;
     color: var(--color-content-secondary);
     font-size: 1rem;
     line-height: 1rem;
     font-weight: 200;
+  }
+  .nav-inner-left {
+    display: flex;
+  }
+  .nav-pubinfo {
+    display: flex;
+  }
+  .nav-pubinfo div {
+    white-space: nowrap;
   }
   .nav-pubinfo a {
     text-decoration: none;
@@ -53,6 +75,9 @@ const currentYear = new Date().getFullYear();
   }
   .nav-item-grow {
     flex-grow: 1;
+  }
+  .nav-copyright {
+    white-space: nowrap;
   }
   .nav-external-link {
     display: flex;
@@ -67,5 +92,29 @@ const currentYear = new Date().getFullYear();
   }
   .nav-external-link a:hover {
     color: var(--color-content-main);
+  }
+  @media screen and (max-width: 1100px) {
+    .nav-inner {
+      justify-content: center;
+      flex-direction: column;
+    }
+    .nav-mb-sm {
+      margin-bottom: 1rem;
+    }
+    .nav-margin {
+      margin-bottom: 2rem;
+    }
+    .nav-inner-left {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .nav-pubinfo {
+      flex-direction: column;
+      align-items: center;
+    }
+    .dot {
+      display: none;
+    }
   }
 </style>
