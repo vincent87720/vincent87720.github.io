@@ -1,0 +1,43 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainHeader from "@/components/MainHeader.astro";
+import MainBody from "@/components/MainBody.astro";
+import AuthorHeaderBox from "@/components/AuthorHeaderBox.astro";
+import { siteConfig } from "@/config";
+import { getBanner } from "@/lib/bannerHelper";
+const allPosts = await Astro.glob("/src/posts/**/*.md");
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("/src/posts/**/*.md");
+  const orderByCreateDateTimeDescPosts = allPosts
+    .sort(
+      (a, b) =>
+        new Date(a.frontmatter.createAt).valueOf() -
+        new Date(b.frontmatter.createAt).valueOf()
+    )
+    .reverse();
+  return paginate(orderByCreateDateTimeDescPosts, { pageSize: 8 });
+}
+const bannerImage = await getBanner("/author/" + siteConfig.author);
+const { page } = Astro.props;
+---
+
+<MainLayout title={siteConfig.author}>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
+    <AuthorHeaderBox
+      author={siteConfig.author}
+      avatarUrl="/favicon.svg"
+      archiveCount={allPosts.length.toString()}
+    />
+  </MainHeader>
+  <MainBody
+    posts={page.data}
+    currentPage={page.currentPage}
+    lastPage={page.lastPage}
+    firstPageURL={"/author/" + siteConfig.author}
+    prevUrl={page.url.prev}
+    nextUrl={page.url.next}
+    extraPagination={true}
+  />
+</MainLayout>
