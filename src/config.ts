@@ -4,6 +4,7 @@ import type { NavBarConfig } from "./types/NavBarConfigType";
 export const siteConfig: SiteConfig = {
   title: "柴魚筆記",
   description: "程式・軟體・攝影",
+  metaDescription: "Vincent 的個人部落格，用於紀錄時常忘記的事物和自己走過的路，分享網頁後端、資料庫及系統架構等各式各樣的技術議題。",
   banner: "assets/images/demo-banner.png",
   author: "Katsuobushi",
 };

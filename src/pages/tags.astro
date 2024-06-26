@@ -8,7 +8,7 @@ import { getBanner } from "@/lib/bannerHelper";
 const bannerImage = await getBanner(Astro.url.pathname);
 ---
 
-<MainLayout title="Tags">
+<MainLayout title="Tags" description="Tags">
   <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
   <MainHeader bannerImage={bannerImage}>
     <TagListHeaderBox />
