@@ -22,10 +22,7 @@ const { page } = Astro.props;
 ---
 
 <MainLayout title="">
-  {
-    bannerImage&&
-    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
-  }
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
   <MainHeader bannerImage={bannerImage}>
     <HomeHeaderBox
       title={siteConfig.title}

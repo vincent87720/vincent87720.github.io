@@ -6,7 +6,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: 'https://vincent87720.github.io',
   outDir: './docs',
-  trailingSlash: "never",
+  trailingSlash: "ignore",
   build: {
     assets: 'assets'
   },

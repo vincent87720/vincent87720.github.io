@@ -16,10 +16,7 @@ const bannerImage = await getBanner(currentPath);
 ---
 
 <MainLayout title={siteConfig.author}>
-  {
-    bannerImage&&
-    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
-  }
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
   <MainHeader bannerImage={bannerImage}>
     <AuthorHeaderBox
       author={siteConfig.author}

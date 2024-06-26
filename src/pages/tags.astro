@@ -9,10 +9,7 @@ const bannerImage = await getBanner(Astro.url.pathname);
 ---
 
 <MainLayout title="Tags" description="Tags">
-  {
-    bannerImage&&
-    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
-  }
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
   <MainHeader bannerImage={bannerImage}>
     <TagListHeaderBox />
   </MainHeader>

@@ -8,13 +8,14 @@ interface Props {
 const { title, description } = Astro.props;
 
 const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
+const htmlDescription = description ? `${description}` : `${siteConfig.metaDescription}`;
 ---
 
 <!doctype html>
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description || siteConfig.metaDescription} />
+    <meta name="description" content={htmlDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />

@@ -15,10 +15,7 @@ const bannerImage = await getBanner(Astro.url.pathname);
 ---
 
 <MainLayout title="" description="Vincent 的個人部落格，用於紀錄時常忘記的事物和自己走過的路，分享網頁後端、資料庫及系統架構等各式各樣的技術議題。">
-  {
-    bannerImage&&
-    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
-  }
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
   <MainHeader bannerImage={bannerImage}>
     <HomeHeaderBox
       title={siteConfig.title}
