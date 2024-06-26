@@ -2,6 +2,7 @@ import { bannerConfig } from "@/config";
 import { getImage } from "astro:assets";
 
 export const getBanner = async (url) => {
+  if (!url) return null;
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/Cover/**/*.{jpeg,jpg,png,gif,svg}"
   );

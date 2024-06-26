@@ -23,7 +23,10 @@ const { page } = Astro.props;
 ---
 
 <MainLayout title={siteConfig.author}>
-  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  {
+    bannerImage&&
+    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
+  }
   <MainHeader bannerImage={bannerImage}>
     <AuthorHeaderBox
       author={siteConfig.author}

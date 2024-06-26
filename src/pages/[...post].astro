@@ -28,7 +28,10 @@ const postMainTag = post.frontmatter.tags?.[0];
 ---
 
 <MainLayout title={post.frontmatter.title} description={post.frontmatter.abstract}>
-  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  {
+    bannerImage&&
+    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
+  }
   <PostHeader bannerImage={bannerImage}>
     <PostHeaderBox
       postTitle={post.frontmatter.title}

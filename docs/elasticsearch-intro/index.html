@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="ElasticSearch是一個開源的且基於Lucene的全文搜尋引擎，其封裝Lucene並提供REST API，讓使用者可以更容易操作及使用。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>ElasticSearch簡介 - 柴魚筆記</title><link rel="preload" href="/assets/Search_DanielLerman_unsplash.Bdoh06tj_1PYJJc.webp" as="image"><link rel="stylesheet" href="/assets/style.DaOFvi7o.css"><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
-</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>     <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Elasticsearch</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>ElasticSearch簡介</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2022-10-29T00:00:00+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Search_DanielLerman_unsplash.Bdoh06tj_1PYJJc.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2560" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>ElasticSearch是一個開源的且基於Lucene的全文搜尋引擎，其封裝Lucene並提供REST API，讓使用者可以更容易操作及使用。</p>
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="ElasticSearch是一個開源的且基於Lucene的全文搜尋引擎，其封裝Lucene並提供REST API，讓使用者可以更容易操作及使用。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>ElasticSearch簡介 - 柴魚筆記</title><link rel="stylesheet" href="/assets/style.7ZabHF9q.css" /><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
+</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>   <header class="main-header" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>Elasticsearch</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>ElasticSearch簡介</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2022-10-29T00:00:00+08:00 </span> </div> </div> </div>   </div>  </div> </header>  <article> <div class="content"> <div class="markdown">  <p>ElasticSearch是一個開源的且基於Lucene的全文搜尋引擎，其封裝Lucene並提供REST API，讓使用者可以更容易操作及使用。</p>
 <h2 id="環境">環境</h2>
 <ul>
 <li>macOS Monterey 12.4</li>
@@ -9,8 +9,7 @@
 <h2 id="安裝">安裝</h2>
 <p>到<a href="https://www.elastic.co/downloads/elasticsearch">elasticsearch官網</a>下載mac版本的壓縮檔，解壓縮後執行<code>bin/elasticsearch</code>檔案，elasticsearch便會啟動並在port9200提供服務</p>
 <p>發送GET請求到9200port測試服務狀態</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> localhost:9200</span></span>
-<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> localhost:9200</span></span></code></pre>
 <h3 id="安全性問題">安全性問題</h3>
 <p>:::warning
 [WARN ][o.e.x.s.t.n.SecurityNetty4HttpServerTransport] [userde-MacBook-Pro.local] received plaintext http traffic on an https channel, closing connection Netty4HttpChannel{localAddress=/[0:0:0:0:0:0:0:1]:9200, remoteAddress=/[0:0:0:0:0:0:0:1]:52561}
@@ -18,7 +17,7 @@
 若出現以上錯誤訊息時可以先暫時先將elasticsearch.yaml中的<code>xpack.security.enabled</code>的選項設為false，測試完畢後務必恢復為true並進行正確的安全性設定</p>
 <h3 id="完成">完成</h3>
 <p>若系統正常會返回下列訊息</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#B392F0">  "name"</span><span style="color:#9ECBFF"> :</span><span style="color:#9ECBFF"> "userde-MacBook-Pro.local",</span></span>
 <span class="line"><span style="color:#B392F0">  "cluster_name"</span><span style="color:#9ECBFF"> :</span><span style="color:#9ECBFF"> "elasticsearch",</span></span>
@@ -36,7 +35,6 @@
 <span class="line"><span style="color:#E1E4E8">  },</span></span>
 <span class="line"><span style="color:#B392F0">  "tagline"</span><span style="color:#9ECBFF"> :</span><span style="color:#9ECBFF"> "You Know, for Search"</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span>
 <span class="line"></span></code></pre>
 <h2 id="基本概念">基本概念</h2>
 <p>ElasticSearch的最高單位是Index，相當於資料庫。在Index下會有很多Document，一個記錄稱為一個Document，Index包含了多個Document。</p>
@@ -53,26 +51,22 @@
 </ul>
 <h2 id="index操作">Index操作</h2>
 <h3 id="新增index">新增Index</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 新增一個名稱為customers的Index</span></span>
-<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> PUT</span><span style="color:#9ECBFF"> 'localhost:9200/customers'</span></span>
-<span class="line"></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 新增一個名稱為customers的Index</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> PUT</span><span style="color:#9ECBFF"> 'localhost:9200/customers'</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#B392F0">    "acknowledged"</span><span style="color:#B392F0">:true,</span></span>
 <span class="line"><span style="color:#B392F0">    "shards_acknowledged"</span><span style="color:#B392F0">:true,</span></span>
 <span class="line"><span style="color:#B392F0">    "index"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"customers"</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>若成功ElasticSearch會返回acknowledged為true的訊息</p>
 <h3 id="刪除index">刪除Index</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 刪除名稱為customers的Index</span></span>
-<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> DELETE</span><span style="color:#9ECBFF"> 'localhost:9200/customers'</span></span>
-<span class="line"></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 刪除名稱為customers的Index</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> DELETE</span><span style="color:#9ECBFF"> 'localhost:9200/customers'</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#B392F0">    "acknowledged"</span><span style="color:#B392F0">:true</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>若成功一樣會返回acknowledged為true的訊息</p>
 <h2 id="分詞">分詞</h2>
 <h3 id="安裝分詞插件">安裝分詞插件</h3>
@@ -80,18 +74,16 @@
 :::warning
 分詞插件的版本號必須與ElasticSearch相同，否則無法指定分詞插件並且會跳出錯誤訊息（Failed to parse mapping: analyzer [ik_max_word] has not been configured in mappings）
 :::</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> ./bin/elasticsearch-plugin</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.2.3/elasticsearch-analysis-ik-8.2.3.zip</span></span>
-<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>$ ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.2.3/elasticsearch-analysis-ik-8.2.3.zip</span></span></code></pre>
 <p>將上面指令的版本號換成與ElasticSearch相對應的版本號即可安裝
 安裝完會顯示安裝成功訊息，重新開啟ElasticSearch即可
-<img  src="/assets/10.Buvltl0x_27oY0e.webp" alt="10" width="881" height="588" loading="lazy" decoding="async"></p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-> Installed analysis-ik</span></span>
-<span class="line"><span>-> Please restart Elasticsearch to activate any plugins installed</span></span>
-<span class="line"><span></span></span></code></pre>
+<img  src="/assets/10.br5bZdMX_ZiMWYu.webp" alt="10" width="881" height="588" loading="lazy" decoding="async"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>-> Installed analysis-ik</span></span>
+<span class="line"><span>-> Please restart Elasticsearch to activate any plugins installed</span></span></code></pre>
 <h3 id="設定分詞">設定分詞</h3>
 <p>在設定中文分詞（medcl/elasticsearch-analysis-ik）之前必須要先安裝插件
 僅使用英文分詞的話不需要安裝插件，直接在<code>analyzer</code>和<code>search_analyzer</code>替換成內建的<code>standard</code>即可</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-H </span><span style="color:#9ECBFF">"Content-Type: application/json"</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-X </span><span style="color:#9ECBFF">PUT</span><span style="color:#9ECBFF"> 'localhost:9200/customers'</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-d </span><span style="color:#9ECBFF">'</span></span>
@@ -119,14 +111,12 @@
 <span class="line"><span style="color:#9ECBFF">            }</span></span>
 <span class="line"><span style="color:#9ECBFF">        }</span></span>
 <span class="line"><span style="color:#9ECBFF">    }</span></span>
-<span class="line"><span style="color:#9ECBFF">}'</span></span>
-<span class="line"></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 返回結果</span></span>
-<span class="line"><span style="color:#E1E4E8">{</span><span style="color:#B392F0">"acknowledged"</span><span style="color:#B392F0">:true,</span><span style="color:#B392F0">"shards_acknowledged"</span><span style="color:#B392F0">:true,</span><span style="color:#B392F0">"index"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"customers"</span><span style="color:#B392F0">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#9ECBFF">}'</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 返回結果</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span><span style="color:#B392F0">"acknowledged"</span><span style="color:#B392F0">:true,</span><span style="color:#B392F0">"shards_acknowledged"</span><span style="color:#B392F0">:true,</span><span style="color:#B392F0">"index"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"customers"</span><span style="color:#B392F0">}</span></span></code></pre>
 <h2 id="document操作">Document操作</h2>
 <h3 id="新增document">新增Document</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-H </span><span style="color:#9ECBFF">"Content-Type: application/json"</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-X </span><span style="color:#9ECBFF">POST</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_doc/1'</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-d </span><span style="color:#9ECBFF">'</span></span>
@@ -134,24 +124,21 @@
 <span class="line"><span style="color:#9ECBFF">  "name": "田中太郎2",</span></span>
 <span class="line"><span style="color:#9ECBFF">  "address": "北海道室蘭市水元町57-8",</span></span>
 <span class="line"><span style="color:#9ECBFF">  "room": "A303"</span></span>
-<span class="line"><span style="color:#9ECBFF">}'</span></span>
-<span class="line"></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 返回結果</span></span>
+<span class="line"><span style="color:#9ECBFF">}'</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 返回結果</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#B392F0">    "_index"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"customers"</span><span style="color:#B392F0">,</span></span>
 <span class="line"><span style="color:#B392F0">    "_id"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"1"</span><span style="color:#B392F0">,</span></span>
 <span class="line"><span style="color:#B392F0">    "_version"</span><span style="color:#B392F0">:1,</span></span>
 <span class="line"><span style="color:#B392F0">    "result"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"created"</span><span style="color:#B392F0">,</span></span>
-<span class="line"><span style="color:#B392F0">    "_shards"</span><span style="color:#79B8FF">:</span><span style="color:#9ECBFF">{</span><span style="color:#E1E4E8">"</span><span style="color:#B392F0">total</span><span style="color:#B392F0">":2,"</span><span style="color:#B392F0">successful</span><span style="color:#B392F0">":1,"</span><span style="color:#B392F0">failed</span><span style="color:#B392F0">":0},</span></span>
+<span class="line"><span style="color:#B392F0">    "_shards"</span><span style="color:#79B8FF">:</span><span style="color:#E1E4E8">{"</span><span style="color:#B392F0">total</span><span style="color:#B392F0">":2,"</span><span style="color:#B392F0">successful</span><span style="color:#B392F0">":1,"</span><span style="color:#B392F0">failed</span><span style="color:#B392F0">":0},</span></span>
 <span class="line"><span style="color:#B392F0">    "</span><span style="color:#B392F0">_seq_no</span><span style="color:#B392F0">":0,</span></span>
 <span class="line"><span style="color:#B392F0">    "</span><span style="color:#B392F0">_primary_term</span><span style="color:#B392F0">":1</span></span>
-<span class="line"><span style="color:#B392F0">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#B392F0">}</span></span></code></pre>
 <h3 id="刪除document">刪除Document</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 刪除名稱為customers的Index</span></span>
-<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> DELETE</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_doc/1'</span></span>
-<span class="line"></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 刪除名稱為customers的Index</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> DELETE</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_doc/1'</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">#返回結果</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#B392F0">    "_index"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"customers"</span><span style="color:#B392F0">,</span></span>
 <span class="line"><span style="color:#B392F0">    "_id"</span><span style="color:#79B8FF">:</span><span style="color:#B392F0">"1"</span><span style="color:#B392F0">,</span><span style="color:#B392F0">"_version"</span><span style="color:#B392F0">:2,</span></span>
@@ -164,27 +151,23 @@
 <span class="line"><span style="color:#E1E4E8">    },</span></span>
 <span class="line"><span style="color:#B392F0">    "_seq_no"</span><span style="color:#B392F0">:2,</span></span>
 <span class="line"><span style="color:#B392F0">    "_primary_term"</span><span style="color:#B392F0">:1</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>若成功一樣會返回成功訊息</p>
 <h2 id="查詢操作">查詢操作</h2>
 <h3 id="查詢所有document">查詢所有Document</h3>
 <p>使用GET方法並在Index後方加上_search查詢所有Document</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_search'</span></span>
-<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_search'</span></span></code></pre>
 <h3 id="查詢特定document">查詢特定Document</h3>
 <p>使用GET方法並加上Document的id，以查找特定id的資訊</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_doc/1?pretty=true'</span></span>
-<span class="line"></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_doc/1?pretty=true'</span></span></code></pre>
 <h3 id="全文搜索">全文搜索</h3>
 <p>使用GET方法並使用query、match等關鍵字及要查找的欄位及內容進行查詢</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> curl</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-H </span><span style="color:#9ECBFF">"Content-Type: application/json"</span><span style="color:#79B8FF"> \</span></span>
 <span class="line"><span style="color:#E1E4E8">-X </span><span style="color:#9ECBFF">GET</span><span style="color:#9ECBFF"> 'localhost:9200/customers/_search'</span><span style="color:#79B8FF">  -d</span><span style="color:#9ECBFF"> '</span></span>
 <span class="line"><span style="color:#9ECBFF">{</span></span>
 <span class="line"><span style="color:#9ECBFF">  "query" : { "match" : { "address" : "44" }}</span></span>
-<span class="line"><span style="color:#9ECBFF">}'</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#9ECBFF">}'</span></span></code></pre>
 <h2 id="參考資料">參考資料</h2>
 <ul>
 <li><a href="https://www.ruanyifeng.com/blog/2017/08/elasticsearch.html">全文搜索引擎 Elasticsearch 入门教程</a></li>

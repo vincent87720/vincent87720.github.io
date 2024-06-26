@@ -33,7 +33,10 @@ const { posts, tagName, totalCount, lastPage } = Astro.props;
 ---
 
 <MainLayout title={tagName}>
-  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  {
+    bannerImage&&
+    <link rel="preload" href={bannerImage.src} as="image" slot="head"/>
+  }
   <MainHeader bannerImage={bannerImage}>
     <TagHeaderBox tagName={tagName} postCount={totalCount} />
   </MainHeader>

@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="依賴注入 Dependency injection"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>依賴注入 Dependency injection - 柴魚筆記</title><link rel="preload" href="/assets/ABlackAndWhitePhotoOfAWall_Shapelined_unsplash.B8AEjOyd_Z2mWF81.webp" as="image"><link rel="stylesheet" href="/assets/style.DaOFvi7o.css"><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
-</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>     <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>依賴注入 Dependency injection</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2023-08-16T00:00:00+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/ABlackAndWhitePhotoOfAWall_Shapelined_unsplash.B8AEjOyd_Z2mWF81.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2562" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <h3 id="為什麼要使用注入">為什麼要使用注入</h3>
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="依賴注入 Dependency injection"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>依賴注入 Dependency injection - 柴魚筆記</title><link rel="stylesheet" href="/assets/style.7ZabHF9q.css" /><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
+</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>   <header class="main-header" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>依賴注入 Dependency injection</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2023-08-16T00:00:00+08:00 </span> </div> </div> </div>   </div>  </div> </header>  <article> <div class="content"> <div class="markdown">  <h3 id="為什麼要使用注入">為什麼要使用注入</h3>
 <p>為了把低階模組送到高階模組的內使用</p>
 <h3 id="為什麼要把低階模組往高階模組送">為什麼要把低階模組往高階模組送</h3>
 <p>為了不直接在高階模組內建立低階模組物件</p>
@@ -11,7 +11,7 @@
 從不同角度來看都應該由高階模組定義介面內的方法。</p>
 <h2 id="控制反轉及依賴注入">控制反轉及依賴注入</h2>
 <p>以飲料店來舉例，假設我今天開了一間格雷伯爵奶茶專賣店，我向食品材料行進貨茶葉</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShop</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShop</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> GetTea</span><span style="color:#E1E4E8">(){</span></span>
 <span class="line"><span style="color:#6A737D">        //建立一個供應商物件</span></span>
 <span class="line"><span style="color:#B392F0">        SupplierA</span><span style="color:#B392F0"> supplierA</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> SupplierA</span><span style="color:#E1E4E8">();</span></span>
@@ -22,11 +22,10 @@
 <span class="line"><span style="color:#6A737D">        //取得茶葉並回傳</span></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tea;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>目前我把SupplierA寫死在飲料店裡的GetTea方法裡，TeaShop高度依賴於SupplierA。
 開店一陣子後我覺得SupplierA提供的茶有怪味，想換成從SupplierB叫貨</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShop</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShop</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> GetTea</span><span style="color:#E1E4E8">(){</span></span>
 <span class="line"><span style="color:#6A737D">        //建立一個供應商物件</span></span>
 <span class="line"><span style="color:#B392F0">        SupplierB</span><span style="color:#B392F0"> supplierB</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> SupplierB</span><span style="color:#E1E4E8">();</span></span>
@@ -37,11 +36,10 @@
 <span class="line"><span style="color:#6A737D">        //取得茶葉並回傳</span></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tea;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>如果供應商一直換，我的程式豈不是要一直改？
 幸好這個問題有解決的辦法，我們把SupplierA和SupplierB抽象成Supplier就皆大歡喜啦</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ISupplier</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ISupplier</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> buy</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
@@ -60,11 +58,10 @@
 <span class="line"><span style="color:#6A737D">        //取得茶葉並回傳</span></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tea;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>這顯然沒有解決我們的問題，當我要把SupplierA換成SupplierB時還是會更改到程式。
 如果我讓GetTea只關心要跟廠商進貨，而不關心要跟哪間進貨，把這個煩惱交給別人好像問題就解決了</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ISupplier</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ISupplier</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> buy</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
@@ -88,8 +85,7 @@
 <span class="line"><span style="color:#6A737D">        //取得茶葉並回傳</span></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tea;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>這就是大家俗稱的控制反轉 (Inversion of Control, IoC)，原本高階依賴於低階（TeaShop依賴於SupplierA或SupplierB），變成高階被動接收低階模組（TeaShop被動接收被傳入的supplier）。
 原本是高階模組直接建立低階模組，經過控制反轉之後變成由控制反轉中心去建立低階模組，並傳給高階模組使用。</p>
 <p>低階模組的物件要能夠被傳入高階模組就稱為依賴注入，通常會在高階模組中使用兩者依賴的介面宣告一個變數（使用ISupplier宣告_supplier變數用於存放低階模組物件），使用建構子將該物件傳入並指定給該變數，供高階模組使用。</p>
@@ -99,23 +95,21 @@
 <h2 id="aspnet-core的依賴注入">ASP.Net Core的依賴注入</h2>
 <p>在ASP.NET中使用依賴注入的方法如下
 首先，在專案中加入<strong>services</strong>資料夾，在資料夾建立SupplierAService.cs</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> SupplierAService</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> SupplierAService</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> buy</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#B392F0"> gram</span><span style="color:#E1E4E8">){</span></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> gram;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>接著將SupplierAService服務註冊到WebApplicationBuilder，註冊完之後DI容器便會知道ISupplier對應的實作是SupplierAService，當需要使用到ISupplier時便會幫我們找到SupplierAService，new出物件之後幫我們丟到高階容器中注入，超級方便！！</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">){</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">){</span></span>
 <span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
 <span class="line"><span style="color:#F97583">    ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    builder.Services.</span><span style="color:#B392F0">AddTransient</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">ISupplier</span><span style="color:#E1E4E8">,</span><span style="color:#B392F0">SupplierAService</span><span style="color:#E1E4E8">>();</span></span>
 <span class="line"><span style="color:#F97583">    ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>例如當TeaShopController有要用到ISupplier服務時，只需要在建構式傳入ISupplier即可使用</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShopController</span><span style="color:#E1E4E8">{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TeaShopController</span><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    private</span><span style="color:#B392F0"> ISupplier</span><span style="color:#B392F0"> _supplier</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#E1E4E8">    </span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> TeaShopController</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">ISupplier</span><span style="color:#B392F0"> supplier</span><span style="color:#E1E4E8">){</span></span>
@@ -131,7 +125,6 @@
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tea;</span></span>
 <span class="line"><span style="color:#E1E4E8">    }  </span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span>
 <span class="line"></span></code></pre>
 <h6 id="參考資料">參考資料</h6>
 <ul>

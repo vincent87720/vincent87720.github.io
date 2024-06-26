@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="公司的APP其中一個功能是影片上傳及串流的服務，這陣子比較了許多影片串流及直播的通訊協定，最後選擇使用HLS協定來提供影片串流服務，流程包括「建立影片上傳API」、「影片轉檔」及「建立串流API」，這篇筆記記錄如何使用ASP.NET Core Web API來建立影音串流服務。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.10.3"><title>使用ASP.NET Core Web API提供HLS影片串流服務 - 柴魚筆記</title><link rel="preload" href="/assets/Waterfall_JonatanLewczuk_unsplash.CP2cTJcH_Z2jjvO7.webp" as="image"><link rel="stylesheet" href="/assets/style.DaOFvi7o.css"><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
-</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>     <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>使用ASP.NET Core Web API提供HLS影片串流服務</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2023-09-10T00:00:00+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/Waterfall_JonatanLewczuk_unsplash.CP2cTJcH_Z2jjvO7.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2560" loading="lazy" decoding="async"> </div> </div> </header>  <article> <div class="content"> <div class="markdown">  <p>公司的APP其中一個功能是影片上傳及串流的服務，這陣子比較了許多影片串流及直播的通訊協定，最後選擇使用HLS協定來提供影片串流服務，流程包括「建立影片上傳API」、「影片轉檔」及「建立串流API」，這篇筆記記錄如何使用 ASP.NET Core Web API 來建立影音串流服務。</p>
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="公司的APP其中一個功能是影片上傳及串流的服務，這陣子比較了許多影片串流及直播的通訊協定，最後選擇使用HLS協定來提供影片串流服務，流程包括「建立影片上傳API」、「影片轉檔」及「建立串流API」，這篇筆記記錄如何使用ASP.NET Core Web API來建立影音串流服務。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>使用ASP.NET Core Web API提供HLS影片串流服務 - 柴魚筆記</title><link rel="stylesheet" href="/assets/style.7ZabHF9q.css" /><script type="module">let e=!1;function t(){e=!e,e?(document.getElementById("navOuter").classList.add("menu-active"),document.getElementById("navOverlay").classList.add("nav-close")):(document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close"))}function n(){e=!1,document.getElementById("navOuter").classList.remove("menu-active"),document.getElementById("navOverlay").classList.remove("nav-close")}document.getElementById("MenuBtn").addEventListener("click",t);document.getElementById("navOverlay").addEventListener("click",n);
+</script></head> <body>   <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div>   <header class="main-header" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>使用ASP.NET Core Web API提供HLS影片串流服務</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2023-09-10T00:00:00+08:00 </span> </div> </div> </div>   </div>  </div> </header>  <article> <div class="content"> <div class="markdown">  <p>公司的APP其中一個功能是影片上傳及串流的服務，這陣子比較了許多影片串流及直播的通訊協定，最後選擇使用HLS協定來提供影片串流服務，流程包括「建立影片上傳API」、「影片轉檔」及「建立串流API」，這篇筆記記錄如何使用 ASP.NET Core Web API 來建立影音串流服務。</p>
 <h2 id="檔案結構">檔案結構</h2>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">--</span><span style="color:#9ECBFF"> Example</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">--</span><span style="color:#9ECBFF"> Example</span></span>
 <span class="line"><span style="color:#F97583">|</span><span style="color:#F97583">    |</span><span style="color:#B392F0">--Program.cs</span><span style="color:#6A737D">          #程式進入點</span></span>
 <span class="line"><span style="color:#F97583">|</span><span style="color:#F97583">    |</span></span>
 <span class="line"><span style="color:#F97583">|</span><span style="color:#F97583">    |</span><span style="color:#B392F0">--Example.csproj</span><span style="color:#6A737D">      #CSharp專案檔</span></span>
@@ -19,14 +19,13 @@
 <span class="line"><span style="color:#F97583">|</span><span style="color:#F97583">    |</span></span>
 <span class="line"><span style="color:#F97583">|</span><span style="color:#F97583">    |</span><span style="color:#B392F0">--FFMpeg</span><span style="color:#6A737D">                       #FFMpeg可執行檔（官網下載）</span></span>
 <span class="line"><span style="color:#F97583">|</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">--</span><span style="color:#9ECBFF"> Example.sln</span><span style="color:#6A737D">             #專案</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">--</span><span style="color:#9ECBFF"> Example.sln</span><span style="color:#6A737D">             #專案</span></span></code></pre>
 <h2 id="影片上傳">影片上傳</h2>
 <h3 id="建立上傳影片服務">建立上傳影片服務</h3>
 <p>上傳影片會用到<code>IFormFile</code>這個介面，<code>IFormFile</code>用來處理或儲存檔案，我們在<code>Services</code>目錄底下的<code>MultimediaService.cs</code>檔案裡新增<code>CreateMultimedia</code>函式並傳入型別為<code>IFormFile</code>的參數。</p>
 <p>首先取得檔案的副檔名，同時產生一個新檔名，接著建立一個Multimedia的物件，將資訊存放進去。</p>
 <p>這裡我們使用注入方式將資料庫注入，已建立好的Multimedia物件使用被注入的_dbContext加入到資料庫中，並且呼叫SaveChanges保存變動。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MultimediaService</span></span>
 <span class="line"><span style="color:#E1E4E8">{    </span></span>
@@ -60,12 +59,11 @@
 <span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> mmedia</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> _dbContext.Multimedia.</span><span style="color:#B392F0">Add</span><span style="color:#E1E4E8">(multimedia);</span></span>
 <span class="line"><span style="color:#E1E4E8">        _dbContext.</span><span style="color:#B392F0">SaveChanges</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>這個檔案先寫到這，我們先建立資料儲存及轉檔的程式，接著才會把所有服務都串起來。</p>
 <p>除了在資料庫存放檔案資訊外，還需要在實體目錄中存放實體影音檔案提供串流及下載，我們在<code>Services</code>目錄底下新增<code>FileService.cs</code>，用於提供檔案儲存及讀取的操作。</p>
 <p><code>WriteFile</code>函式傳入要寫入到本機的檔案、檔案名稱及副檔名，檢查目的目錄是否存在，並使用CopyToAsync及Stream寫入檔案。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//FileService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//FileService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FileService</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
@@ -92,8 +90,7 @@
 <span class="line"><span style="color:#6A737D">        //關閉stream</span></span>
 <span class="line"><span style="color:#E1E4E8">        stream.</span><span style="color:#B392F0">Close</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>此時我們已經能夠將檔案寫入本機目錄中了，接著便是我們今天的重頭戲－轉檔</p>
 <h3 id="影片轉檔為m3u8格式">影片轉檔為m3u8格式</h3>
 <p>不免俗的我們再來建立一個服務</p>
@@ -103,7 +100,7 @@
 <p><code>FromFileInput</code>可以用於指定輸入檔案的路徑
 <code>OutputToFile</code>可以用於指定輸出檔案路徑
 <code>ProcessAsynchronously</code>用於執行轉檔</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//HLSService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//HLSService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">using</span><span style="color:#B392F0"> FFMpegCore</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span>
@@ -124,13 +121,12 @@
 <span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">OutputToFile</span><span style="color:#E1E4E8">(filePath </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ".m3u8"</span><span style="color:#E1E4E8">)</span><span style="color:#6A737D">//輸出路徑後方必須包含".m3u8"副檔名</span></span>
 <span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">ProcessAsynchronously</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>到這邊已經可以將影片檔轉為m3u8及ts檔了，接著就是要把剛才的所有步驟串起來，我們把剛剛的步驟都串到<code>MultimediaService</code>裡的<code>CreateMultimedia</code>函式裡面。</p>
 <h3 id="包裝上傳流程">包裝上傳流程</h3>
 <p>剛才在<code>FileService</code>建立了<code>WriteFile</code>方法，用於將檔案寫入目錄中，在<code>HLSService</code>也建立了<code>WriteFile</code>方法，用於進行影片轉檔，我們接著要把這些服務串起來。</p>
 <p>目前<code>MultimediaService</code>中的<code>CreateMultimedia</code>函式寫到新增影片資訊到資料庫，接著<code>_dbContext.SaveChanges();</code>的後面加入寫檔及轉檔的服務。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MultimediaService</span></span>
 <span class="line"><span style="color:#E1E4E8">{    </span></span>
@@ -176,12 +172,11 @@
 <span class="line"><span style="color:#6A737D">        //傳入檔名及副檔名</span></span>
 <span class="line"><span style="color:#F97583">        await</span><span style="color:#E1E4E8"> _hls.</span><span style="color:#B392F0">WriteFile</span><span style="color:#E1E4E8">(fileNewName, fileExt);</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>恭喜我們終於完成上傳了，接著只要在API中提供此服務即可</p>
 <h3 id="建立上傳影片api">建立上傳影片API</h3>
 <p>上傳影片的API我們把他放在<code>ApiControllers</code>目錄中，在目錄中建立<code>MultimediaController.cs</code>檔案存放API</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"api/[controller]"</span><span style="color:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
@@ -207,15 +202,14 @@
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>影片上傳終於告一段落了，接著是影片下載及串流</p>
 <h2 id="影片串流">影片串流</h2>
 <p>剛才已經把影片都轉檔好了，其實影片串流就只是開一個API讓前端丟請求過來拿檔案而已…嗎？
 也沒這麼單純，我們要先從資料庫取得影片列表，我們需要裡面的檔案名稱，存取完資料庫還要開一個讀檔案的服務從目錄中讀取檔案，不過這應該比剛剛的簡單多了。</p>
 <h3 id="從資料庫取得影片資訊">從資料庫取得影片資訊</h3>
 <p>在<code>MultimediaService.cs</code>中加入<code>GetMultimediaViews</code>函式，取得<code>_dbContext</code>中<code>Multimedia</code>資料表的資料。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MultimediaService</span></span>
 <span class="line"><span style="color:#E1E4E8">{    </span></span>
@@ -239,10 +233,9 @@
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
 <span class="line"><span style="color:#F97583">        ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>開好服務後由<code>MultimediaController</code>呼叫<code>GetMultimediaViews</code>服務，將資料表中的影音資訊清單返回給使用者</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"api/[controller]"</span><span style="color:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
@@ -270,11 +263,10 @@
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
 <span class="line"><span style="color:#F97583">        ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h3 id="從目錄取得檔案">從目錄取得檔案</h3>
 <p>先前寫入檔案時把程式寫在<code>FileService.cs</code>，讀取檔案我們一樣把函式放在這個檔案裡面</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//FileService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//FileService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FileService</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
@@ -300,10 +292,9 @@
 <span class="line"><span style="color:#F97583">        ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">    </span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>接著在<code>MultimediaService</code>中呼叫剛剛建立的讀取檔案函式，建立<code>GetMultimedia</code>服務</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaService.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MultimediaService</span></span>
 <span class="line"><span style="color:#E1E4E8">{    </span></span>
@@ -332,12 +323,11 @@
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
 <span class="line"><span style="color:#F97583">        ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>到這邊已經完成所有服務了，接著只要建立取得檔案的API即可</p>
 <h3 id="建立串流api">建立串流API</h3>
 <p>在<code>MultimediaController</code>中建立<code>GetHLSMultimedia</code>API函式，函式中呼叫<code>MultimediaService</code>中的<code>GetHLSMultimedia</code>方法，取得stream後使用<code>File</code>函式將stream返回給使用者，並指定Content-Type為<code>video/mp2t</code>。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">//MultimediaController.cs</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"api/[controller]"</span><span style="color:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
@@ -375,8 +365,7 @@
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
 <span class="line"><span style="color:#F97583">        ..</span><span style="color:#E1E4E8">.</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h3 id="呼叫api">呼叫API</h3>
 <p>由於我們建立的是HttpGet方法，在瀏覽器網址列可以直接輸入網址呼叫API，在<code>MultimediaController</code>設定的路由是<code>/api/Multimedia/HLS/&#x3C;已轉檔後的檔名></code>，以檔名為<code>vxvi0clz.4od</code>的檔案為例，剛剛在轉檔的時候會轉出一個<code>vxvi0clz.4od.m3u8</code>檔案及<code>vxvi0clz.4od0.ts</code>,<code>vxvi0clz.4od1.ts</code>…等多個ts檔案，存取時呼叫<code>/api/Multimedia/HLS/vxvi0clz.4od.m3u8</code>即可取得檔案。</p>
 <h6 id="參考資料">參考資料</h6>
