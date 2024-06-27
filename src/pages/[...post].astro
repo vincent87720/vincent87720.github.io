@@ -27,8 +27,16 @@ const { Content } = post;
 const postMainTag = post.frontmatter.tags?.[0];
 ---
 
-<MainLayout title={post.frontmatter.title} description={post.frontmatter.abstract}>
-  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+<MainLayout
+  title={post.frontmatter.title}
+  description={post.frontmatter.abstract}
+>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head" />
+  <progress-bar-element>
+    <div id="progress-container" class="progress-container">
+      <span id="progress-bar" class="progress-bar"></span>
+    </div>
+  </progress-bar-element>
   <PostHeader bannerImage={bannerImage}>
     <PostHeaderBox
       postTitle={post.frontmatter.title}
@@ -51,3 +59,52 @@ const postMainTag = post.frontmatter.tags?.[0];
     </div>
   </article>
 </MainLayout>
+<script>
+  class AstroElement extends HTMLElement {
+    constructor() {
+      super();
+      let progressBar = document.getElementById("progress-bar");
+      document.addEventListener("scroll", (event) => {
+        let percentage =
+          (document.documentElement.scrollTop /
+            (document.documentElement.scrollHeight -
+              200 -
+              window.innerHeight)) *
+          100;
+        progressBar.style.width = `${percentage}%`;
+        if (percentage < 100) {
+          progressBar.style.display = "block";
+          document
+            .getElementById("progress-container")
+            .classList.remove("complete");
+        } else {
+          progressBar.style.display = "none";
+          document
+            .getElementById("progress-container")
+            .classList.add("complete");
+        }
+      });
+    }
+  }
+  customElements.define("progress-bar-element", AstroElement);
+</script>
+<style>
+  .progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    z-index: 1024;
+    transition: all ease-out 0.2s;
+  }
+  .progress-bar {
+    display: block;
+    height: 3px;
+    width: 0;
+    background: var(--color-accent);
+  }
+  .complete {
+    transform: translateY(-4px);
+  }
+</style>
