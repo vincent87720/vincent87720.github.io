@@ -2,7 +2,8 @@
   <slot />
 </div>
 
-<style is:global>
+<style is:global lang="scss">
+  $breakpoint-medium: 640px;
   .markdown {
     margin: 3.8rem 0;
     font-size: 1.1rem;
@@ -269,12 +270,12 @@
       background: var(--color-background-secondary);
       border-collapse: collapse;
 
-      @media (max-width: $breakpoint-medium) {
-        display: block;
-        border: none;
-        overflow-x: auto;
-        box-shadow: inset 0 0 0 1px var(--color-background-contrast);
-      }
+      // @media (max-width: $breakpoint-medium) {
+      //   display: block;
+      //   border: none;
+      //   overflow-x: auto;
+      //   box-shadow: inset 0 0 0 1px var(--color-background-contrast);
+      // }
 
       td,
       th {

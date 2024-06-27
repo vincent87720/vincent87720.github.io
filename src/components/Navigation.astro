@@ -1,56 +1,65 @@
 ---
 import { navConfig } from "@/config";
+import { removeTrailingSlash } from "@/lib/URLHelper";
 
 const currentPath = Astro.url.pathname;
 ---
 
-<div id="navOuter" class="nav-outer">
-  <nav class="nav-inner">
-    <span class="logo">
-      <a href="/">
-        <img src="/favicon.svg" />
+<custom-astro-element>
+  <div id="navOuter" class="nav-outer">
+    <nav class="nav-inner">
+      <span class="logo">
+        <a href="/">
+          <img src="/favicon.svg" />
+        </a>
+      </span>
+      <ul>
+        {
+          navConfig.items.map((x) => (
+            <li class:list={[{ active: removeTrailingSlash(currentPath) === x.url }]}>
+              <a href={x.url}>
+                <span>{x.name}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="nav-control">
+      <a id="MenuBtn" class="nav-control-inner">
+        <span class="icon icon-menu">Menu</span>
       </a>
-    </span>
-    <ul>
-      {
-        navConfig.items.map((x) => (
-          <li class:list={[{ active: currentPath === x.url }]}>
-            <a href={x.url}>
-              <span>{x.name}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-  <div class="nav-control">
-    <a id="MenuBtn" class="nav-control-inner">
-      <span class="icon icon-menu">Menu</span>
-    </a>
+    </div>
   </div>
-</div>
-<div id="navOverlay"></div>
+  <div id="navOverlay"></div>
+</custom-astro-element>
 <script>
-  let menuIsActive = false;
-  function handleMenu() {
-    menuIsActive = !menuIsActive;
-    if (menuIsActive) {
-      document.getElementById("navOuter").classList.add("menu-active");
-      document.getElementById("navOverlay").classList.add("nav-close");
-    } else {
-      document.getElementById("navOuter").classList.remove("menu-active");
-      document.getElementById("navOverlay").classList.remove("nav-close");
+  class AstroElement extends HTMLElement {
+    constructor() {
+      super();
+      let menuIsActive = false;
+      function handleMenu() {
+        menuIsActive = !menuIsActive;
+        if (menuIsActive) {
+          document.getElementById("navOuter").classList.add("menu-active");
+          document.getElementById("navOverlay").classList.add("nav-close");
+        } else {
+          document.getElementById("navOuter").classList.remove("menu-active");
+          document.getElementById("navOverlay").classList.remove("nav-close");
+        }
+      }
+      function handleMenuClose() {
+        menuIsActive = false;
+        document.getElementById("navOuter").classList.remove("menu-active");
+        document.getElementById("navOverlay").classList.remove("nav-close");
+      }
+      document.getElementById("MenuBtn").addEventListener("click", handleMenu);
+      document
+        .getElementById("navOverlay")
+        .addEventListener("click", handleMenuClose);
     }
   }
-  function handleMenuClose() {
-    menuIsActive = false;
-    document.getElementById("navOuter").classList.remove("menu-active");
-    document.getElementById("navOverlay").classList.remove("nav-close");
-  }
-  document.getElementById("MenuBtn").addEventListener("click", handleMenu);
-  document
-    .getElementById("navOverlay")
-    .addEventListener("click", handleMenuClose);
+  customElements.define("custom-astro-element", AstroElement);
 </script>
 <style>
   .nav-outer {

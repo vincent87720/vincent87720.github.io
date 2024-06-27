@@ -1,4 +1,5 @@
 import { bannerConfig } from "@/config";
+import { removeTrailingSlash } from "@/lib/URLHelper";
 import { getImage } from "astro:assets";
 
 export const getBanner = async (url) => {
@@ -14,7 +15,4 @@ export const getBanner = async (url) => {
   });
 };
 
-function removeTrailingSlash(str: string) {
-  if(str === "/") return str;
-  return str.replace(/\/+$/, '');
-}
+
