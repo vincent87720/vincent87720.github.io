@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import { siteConfig } from "@/config";
 
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 const { title, description } = Astro.props;
 
 const htmlTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
-const htmlDescription = description ? `${description}` : `${siteConfig.metaDescription}`;
+const htmlDescription = description
+  ? `${description}`
+  : `${siteConfig.metaDescription}`;
 ---
 
 <!doctype html>
@@ -23,10 +26,11 @@ const htmlDescription = description ? `${description}` : `${siteConfig.metaDescr
     <title>{htmlTitle}</title>
     <slot name="head" />
   </head>
-  <body>
+  <body transition:animate="fade">
     <slot />
   </body>
 </html>
+<ViewTransitions />
 <style is:global>
   :root {
     --font-primary: "Fira Sans", sans-serif;
