@@ -59,7 +59,7 @@ public static void SendFarDrinks(string drink)
 
 ### 定義實際執行該委派的函式
 
-在[[#定義委派]]中我們定義了名稱為`SendDrinks`的委派，我們可以將該委派作為某個函式（CreateGroupBuying）的參數。該參數（send）是一個委派實體，可以在函式內被調用，使用委派變數名稱加上參數即可執行該委派。
+在[定義委派](#定義委派)中我們定義了名稱為`SendDrinks`的委派，我們可以將該委派作為某個函式（CreateGroupBuying）的參數。該參數（send）是一個委派實體，可以在函式內被調用，使用委派變數名稱加上參數即可執行該委派。
 ```csharp
 public static void CreateGroupBuying(string order, SendDrinks send)
 {
