@@ -29,7 +29,7 @@ Index scan 同樣會歷遍整個索引來查找符合條件的資料，與 clust
 ## Index seek 非叢集索引搜尋
 Index seek 與 clustered index seek 的搜尋方式大同小異，差別在於非叢集索引的排序與實際的排序不同，必須透過指標才能找到實際的資料列。
 
-# Key lookup 索引鍵查閱
+## Key lookup 索引鍵查閱
 當查詢式中所需的欄位沒有被索引涵蓋到時，資料庫引擎會使用 Clustered Index 到來源Table取得索引中未涵蓋的資料。
 
 ###### 參考資料

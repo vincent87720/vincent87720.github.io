@@ -51,7 +51,7 @@
 <p>若查詢條件中的欄位剛好是某個索引的第一個欄位時，資料庫引擎可透過B Tree查找第一筆相符的資料，逐筆讀取直到不相符為止。由於叢集索引的順序與資料實際的排序相同，可透過索引直接找到資料列。</p>
 <h2 id="index-seek-非叢集索引搜尋">Index seek 非叢集索引搜尋</h2>
 <p>Index seek 與 clustered index seek 的搜尋方式大同小異，差別在於非叢集索引的排序與實際的排序不同，必須透過指標才能找到實際的資料列。</p>
-<h1 id="key-lookup-索引鍵查閱">Key lookup 索引鍵查閱</h1>
+<h2 id="key-lookup-索引鍵查閱">Key lookup 索引鍵查閱</h2>
 <p>當查詢式中所需的欄位沒有被索引涵蓋到時，資料庫引擎會使用 Clustered Index 到來源Table取得索引中未涵蓋的資料。</p>
 <h6 id="參考資料">參考資料</h6>
 <p><a href="https://sqlworker.blogspot.com/2016/12/sql-serverkey-lookup.html">https://sqlworker.blogspot.com/2016/12/sql-serverkey-lookup.html</a>
