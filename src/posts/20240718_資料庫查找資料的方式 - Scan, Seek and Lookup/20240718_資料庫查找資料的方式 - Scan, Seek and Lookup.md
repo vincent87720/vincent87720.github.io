@@ -33,9 +33,16 @@ Index seek 與 clustered index seek 的搜尋方式大同小異，差別在於�
 當查詢式中所需的欄位沒有被索引涵蓋到時，資料庫引擎會使用 Clustered Index 到來源Table取得索引中未涵蓋的資料。
 
 ###### 參考資料
-https://sqlworker.blogspot.com/2016/12/sql-serverkey-lookup.html
-https://sunnote.xyz/zh-tw/tutorials/database-optimization-clustered-index-nonclustered-index
-https://dotblogs.com.tw/EganBlog/2017/04/13/SQL_Clustered_Index#google_vignette
-https://jackyshih.pixnet.net/blog/post/5938123
-https://technet239.rssing.com/chan-4753999/article14783.html
-https://techcommunity.microsoft.com/t5/sql-server-blog/scans-vs-seeks/ba-p/383115
+- [SQL SERVER的索引鍵查閱（key lookup）]
+- [資料庫查詢性能優化技巧:索引概念、叢集、非叢集]
+- [淺談索引(二)]
+- [淺談 Index Seek 和 Scan]
+- [如何寫出高效能 TSQL - 關於索引不可不知道的事]
+- [Scans vs. Seeks]
+
+[SQL SERVER的索引鍵查閱（key lookup）]: https://sqlworker.blogspot.com/2016/12/sql-serverkey-lookup.html
+[資料庫查詢性能優化技巧:索引概念、叢集、非叢集]: https://sunnote.xyz/zh-tw/tutorials/database-optimization-clustered-index-nonclustered-index
+[淺談索引(二)]: https://dotblogs.com.tw/EganBlog/2017/04/13/SQL_Clustered_Index#google_vignette
+[淺談 Index Seek 和 Scan]: https://jackyshih.pixnet.net/blog/post/5938123
+[如何寫出高效能 TSQL - 關於索引不可不知道的事]: https://technet239.rssing.com/chan-4753999/article14783.html
+[Scans vs. Seeks]: https://techcommunity.microsoft.com/t5/sql-server-blog/scans-vs-seeks/ba-p/383115

@@ -155,4 +155,5 @@ export const bannerConfig = {
   "/solid-srp": `${postCoverPath}/ABlackAndWhitePhotoOfAWall_Shapelined_unsplash.jpg`,
   "/generic-delegates": `${postCoverPath}/VisualStudioGray.png`,
   "/database-scan-seek-lookup": `${postCoverPath}/BrownWoodenDrawer_JanAntoninKolar_unsplash.jpeg`,
+  "/csharp-base": `${postCoverPath}/VisualStudioGray.png`,
 }
