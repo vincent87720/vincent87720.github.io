@@ -5,17 +5,19 @@ import PostHeaderBox from "@/components/PostHeaderBox.astro";
 import PostBody from "@/components/PostBody.astro";
 import PostFooter from "@/components/PostFooter.astro";
 import { siteConfig } from "@/config";
+import { orderByDateDesc } from "@/lib/sort";
 import { getBanner } from "@/lib/bannerHelper";
 
 export async function getStaticPaths() {
   const allPosts = await Astro.glob("/src/posts/**/*.md");
-  return allPosts.map((post, index) => {
+  const sortedPosts = orderByDateDesc(allPosts);
+  return sortedPosts.map((post, index) => {
     return {
       params: { post: post.frontmatter.slug },
       props: {
         post,
-        prevPost: allPosts[index - 1],
-        nextPost: allPosts[index + 1],
+        prevPost: allPosts[index + 1],
+        nextPost: allPosts[index - 1],
       },
     };
   });
