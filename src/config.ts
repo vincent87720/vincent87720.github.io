@@ -156,4 +156,5 @@ export const bannerConfig = {
   "/generic-delegates": `${postCoverPath}/VisualStudioGray.png`,
   "/database-scan-seek-lookup": `${postCoverPath}/BrownWoodenDrawer_JanAntoninKolar_unsplash.jpeg`,
   "/csharp-base": `${postCoverPath}/VisualStudioGray.png`,
+  "/asp-net-core-basic": `${postCoverPath}/VisualStudioGray.png`,
 }
