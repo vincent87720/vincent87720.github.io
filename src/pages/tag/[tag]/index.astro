@@ -43,6 +43,6 @@ const { posts, tagName, totalCount, lastPage } = Astro.props;
     lastPage={lastPage}
     firstPageURL={"/tag/" + params.tag}
     prevUrl=""
-    nextUrl={params.tag + "/page/2"}
+    nextUrl={"/tag/" + params.tag + "/page/2"}
   />
 </MainLayout>
