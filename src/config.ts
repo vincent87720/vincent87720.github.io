@@ -157,4 +157,5 @@ export const bannerConfig = {
   "/database-scan-seek-lookup": `${postCoverPath}/BrownWoodenDrawer_JanAntoninKolar_unsplash.jpeg`,
   "/csharp-base": `${postCoverPath}/VisualStudioGray.png`,
   "/asp-net-core-basic": `${postCoverPath}/VisualStudioGray.png`,
+  "/middleware-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
 }

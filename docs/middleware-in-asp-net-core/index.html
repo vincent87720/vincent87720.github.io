@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="ASP.NET Core中，請求與回應會經過一連串的Middleware（中介軟體），每個Middleware都有各自的職責，例如用於驗證、授權或是錯誤處理等。當請求或回應流經Middleware時，Middleware會處理並選擇是否將請求傳遞到下一個Middleware，或者是將其短路。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>Middleware in ASP.NET Core - 柴魚筆記</title><meta name="google-site-verification" content="2IBowwEd6BLzhCDp1tolkz_388wjn2Vtwr9FedCaH_g"><link rel="preload" href="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" as="image"><link rel="stylesheet" href="/assets/style.oUFxCPxu.css" /><script type="module" src="/assets/hoisted.fwYYp2uV.js"></script><style>[data-astro-transition-scope="astro-mljbisf2-1"] { view-transition-name: astro-mljbisf2-1; }@layer astro { ::view-transition-old(astro-mljbisf2-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-mljbisf2-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-mljbisf2-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-mljbisf2-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-mljbisf2-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-mljbisf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-mljbisf2-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-mljbisf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-mljbisf2-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-mljbisf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-mljbisf2-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-mljbisf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-transition-scope="astro-mljbisf2-1">   <custom-astro-element data-astro-cid-pux6a34n> <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div> </custom-astro-element>     <progress-bar-element data-astro-cid-dkeyiay5> <div id="progress-container" class="progress-container" data-astro-cid-dkeyiay5> <span id="progress-bar" class="progress-bar" data-astro-cid-dkeyiay5></span> </div> </progress-bar-element> <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>Middleware in ASP.NET Core</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2024-08-03T19:25:00+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2160" loading="lazy" decoding="async"> </div> </div> </header>  <article data-astro-cid-dkeyiay5> <div class="content" data-astro-cid-dkeyiay5> <div class="markdown">  <p>ASP.NET Core中，請求與回應會經過一連串的Middleware（中介軟體），每個Middleware都有各自的職責，例如用於驗證、授權或是錯誤處理等。當請求或回應流經Middleware時，Middleware會處理並選擇是否將請求傳遞到下一個Middleware，或者是將其短路。</p>
+<h2 id="管線">管線</h2>
+<p>Middleware的組成方式就像管線一樣，會一段接著一段。</p>
+<p>可以把每個Middleware都想像成一個函式，在每個Middleware中都可以呼叫函式連到下一個Middleware，或是選擇不連到下一個函式直接短路。</p>
+<p>除了單一管線之外，管線也可以有分支，可以依照不同的路徑執行不同條管線。而管線也不可能一直延伸下去，最終都會遇到盡頭。</p>
+<h2 id="串接">串接</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Program</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#6A737D">	    // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">		// 建置WebApplication，回傳WebApplication的物件</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">MapGet</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#9ECBFF"> "Hello World!"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">		// 執行應用程式</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在範例程式碼中，我們對WebApplicationBuilder的物件（builder）呼叫<code>Build()</code>方法後，會回傳一個WebApplication的物件（app），WebApplication類別提供<code>Use()</code>方法讓我們可以把Middleware加入到管線中。ASP.NET Core提供了許多現成的Middleware擴充函式（Extensions），我們可以找到需要的功能直接加入到管線中。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Program</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#6A737D">	    // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">		// 建置WebApplication，回傳WebApplication的物件</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">		// 各種內建的Middleware Extension</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseHttpsRedirection</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseStaticFiles</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseRouting</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseAuthentication</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseAuthorization</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">MapRazorPages</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">MapControllers</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 執行應用程式</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>除了現成的Middleware可以使用外，我們也可以使用<code>Use()</code>方法自訂Middleware，事實上ASP.NET Core提供的現成Middleware也是使用相同的方法，只是被包裝為Extensions讓使用者可以方便使用。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Program</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Use</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">context</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"middleware 1 in </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> next.</span><span style="color:#B392F0">Invoke</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"middleware 1 out </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Use</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">context</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"middleware 2 in </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> next.</span><span style="color:#B392F0">Invoke</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"middleware 2 out </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">context</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"terminal middleware </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>middleware 1 in </span></span>
+<span class="line"><span>middleware 2 in </span></span>
+<span class="line"><span>terminal middleware </span></span>
+<span class="line"><span>middleware 2 out </span></span>
+<span class="line"><span>middleware 1 out</span></span></code></pre>
+<p>從輸出的結果可以觀察到Middleware的執行順序是由最前方的Middleware依序執行，直到terminal middleware（終端中介軟體）也就是<code>Run()</code>被執行為止。Middleware的執行順序是非常重要的，若Middleware之間有先後順序的話必須非常注意Middleware擺放順序是否正確。</p>
+<h2 id="分支">分支</h2>
+<p>除了單一管線的Middleware之外，Middleware還可以將不同的路徑對應到不同的Middleware管線，讓Middleware形成分支。WebApplication類別提供的<code>Map()</code>方法就可以指定哪個路徑要對應到哪一組Middleware管線，當收到指定路徑的請求時會執行對應管線中的Middleware。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">namespace</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Program</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Map</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/map1"</span><span style="color:#E1E4E8">, HandleMapTest1);</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Map</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/map2"</span><span style="color:#E1E4E8">, HandleMapTest2);</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> HandleMapTest1</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">IApplicationBuilder</span><span style="color:#B392F0"> app</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#E1E4E8">            app.</span><span style="color:#B392F0">Use</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">context</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span></span>
+<span class="line"><span style="color:#E1E4E8">            {</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"map1 middleware 1 in </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> next.</span><span style="color:#B392F0">Invoke</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"map1 middleware 1 out </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> HandleMapTest2</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">IApplicationBuilder</span><span style="color:#B392F0"> app</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#E1E4E8">            app.</span><span style="color:#B392F0">Use</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">context</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span></span>
+<span class="line"><span style="color:#E1E4E8">            {</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"map2 middleware 1 in </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> next.</span><span style="color:#B392F0">Invoke</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> context.Response.</span><span style="color:#B392F0">WriteAsync</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"map2 middleware 1 out </span><span style="color:#79B8FF">\r\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="盡頭">盡頭</h2>
+<p>只要是管線必定會有盡頭，一般的管線盡頭有兩種，一種是WebApplication類別提供的<code>Run()</code>方法，作為終端Middleware，它的委派不具有next參數，所以無法使用<code>next.Invoke()</code>呼叫下一個Middleware。另一種盡頭是在一般的Middleware中不呼叫<code>next.Invoke()</code>，同樣也使得管線無法繼續下去，我們將這種盡頭稱之為「短路」。</p>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://learn.microsoft.com/zh-tw/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0">ASP.NET Core 中介軟體</a></li>
+<li><a href="https://learn.microsoft.com/zh-tw/dotnet/api/microsoft.aspnetcore.builder.webapplication?view=aspnetcore-8.0">WebApplication 類別</a></li>
+<li><a href="https://blog.johnwu.cc/article/ironman-day03-asp-net-core-middleware.html">ASP.NET Core 2 系列 - Middleware</a></li>
+<li><a href="https://medium.com/@atailin.work/%E9%90%B5%E4%BA%BA%E8%B3%BD-asp-net-core-3-day03-middleware-1f726c90f6e8">Day03 Middleware</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10259251">.NET Core第4天_middleware是捨麼?</a></li>
+<li><a href="https://medium.com/@WilliamWhetstone/net-core-project-%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-middleware%E7%9A%84%E6%A6%82%E5%BF%B5%E8%88%87%E6%87%89%E7%94%A8-cb426045050e">.Net Core Project 從零開始 — Middleware的概念與應用</a></li>
+<li><a href="https://blog.darkthread.net/blog/aspnetcore-middleware-lab/">ASP.NET Core 基礎 - Middleware</a></li>
+<li><a href="https://www.cnblogs.com/JulianHuang/p/13286139.html">ASP.NET Core端点路由 作用原理</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/asp-net-core" data-astro-cid-ctzdi7mj> ASP.NET Core </a><a class="post-tag-badge" href="/tag/csharp" data-astro-cid-ctzdi7mj> C# </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj>  </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="/asp-net-core-basic" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>ASP.NET Core 基礎</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>ASP.NET Core 可以建立Web及桌面應用程式，本篇筆記記錄 ASP.NET Core 建立 Web 應用程式時的基礎概念。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2024-07-31T01:52:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <div class="nav-inner-left" data-astro-cid-bpgok6sl> <span class="nav-copyright nav-margin" data-astro-cid-bpgok6sl> 柴魚筆記 © 2019-2024 </span> <div class="nav-external-link nav-margin" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> </div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Tech support by
+<a href="https://my-attic-millieqiuuuu.vercel.app/" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </div> </span> </nav> </div>   <meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"> </body></html>  
