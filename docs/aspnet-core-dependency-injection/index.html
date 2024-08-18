@@ -161,6 +161,21 @@
 <span class="line"><span style="color:#E1E4E8">    }  </span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span></code></pre>
+<h3 id="生命週期">生命週期</h3>
+<p>在ASP.NET Core中，依賴注入有三種生命週期，分別是Transient、Scoped和Singleton。</p>
+<h4 id="transient">Transient</h4>
+<p>被註冊為Transient的服務會在每次透過控制反轉中心取得物件時，都會建立並回傳新的物件，永遠不共用。
+我們假設在同一個請求中會使用到兩個類別，類別名稱分別是C1及C2。
+在C1和C2中都注入了類別名稱為P的服務，且P被註冊為生命週期為Transient的服務。
+C1及C2初始化時會從控制反轉中心取得P的物件，由於P服務的生命週期是Transient，C1和C2取得的P不會是同一個P物件，而是兩個全新的P物件，C1和C2並不會共用相同的物件。</p>
+<h4 id="scoped">Scoped</h4>
+<p>被註冊為Scoped的服務其存留時間為一個Http請求，每個Http請求都會是不同的物件，在相同的Http請求中會共用同一個物件，並且會在第一次使用到該服務時建立物件。
+我們假設使用者發送了2個請求，分別是R1和R2，且在同一個請求中會使用到兩個類別，類別名稱分別是C1及C2。
+在C1和C2中都注入了類別名稱為P的服務，且P被註冊為生命週期為Scoped的服務。
+又
+在R1和R2中取到的P物件會是不同的物件，但在R1請求內任何地方取得的P物件會是相同的物件，註冊為Scoped的服務，其生命週期是一個Http請求。</p>
+<h4 id="singleton">Singleton</h4>
+<p>被註冊為Singleton的服務其存留時間為整個應用程式，該服務第一次被註冊時會從控制反轉中心取得新的物件，在這之後的每一次注入都會使用到相同的物件。亦即在該應用程式中任何時間任何地方取到該服務的物件都會是相同的物件。</p>
 <h6 id="參考資料">參考資料</h6>
 <ul>
 <li><a href="https://igouist.github.io/post/2021/11/newbie-6-dependency-injection/">菜雞新訓記 (6): 使用 依賴注入 (Dependency Injection) 來解除強耦合吧</a></li>
@@ -168,6 +183,7 @@
 <li><a href="https://www.youtube.com/watch?v=Hhpq7oYcpGE">Dependency Injection in .NET Core (.NET 6)</a></li>
 <li><a href="https://medium.com/wenchin-rolls-around/%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA-dependency-injection-ea672ba033ca">淺入淺出 Dependency Injection</a></li>
 <li><a href="https://learn.microsoft.com/zh-tw/dotnet/core/extensions/dependency-injection">.NET 相依性插入</a></li>
+<li><a href="https://www.gss.com.tw/blog/net-core-service-lifetime">服務存留期 (Service Lifetime)</a></li>
 </ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/asp-net-core" data-astro-cid-ctzdi7mj> ASP.NET Core </a><a class="post-tag-badge" href="/tag/csharp" data-astro-cid-ctzdi7mj> C# </a><a class="post-tag-badge" href="/tag/Pattern" data-astro-cid-ctzdi7mj> Pattern </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-prev" href="/http-header-content-disposition" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-left" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>HTTP header Content-Disposition</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>Content-Disposition包含兩種類型，分別是inline 和 attachment，用於指定下載的行為</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2023-08-18T00:00:00+08:00 </p> </a> </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="/aspnet-core-render-section" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>ASP.NET中RenderSection的作用</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>專案中的各個Page會被插入到_Layout.cshtml裡@RenderBody()的位置，與主版面整合。若Page中的某段程式不想被放在body內時，可以使用Section及RenderSection改變程式碼在_Layout.cshtml中的插入位置。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2023-08-15T01:00:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <div class="nav-inner-left" data-astro-cid-bpgok6sl> <span class="nav-copyright nav-margin" data-astro-cid-bpgok6sl> 柴魚筆記 © 2019-2024 </span> <div class="nav-external-link nav-margin" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> </div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
 Published with
 <a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>

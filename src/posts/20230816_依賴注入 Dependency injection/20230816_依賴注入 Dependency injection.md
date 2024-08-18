@@ -168,6 +168,25 @@ public class TeaShopController{
 
 ```
 
+### 生命週期
+在ASP.NET Core中，依賴注入有三種生命週期，分別是Transient、Scoped和Singleton。
+
+#### Transient
+被註冊為Transient的服務會在每次透過控制反轉中心取得物件時，都會建立並回傳新的物件，永遠不共用。
+我們假設在同一個請求中會使用到兩個類別，類別名稱分別是C1及C2。
+在C1和C2中都注入了類別名稱為P的服務，且P被註冊為生命週期為Transient的服務。
+C1及C2初始化時會從控制反轉中心取得P的物件，由於P服務的生命週期是Transient，C1和C2取得的P不會是同一個P物件，而是兩個全新的P物件，C1和C2並不會共用相同的物件。
+
+#### Scoped
+被註冊為Scoped的服務其存留時間為一個Http請求，每個Http請求都會是不同的物件，在相同的Http請求中會共用同一個物件，並且會在第一次使用到該服務時建立物件。
+我們假設使用者發送了2個請求，分別是R1和R2，且在同一個請求中會使用到兩個類別，類別名稱分別是C1及C2。
+在C1和C2中都注入了類別名稱為P的服務，且P被註冊為生命週期為Scoped的服務。
+又
+在R1和R2中取到的P物件會是不同的物件，但在R1請求內任何地方取得的P物件會是相同的物件，註冊為Scoped的服務，其生命週期是一個Http請求。
+
+#### Singleton
+被註冊為Singleton的服務其存留時間為整個應用程式，該服務第一次被註冊時會從控制反轉中心取得新的物件，在這之後的每一次注入都會使用到相同的物件。亦即在該應用程式中任何時間任何地方取到該服務的物件都會是相同的物件。
+
 
 ###### 參考資料
 - [菜雞新訓記 (6): 使用 依賴注入 (Dependency Injection) 來解除強耦合吧](https://igouist.github.io/post/2021/11/newbie-6-dependency-injection/)
@@ -175,3 +194,4 @@ public class TeaShopController{
 - [Dependency Injection in .NET Core (.NET 6)](https://www.youtube.com/watch?v=Hhpq7oYcpGE)
 - [淺入淺出 Dependency Injection](https://medium.com/wenchin-rolls-around/%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA-dependency-injection-ea672ba033ca)
 - [.NET 相依性插入](https://learn.microsoft.com/zh-tw/dotnet/core/extensions/dependency-injection)
+- [服務存留期 (Service Lifetime)](https://www.gss.com.tw/blog/net-core-service-lifetime)
