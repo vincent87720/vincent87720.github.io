@@ -1,0 +1,17 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainHeader from "@/components/MainHeader.astro";
+import SimpleHeaderBox from "@/components/SimpleHeaderBox.astro";
+import SeriesList from "@/components/SeriesList.astro";
+import { getBanner } from "@/lib/bannerHelper";
+
+const bannerImage = await getBanner(Astro.url.pathname);
+---
+
+<MainLayout title="Tags" description="Tags">
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
+    <SimpleHeaderBox title="Series"/>
+  </MainHeader>
+  <SeriesList />
+</MainLayout>

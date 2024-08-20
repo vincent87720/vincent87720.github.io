@@ -4,7 +4,8 @@ import type { NavBarConfig } from "./types/NavBarConfigType";
 export const siteConfig: SiteConfig = {
   title: "柴魚筆記",
   description: "程式・軟體・攝影",
-  metaDescription: "Vincent 的個人部落格，用於紀錄時常忘記的事物和自己走過的路，分享網頁後端、資料庫及系統架構等各式各樣的技術議題。",
+  metaDescription:
+    "Vincent 的個人部落格，用於紀錄時常忘記的事物和自己走過的路，分享網頁後端、資料庫及系統架構等各式各樣的技術議題。",
   banner: "assets/images/demo-banner.png",
   author: "Katsuobushi",
 };
@@ -22,6 +23,10 @@ export const navConfig: NavBarConfig = {
     {
       name: "Tags",
       url: "/tags",
+    },
+    {
+      name: "Series",
+      url: "/series",
     },
   ],
 };
@@ -57,6 +62,7 @@ export const bannerConfig = {
   "/": `${mainCoverPath}/IMG_2313.jpg`,
   "/author/Katsuobushi": `${mainCoverPath}/INSTAIMG_0049.jpg`,
   "/tags": `${mainCoverPath}/IMG_8174.jpg`,
+  "/series": `${mainCoverPath}/IMG_7313.jpg`,
   "/tag/uploaded": `${mainCoverPath}/IMG_8174.jpg`,
 
   "/tag/csharp": `${postCoverPath}/VisualStudioGray.png`,
@@ -95,7 +101,8 @@ export const bannerConfig = {
   "/tag/Streaming": `${postCoverPath}/Waterfall_JonatanLewczuk_unsplash.jpg`,
   "/tag/TCP": `${postCoverPath}/Communication.jpg`,
   "/tag/VisualStudioCode": `${postCoverPath}/VisualStudioGray.png`,
-  
+  "/series/asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
+
   "/ghost-github-webpage": `${postCoverPath}/GhostBlog.svg`,
   "/wildcard-mask": `${postCoverPath}/BinaryCode_kalhh_pxhere.jpg`,
   "/golang-function": `${postCoverPath}/Gopher.jpeg`,
@@ -158,4 +165,16 @@ export const bannerConfig = {
   "/csharp-base": `${postCoverPath}/VisualStudioGray.png`,
   "/asp-net-core-basic": `${postCoverPath}/VisualStudioGray.png`,
   "/middleware-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
-}
+};
+
+export const seriesConfig = [
+  {
+    name: "ASP.NET Core 系列文章",
+    slug: "asp-net-core",
+    posts: [
+      "/asp-net-core-basic",
+      "/middleware-in-asp-net-core",
+      "/aspnet-core-dependency-injection"
+    ],
+  },
+];

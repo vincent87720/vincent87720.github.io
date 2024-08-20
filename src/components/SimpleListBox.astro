@@ -1,0 +1,38 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  postCount: string;
+}
+
+const { href, name, postCount } = Astro.props;
+---
+
+<div class="box">
+  <h2 class="name">
+    <a href={"/series/"+href}>{name}</a>
+  </h2>
+  <span class="metadata">
+    {postCount} {postCount == "1" ? "Post" : "Posts"} / {href}
+  </span>
+</div>
+<style>
+  .box {
+    margin: 2.5rem 0;
+  }
+  .name {
+    margin-top: 0;
+  }
+  .name a {
+    text-decoration: none;
+    font-size: 2rem;
+    line-height: 2rem;
+    color: var(--color-content-lead);
+  }
+  .metadata {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: var(--color-content-secondary);
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainHeader from "@/components/MainHeader.astro";
+import TagHeaderBox from "@/components/TagHeaderBox.astro";
+import MainBody from "@/components/MainBody.astro";
+import { getBanner } from "@/lib/bannerHelper";
+import { seriesConfig } from "@/config";
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("/src/posts/**/*.md");
+  
+  return seriesConfig.map((series) => {
+    const filteredPosts = series.posts.map(x=>allPosts.find(post=>"/"+post.frontmatter.slug == x));
+    return {
+      params: { series: series.slug },
+      props: {
+        posts: filteredPosts,
+        seriesName: series.name,
+        totalCount: filteredPosts.length,
+      },
+    };
+  });
+}
+const params = Astro.params;
+const bannerImage = await getBanner("/series/" + params.series);
+const { posts, seriesName, totalCount } = Astro.props;
+---
+
+<MainLayout title={seriesName}>
+  <link rel="preload" href={bannerImage?.src} as="image" slot="head"/>
+  <MainHeader bannerImage={bannerImage}>
+    <TagHeaderBox tagName={seriesName} postCount={totalCount} />
+  </MainHeader>
+  <MainBody
+    posts={posts}
+    currentPage={1}
+    lastPage={1}
+    firstPageURL={"/series/" + params.series}
+    prevUrl=""
+    nextUrl=""
+  />
+</MainLayout>

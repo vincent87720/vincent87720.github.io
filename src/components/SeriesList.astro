@@ -1,0 +1,20 @@
+---
+import SimpleListBox from "@/components/SimpleListBox.astro";
+import { seriesConfig } from "@/config";
+---
+
+<main>
+  <article>
+    <div class="content">
+      {
+        seriesConfig.map((series) => (
+          <SimpleListBox
+            href={series.slug}
+            name={series.name}
+            postCount={series.posts.length.toString()}
+          />
+        ))
+      }
+    </div>
+  </article>
+</main>
