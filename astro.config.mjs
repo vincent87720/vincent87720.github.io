@@ -15,5 +15,6 @@ export default defineConfig({
       cssCodeSplit: false
     }
   },
-  integrations: [sitemap()]
+  integrations: [sitemap()],
+  serviceWorker: true,
 });
