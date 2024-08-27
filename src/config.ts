@@ -165,6 +165,7 @@ export const bannerConfig = {
   "/csharp-base": `${postCoverPath}/VisualStudioGray.png`,
   "/asp-net-core-basic": `${postCoverPath}/VisualStudioGray.png`,
   "/middleware-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
+  "/route-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
 };
 
 export const seriesConfig = [
@@ -174,7 +175,8 @@ export const seriesConfig = [
     posts: [
       "/asp-net-core-basic",
       "/middleware-in-asp-net-core",
-      "/aspnet-core-dependency-injection"
+      "/aspnet-core-dependency-injection",
+      "/route-in-asp-net-core",
     ],
   },
 ];

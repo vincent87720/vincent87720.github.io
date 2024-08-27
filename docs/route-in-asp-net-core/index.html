@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="ASP.NET Core中的路由可以分為慣例路由（Conventional routing）和屬性路由（Attribute routing），慣例路由通常用在Controller和View，屬性路由通常用在REST API，這篇筆記記錄屬性路由的相關設定。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>ASP.NET Core 中的路由 - 柴魚筆記</title><meta name="google-site-verification" content="2IBowwEd6BLzhCDp1tolkz_388wjn2Vtwr9FedCaH_g"><link rel="preload" href="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" as="image"><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1T2SE8P95"></script><link rel="stylesheet" href="/assets/style.skmwLMJh.css" /><script type="module" src="/assets/hoisted.E2jjHYdj.js"></script><style>[data-astro-transition-scope="astro-4vhbyfto-1"] { view-transition-name: astro-4vhbyfto-1; }@layer astro { ::view-transition-old(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-transition-scope="astro-4vhbyfto-1">   <custom-astro-element data-astro-cid-pux6a34n> <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/series" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Series</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div> </custom-astro-element>     <progress-bar-element data-astro-cid-dkeyiay5> <div id="progress-container" class="progress-container" data-astro-cid-dkeyiay5> <span id="progress-bar" class="progress-bar" data-astro-cid-dkeyiay5></span> </div> </progress-bar-element> <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>ASP.NET Core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>ASP.NET Core 中的路由</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2024-08-27T23:59:00+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2160" loading="lazy" decoding="async"> </div> </div> </header>  <article data-astro-cid-dkeyiay5> <div class="content" data-astro-cid-dkeyiay5> <div class="markdown">  <p>ASP.NET Core 中使用<code>UseRouting()</code>和<code>UseEndpoints()</code>這兩個Middleware來比對傳入請求的URL，並將這些請求對應到Controller中的Action。</p>
+<p>若想要自定義Middleware的順序，我們可以在<code>Program.cs</code>中明確定義這兩個Middleware。如果沒有定義也沒關係，ASP.NET Core預設會在Pipeline（管線）中自動加入這兩個Middleware。</p>
+<p>ASP.NET Core中的路由可以分為慣例路由（Conventional routing）和屬性路由（Attribute routing），慣例路由通常用在Controller和View，屬性路由通常用在REST API，這篇筆記記錄屬性路由的相關設定。</p>
+<h2 id="屬性路由-attribute-routing">屬性路由 Attribute routing</h2>
+<p>要讓屬性路由可以順利運作，首先必須在<code>Program.cs</code>中加入<code>MapControllers()</code>方法，<code>MapControllers</code>用於對映所有使用屬性路由的Action。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"><span style="color:#E1E4E8">builder.Services.</span><span style="color:#B392F0">AddControllers</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">//使用AddControllers讓屬性路由可以運作</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">app.</span><span style="color:#B392F0">MapControllers</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">//使用MapControllers讓屬性路由可以運作</span></span>
+<span class="line"><span style="color:#E1E4E8">app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<p>屬性路由聽名字就知道跟屬性（Attribute，也就是常常會看到掛在方法或類別上方用中括號包起來的那個東西）肯定脫不了關係。</p>
+<p>我們在開API時，會需要指定這支API的HTTP動詞及路由，ASP.NET Core 提供以下這幾個Attribute讓我們可以直接把這個屬性掛在類別或方法上方，指定其HTTP動詞或路由。</p>
+<h5 id="http動詞attribute">HTTP動詞Attribute</h5>
+<ul>
+<li><code>[HttpGet]</code></li>
+<li><code>[HttpPost]</code></li>
+<li><code>[HttpPut]</code></li>
+<li><code>[HttpDelete]</code></li>
+<li><code>[HttpHead]</code></li>
+<li><code>[HttpPatch]</code></li>
+</ul>
+<h5 id="http路由attribute">HTTP路由Attribute</h5>
+<ul>
+<li><code>[Route]</code></li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BarController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ControllerBase</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/Bar/List"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBarList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在上述範例中，<code>GetBarList()</code>方法上方掛了兩個Attribute，分別是<code>[HttpGet]</code>和<code>[Route]</code>。當我們對這個應用程式發出方法為GET且Endpoint為<code>/api/Bar/List</code>時就會執行<code>GetBarList()</code>這個方法。我們可以針對不同需求使用不同的HTTP動詞搭配不同的路由建立自己需要的API。</p>
+<h3 id="提取重複的路由">提取重複的路由</h3>
+<p>在同一個Controller中，如果有多個Action都有使用到部分相同的路由時，可以把相同的部分提取出來，一樣使用<code>[Route]</code>attribute掛到class上。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/Bar"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BarController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ControllerBase</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：GET /api/Bar/List</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"List"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBarList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：GET /api/Bar/:barId</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"{barId}"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Guid</span><span style="color:#B392F0"> barId</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：POST /api/Bar</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpPost</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> PostBar</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="語彙基元取代-token-replacement">語彙基元取代 Token replacement</h3>
+<p>這個正著唸或倒著唸都不明所以的東東在路由中可是很有用的。通常我們的路由跟Controller的類別名稱有很大的關係，如果想要直接把Controller名稱加入到路由中，我們可以在路由中使用<code>[controller]</code>作為替代Controller名稱的符號。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/[controller]"</span><span style="color:#E1E4E8">)]</span><span style="color:#6A737D">//使用[controller]作為代替Controller名稱的符號，[controller]將會被替換為Bar（Controller的類別名稱）</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BarController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ControllerBase</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：GET /api/Bar/List</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"List"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBarList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：GET /api/Bar/:barId</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"{barId}"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Guid</span><span style="color:#B392F0"> barId</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	//HTTP動詞與路由為：POST /api/Bar</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpPost</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> PostBar</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>除了<code>[controller]</code>，ASP.NET Core還提供另外兩個token，分別是<code>[area]</code>和<code>[action]</code>。
+<code>[area]</code>會被自動替換為Area的名稱，而<code>[action]</code>則會被替換為controller內action的名稱。</p>
+<h3 id="多個屬性路由">多個屬性路由</h3>
+<p>我們可以使用多個屬性路由指向同一個Controller或Action，常見的用法是用在「預設慣例路由」，也可以用在任何想要把一個以上的路由對應到同一個Controller或Action時。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">ApiController</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/Foo"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/api/[controller]"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#6A737D">// 「/api/Foo」和「/api/Bar」都會指向這個Controller</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BarController</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ControllerBase</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">HttpGet</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#E1E4E8">    [</span><span style="color:#B392F0">Route</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"List"</span><span style="color:#E1E4E8">)]</span></span>
+<span class="line"><span style="color:#6A737D">	// 「/api/Foo」、「/api/Bar」、「/api/Foo/List」、「/api/Bar/List」都會指向這個Action</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> IActionResult</span><span style="color:#B392F0"> GetBarList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> Ok</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="多個http動詞attribute">多個HTTP動詞Attribute</h3>
+<p>除了可以在掛上多個屬性路由，還可以掛多個HTTP動詞Attribute，不過非必要通常不建議這樣做，除非為了支援舊版API之類的非必要情況，否則可能會難以維護。</p>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://learn.microsoft.com/zh-tw/aspnet/core/mvc/controllers/routing?view=aspnetcore-8.0#token-replacement-in-route-templates-controller-action-area">ASP.NET Core 中的路由至控制器動作</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10262396">.Net Core Web Api_筆記09_web api的屬性路由模板兩種寫法_路由模板使用</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/asp-net-core" data-astro-cid-ctzdi7mj> ASP.NET Core </a><a class="post-tag-badge" href="/tag/csharp" data-astro-cid-ctzdi7mj> C# </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj>  </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="/middleware-in-asp-net-core" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>Middleware in ASP.NET Core</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>ASP.NET Core中，請求與回應會經過一連串的Middleware（中介軟體），每個Middleware都有各自的職責，例如用於驗證、授權或是錯誤處理等。當請求或回應流經Middleware時，Middleware會處理並選擇是否將請求傳遞到下一個Middleware，或者是將其短路。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2024-08-03T19:25:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <div class="nav-inner-left" data-astro-cid-bpgok6sl> <span class="nav-copyright nav-margin" data-astro-cid-bpgok6sl> 柴魚筆記 © 2019-2024 </span> <div class="nav-external-link nav-margin" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> </div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Tech support by
+<a href="https://my-attic-millieqiuuuu.vercel.app/" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </div> </span> </nav> </div>   <meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"> </body></html>  
