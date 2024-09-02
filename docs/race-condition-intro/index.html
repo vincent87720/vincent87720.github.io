@@ -53,9 +53,11 @@
 <p>所謂髒讀就是讀到髒東西，意即讀取到另一個 Transaction 尚未 commit 的值。</p>
 <h3 id="dirty-read-的情境">Dirty Read 的情境</h3>
 <p>假設有三個角色，資料庫、Transaction A 和 Transaction B</p>
-<p>資料庫：在資料庫中存在一個值 X=0
-Transaction A：變更數值 X 為 2 但因為某些原因需要 rollback，沒有成功更新
-Transaction B：讀取數值 X</p>
+<ul>
+<li>資料庫：在資料庫中存在一個值 X=0</li>
+<li>Transaction A：變更數值 X 為 2 但因為某些原因需要 rollback，沒有成功更新</li>
+<li>Transaction B：讀取數值 X</li>
+</ul>
 <p>如果是正常的情況應該是 Transaction A 想將 X 變更為 2 但沒有成功，所以將 rollback 回 0 ，此時 Transaction B 讀取到的數值應該要是0，與資料庫內的數值相同。</p>
 <p>若發生 Dirty Read 的情況時 Transaction B 讀到的數值會是2，發生競爭時的執行順序如下：</p>
 
@@ -105,9 +107,11 @@ Transaction B：讀取數值 X</p>
 而不相同的原因出在另一個交易（總公司調漲價格為70元）在此交易兩次查詢的途中更改了該數值導致的現象。</p>
 <h3 id="non-repeatable-read-的情境">Non-repeatable Read 的情境</h3>
 <p>假設有三個角色，資料庫、Transaction A和Transaction B</p>
-<p>資料庫：在資料庫中存在一個值X=0
-Transaction A：變更數值X為2
-Transaction B：讀取兩次數值X</p>
+<ul>
+<li>資料庫：在資料庫中存在一個值X=0</li>
+<li>Transaction A：變更數值X為2</li>
+<li>Transaction B：讀取兩次數值X</li>
+</ul>
 <p>正常情況下 Transaction B 讀兩次數值應該會都是 0 或都是 2。</p>
 <p>若發生 Non-repeatable Read，則有可能 Transaction B 在兩次讀取的期間 X 的值被改了，發生競爭時的執行順序如下：</p>
 
@@ -156,9 +160,11 @@ Transaction B：讀取兩次數值X</p>
 <p>在同一個交易中下達同樣的查詢式，但得到不同筆數的資料。</p>
 <h3 id="phantom-的情境">Phantom 的情境</h3>
 <p>假設有三個角色，資料庫、Transaction A和Transaction B</p>
-<p>資料庫：在資料庫中存在一筆資料
-Transaction A：增加一筆資料
-Transaction B：查詢所有資料兩次</p>
+<ul>
+<li>資料庫：在資料庫中存在一筆資料</li>
+<li>Transaction A：增加一筆資料</li>
+<li>Transaction B：查詢所有資料兩次</li>
+</ul>
 <p>正常情況下 Transaction B 的兩次查詢應該都要是相同的筆數。</p>
 <p>假設 Transaction A 和 Transaction B 幾乎同時發生，則有可能發生在 Transaction B 分別在 Transaction A 新增資料的前與後讀取資料，導致讀到的資料筆數不一致的問題，範例如下：</p>
 
@@ -204,9 +210,11 @@ Transaction B：查詢所有資料兩次</p>
 <p>當更新的數值在 commit 前被其他 transaction 改動時稱為 lost update。</p>
 <h3 id="lost-update-的情境">Lost update 的情境</h3>
 <p>假設有三個角色，資料庫、Transaction A和Transaction B</p>
-<p>資料庫：在資料庫中存在一個值X=0
-Transaction A：變更數值X，將X加上2
-Transaction B：變更數值X，將X加上3</p>
+<ul>
+<li>資料庫：在資料庫中存在一個值X=0</li>
+<li>Transaction A：變更數值X，將X加上2</li>
+<li>Transaction B：變更數值X，將X加上3</li>
+</ul>
 <p>正常情況下 Transaction A 和 B 對 X 加上 2 和 3 後，X 應該要變成 5。</p>
 <p>假設 Transaction A 和 Transaction B 幾乎同時發生，且沒有防止 race condition，則會發生以下情況：</p>
 
@@ -265,9 +273,11 @@ FOR UPDATE 是一種行級鎖，又稱為排他鎖，屬於悲觀鎖。</p>
 <p>當兩個交易同時讀取一個資料集，並且各自改動不同的資料時，會造成資料不一致的問題。</p>
 <h3 id="write-skew-的情境">Write Skew 的情境</h3>
 <p>假設有三個角色，資料庫、Transaction A和Transaction B</p>
-<p>資料庫：在資料庫中存在二筆資料，兩筆資料的數值皆為false
-Transaction A：讀取並編輯其中一筆資料
-Transaction B：讀取並編輯另外一筆資料</p>
+<ul>
+<li>資料庫：在資料庫中存在二筆資料，兩筆資料的數值皆為false</li>
+<li>Transaction A：讀取並編輯其中一筆資料</li>
+<li>Transaction B：讀取並編輯另外一筆資料</li>
+</ul>
 <p>假設我的商業邏輯是所有資料中只允許其中一筆資料的狀態為 true ，一但有其中一個為 true 之後其餘的資料都不能被變更為 true。</p>
 <p>正常情況下第二個交易的查詢應該會基於前一個交易的結果進行查詢，所以一但 Transaction A 將第一筆資料的狀態改為true之後，Transaction B 應該不能將第二筆資料改為 true。</p>
 <p>假設 Transaction A 和 B 同時讀取到一樣的狀態，兩個都各自進行編輯並 commit，雖然改動不同筆資料所以不會將另一個交易的結果覆蓋掉，但是可能會導致商業邏輯上的錯誤，範例如下：</p>
@@ -323,13 +333,13 @@ Transaction B：讀取並編輯另外一筆資料</p>
 <p>一種序列化演算法，屬於樂觀的併發控制機制</p>
 <h2 id="各情境之間的差異">各情境之間的差異</h2>
 <h3 id="non-repeatable-read-和-phantom-的差異">Non-repeatable Read 和 Phantom 的差異</h3>
-<p>Non-repeatable Read 是在同一個交易中的兩次查詢之間有其他交易 commit，其中有數值被改動了，導致多次查詢同一筆資料的結果是不同的。
+<p>Non-repeatable Read 是在同一個交易中的兩次查詢之間有其他交易 commit，其中有數值被改動了，導致多次查詢同一筆資料的結果是不同的。<br>
 Phantom 是在同一個交易中的兩次查詢之間有其他交易 commit，其中資料筆數有被變動，導致多次查詢的回傳資料筆數不同。</p>
 <h3 id="lost-update-與-dirty-write-的差異">Lost update 與 dirty write 的差異</h3>
 <p>Dirty write 是在 commit 前就被覆蓋掉，lost update 則是已經 commit 後才被蓋掉。</p>
 <h3 id="lost-update-與-write-skew-的差異">Lost update 與 Write Skew 的差異</h3>
-<p>Lost update 是共同編輯同一筆資料且編輯到了過時的資料，導致編輯的值被後續 commit 的值覆蓋掉導致的問題。
-Write Skew 是編輯到了過時的資料導致商業邏輯錯誤的問題。
+<p>Lost update 是共同編輯同一筆資料且編輯到了過時的資料，導致編輯的值被後續 commit 的值覆蓋掉導致的問題。<br>
+Write Skew 是編輯到了過時的資料導致商業邏輯錯誤的問題。<br>
 Lost update 可以算是 Write Skew 的一種 special case。</p>
 <h6 id="參考資料">參考資料</h6>
 <ul>

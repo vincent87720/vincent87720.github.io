@@ -29,9 +29,9 @@ Race condition 可大致上分為五個現象，包含
 ### Dirty Read 的情境
 假設有三個角色，資料庫、Transaction A 和 Transaction B
 
-資料庫：在資料庫中存在一個值 X=0
-Transaction A：變更數值 X 為 2 但因為某些原因需要 rollback，沒有成功更新
-Transaction B：讀取數值 X
+- 資料庫：在資料庫中存在一個值 X=0
+- Transaction A：變更數值 X 為 2 但因為某些原因需要 rollback，沒有成功更新
+- Transaction B：讀取數值 X
 
 如果是正常的情況應該是 Transaction A 想將 X 變更為 2 但沒有成功，所以將 rollback 回 0 ，此時 Transaction B 讀取到的數值應該要是0，與資料庫內的數值相同。
 
@@ -66,9 +66,9 @@ Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認
 ### Non-repeatable Read 的情境
 假設有三個角色，資料庫、Transaction A和Transaction B
 
-資料庫：在資料庫中存在一個值X=0
-Transaction A：變更數值X為2
-Transaction B：讀取兩次數值X
+- 資料庫：在資料庫中存在一個值X=0
+- Transaction A：變更數值X為2
+- Transaction B：讀取兩次數值X
 
 正常情況下 Transaction B 讀兩次數值應該會都是 0 或都是 2。
 
@@ -99,9 +99,9 @@ Transaction B：讀取兩次數值X
 ### Phantom 的情境
 假設有三個角色，資料庫、Transaction A和Transaction B
 
-資料庫：在資料庫中存在一筆資料
-Transaction A：增加一筆資料
-Transaction B：查詢所有資料兩次
+- 資料庫：在資料庫中存在一筆資料
+- Transaction A：增加一筆資料
+- Transaction B：查詢所有資料兩次
 
 正常情況下 Transaction B 的兩次查詢應該都要是相同的筆數。
 
@@ -125,9 +125,9 @@ Transaction B：查詢所有資料兩次
 ### Lost update 的情境
 假設有三個角色，資料庫、Transaction A和Transaction B
 
-資料庫：在資料庫中存在一個值X=0
-Transaction A：變更數值X，將X加上2
-Transaction B：變更數值X，將X加上3
+- 資料庫：在資料庫中存在一個值X=0
+- Transaction A：變更數值X，將X加上2
+- Transaction B：變更數值X，將X加上3
 
 正常情況下 Transaction A 和 B 對 X 加上 2 和 3 後，X 應該要變成 5。
 
@@ -165,9 +165,9 @@ FOR UPDATE 是一種行級鎖，又稱為排他鎖，屬於悲觀鎖。
 ### Write Skew 的情境
 假設有三個角色，資料庫、Transaction A和Transaction B
 
-資料庫：在資料庫中存在二筆資料，兩筆資料的數值皆為false
-Transaction A：讀取並編輯其中一筆資料
-Transaction B：讀取並編輯另外一筆資料
+- 資料庫：在資料庫中存在二筆資料，兩筆資料的數值皆為false
+- Transaction A：讀取並編輯其中一筆資料
+- Transaction B：讀取並編輯另外一筆資料
 
 假設我的商業邏輯是所有資料中只允許其中一筆資料的狀態為 true ，一但有其中一個為 true 之後其餘的資料都不能被變更為 true。
 
@@ -203,16 +203,16 @@ SERIALIZABLE 等級的交易會序列化執行，就像併發不存在一樣，�
 ## 各情境之間的差異
 
 ### Non-repeatable Read 和 Phantom 的差異
-Non-repeatable Read 是在同一個交易中的兩次查詢之間有其他交易 commit，其中有數值被改動了，導致多次查詢同一筆資料的結果是不同的。
+Non-repeatable Read 是在同一個交易中的兩次查詢之間有其他交易 commit，其中有數值被改動了，導致多次查詢同一筆資料的結果是不同的。  
 Phantom 是在同一個交易中的兩次查詢之間有其他交易 commit，其中資料筆數有被變動，導致多次查詢的回傳資料筆數不同。
 
 ### Lost update 與 dirty write 的差異
 Dirty write 是在 commit 前就被覆蓋掉，lost update 則是已經 commit 後才被蓋掉。
 
 ### Lost update 與 Write Skew 的差異
-Lost update 是共同編輯同一筆資料且編輯到了過時的資料，導致編輯的值被後續 commit 的值覆蓋掉導致的問題。
-Write Skew 是編輯到了過時的資料導致商業邏輯錯誤的問題。
-Lost update 可以算是 Write Skew 的一種 special case。
+Lost update 是共同編輯同一筆資料且編輯到了過時的資料，導致編輯的值被後續 commit 的值覆蓋掉導致的問題。  
+Write Skew 是編輯到了過時的資料導致商業邏輯錯誤的問題。  
+Lost update 可以算是 Write Skew 的一種 special case。  
 
 ###### 參考資料
 - [[PostgreSQL] 資料庫的Race Condition問題與交易隔離等級](https://ajing-notebook.blogspot.com/2021/12/postgresql-transaction.html)
