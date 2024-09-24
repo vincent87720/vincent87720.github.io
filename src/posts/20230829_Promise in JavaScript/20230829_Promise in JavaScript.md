@@ -23,7 +23,7 @@ const p = new Promise(function(resolve, reject) {
         resolve();//當事件已經執行完畢且成功操作時，呼叫此函式
     }
     ...
-	reject();//當事件已經執行完畢但操作失敗時，呼叫此函式
+    reject();//當事件已經執行完畢但操作失敗時，呼叫此函式
 });
 ```
 

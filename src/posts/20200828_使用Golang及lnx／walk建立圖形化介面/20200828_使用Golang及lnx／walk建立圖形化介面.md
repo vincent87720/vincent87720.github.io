@@ -38,20 +38,20 @@ go get github.com/akavel/rsrc
 以examples下的action範例裡的一小段程式碼為例
 ```
 PushButton{
-	AssignTo: &toggleSpecialModePB,
-	Text:     "Enable Special Mode",
-	OnClicked: func() {
-		isSpecialMode.SetSatisfied(!isSpecialMode.Satisfied())
+    AssignTo: &toggleSpecialModePB,
+    Text:     "Enable Special Mode",
+    OnClicked: func() {
+        isSpecialMode.SetSatisfied(!isSpecialMode.Satisfied())
 
-		if isSpecialMode.Satisfied() {
-			toggleSpecialModePB.SetText("Disable Special Mode")
-		} else {
-			toggleSpecialModePB.SetText("Enable Special Mode")
-		}
-	},
-	Accessibility: Accessibility{
-		Help: "Toggles special mode",
-	},
+        if isSpecialMode.Satisfied() {
+            toggleSpecialModePB.SetText("Disable Special Mode")
+        } else {
+            toggleSpecialModePB.SetText("Enable Special Mode")
+        }
+    },
+    Accessibility: Accessibility{
+        Help: "Toggles special mode",
+    },
 },
 ```
 很好奇PushButton裡面的這些參數到底是哪裡來的對吧
@@ -62,55 +62,55 @@ PushButton{
 package declarative
 
 import (
-	"github.com/lxn/walk"
+    "github.com/lxn/walk"
 )
 
 type PushButton struct {
-	// Window
+    // Window
 
-	Accessibility      Accessibility
-	Background         Brush
-	ContextMenuItems   []MenuItem
-	DoubleBuffering    bool
-	Enabled            Property
-	Font               Font
-	MaxSize            Size
-	MinSize            Size
-	Name               string
-	OnBoundsChanged    walk.EventHandler
-	OnKeyDown          walk.KeyEventHandler
-	OnKeyPress         walk.KeyEventHandler
-	OnKeyUp            walk.KeyEventHandler
-	OnMouseDown        walk.MouseEventHandler
-	OnMouseMove        walk.MouseEventHandler
-	OnMouseUp          walk.MouseEventHandler
-	OnSizeChanged      walk.EventHandler
-	Persistent         bool
-	RightToLeftReading bool
-	ToolTipText        Property
-	Visible            Property
+    Accessibility      Accessibility
+    Background         Brush
+    ContextMenuItems   []MenuItem
+    DoubleBuffering    bool
+    Enabled            Property
+    Font               Font
+    MaxSize            Size
+    MinSize            Size
+    Name               string
+    OnBoundsChanged    walk.EventHandler
+    OnKeyDown          walk.KeyEventHandler
+    OnKeyPress         walk.KeyEventHandler
+    OnKeyUp            walk.KeyEventHandler
+    OnMouseDown        walk.MouseEventHandler
+    OnMouseMove        walk.MouseEventHandler
+    OnMouseUp          walk.MouseEventHandler
+    OnSizeChanged      walk.EventHandler
+    Persistent         bool
+    RightToLeftReading bool
+    ToolTipText        Property
+    Visible            Property
 
-	// Widget
+    // Widget
 
-	Alignment          Alignment2D
-	AlwaysConsumeSpace bool
-	Column             int
-	ColumnSpan         int
-	GraphicsEffects    []walk.WidgetGraphicsEffect
-	Row                int
-	RowSpan            int
-	StretchFactor      int
+    Alignment          Alignment2D
+    AlwaysConsumeSpace bool
+    Column             int
+    ColumnSpan         int
+    GraphicsEffects    []walk.WidgetGraphicsEffect
+    Row                int
+    RowSpan            int
+    StretchFactor      int
 
-	// Button
+    // Button
 
-	Image     Property
-	OnClicked walk.EventHandler
-	Text      Property
+    Image     Property
+    OnClicked walk.EventHandler
+    Text      Property
 
-	// PushButton
+    // PushButton
 
-	AssignTo       **walk.PushButton
-	ImageAboveText bool
+    AssignTo       **walk.PushButton
+    ImageAboveText bool
 }
 ```
 這邊清楚的定義了哪些元件可以用哪些參數，只要照著結構裡定義的屬性名稱和型別給予對應的數值就可以了
@@ -131,47 +131,47 @@ type PushButton struct {
 package main
 
 import (
-	"log"
+    "log"
 )
 
 import (
-	"github.com/lxn/walk"
-	. "github.com/lxn/walk/declarative"
+    "github.com/lxn/walk"
+    . "github.com/lxn/walk/declarative"
 )
 
 func main() {
-	var te *walk.TextEdit
+    var te *walk.TextEdit
 
-	if _, err := (MainWindow{
-		Title:   "Walk Clipboard Example",
-		MinSize: Size{300, 200},
-		Layout:  VBox{},
-		Children: []Widget{
-			PushButton{
-				Text: "Copy",
-				OnClicked: func() {
-					if err := walk.Clipboard().SetText(te.Text()); err != nil {
-						log.Print("Copy: ", err)
-					}
-				},
-			},
-			PushButton{
-				Text: "Paste",
-				OnClicked: func() {
-					if text, err := walk.Clipboard().Text(); err != nil {
-						log.Print("Paste: ", err)
-					} else {
-						te.SetText(text)
-					}
-				},
-			},
-			TextEdit{
-				AssignTo: &te,
-			},
-		},
-	}).Run(); err != nil {
-		log.Fatal(err)
-	}
+    if _, err := (MainWindow{
+        Title:   "Walk Clipboard Example",
+        MinSize: Size{300, 200},
+        Layout:  VBox{},
+        Children: []Widget{
+            PushButton{
+                Text: "Copy",
+                OnClicked: func() {
+                    if err := walk.Clipboard().SetText(te.Text()); err != nil {
+                        log.Print("Copy: ", err)
+                    }
+                },
+            },
+            PushButton{
+                Text: "Paste",
+                OnClicked: func() {
+                    if text, err := walk.Clipboard().Text(); err != nil {
+                        log.Print("Paste: ", err)
+                    } else {
+                        te.SetText(text)
+                    }
+                },
+            },
+            TextEdit{
+                AssignTo: &te,
+            },
+        },
+    }).Run(); err != nil {
+        log.Fatal(err)
+    }
 }
 ```
 **test.manifest**

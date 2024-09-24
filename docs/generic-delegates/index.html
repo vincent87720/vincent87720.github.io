@@ -46,24 +46,24 @@
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">SendDrinks</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#B392F0">	send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">    send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#B392F0">    CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>以<code>SendDrinks</code>這個委派為例，我們可以將其由Action改寫。</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 簡化定義委派，直接在CreateGroupBuying的參數中使用Action即可</span></span>
@@ -72,25 +72,25 @@
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 直接使用Action定義委派型態，簡化定義委派寫法</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Action</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#B392F0">	send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">    send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#B392F0">    CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>以Action定義委派使我們不需在程式中額外定義委派，顯得更為簡潔且方便。</p>
 <p>使用Action無法定義回傳值，使用Func則可以定義回傳值。</p>
@@ -101,26 +101,26 @@
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#F97583">	return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#F97583">	return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#9ECBFF"> $"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 直接使用Func定義委派型態，簡化定義委派寫法</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Func</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">string</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#F97583">	var</span><span style="color:#B392F0"> result</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(result);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> result</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(order);</span><span style="color:#6A737D">// 呼叫委派</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(result);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#B392F0">    CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p><code>CreateGroupBuying</code>方法中使用到<code>Func&#x3C;string, string> send</code>作為參數，<code>Func&#x3C;string, string></code>尖括弧內的最後一個<code>string</code>為回傳值，第一個<code>string</code>為傳入參數的型別。</p>
 <p>需注意，Func會將回傳值型別參數視為必填，在Func的尖括弧內只有一個型別參數的情況下，該型別參數會視為回傳值型別參數，若需要只使用一個型別參數但該型別參數不是回傳值的情況，則必須使用Action進行定義。</p>

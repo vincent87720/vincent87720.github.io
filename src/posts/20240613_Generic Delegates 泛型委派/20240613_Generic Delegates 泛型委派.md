@@ -24,24 +24,24 @@ public delegate void SendDrinks(string order);
 // 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendNearDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉");
+    Console.WriteLine($"您的{drink}送到囉");
 }
 
 // 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendFarDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
+    Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
 }
 
 public static void CreateGroupBuying(string order, SendDrinks send)
 {
-	Console.WriteLine($"已建立訂單：{order}");
-	send(order);// 呼叫委派
+    Console.WriteLine($"已建立訂單：{order}");
+    send(order);// 呼叫委派
 }
 
 static void Main(string[] args)
 {
-	CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
+    CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
 }
 ```
 
@@ -54,25 +54,25 @@ static void Main(string[] args)
 // 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendNearDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉");
+    Console.WriteLine($"您的{drink}送到囉");
 }
 
 // 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendFarDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
+    Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
 }
 
 // 直接使用Action定義委派型態，簡化定義委派寫法
 public static void CreateGroupBuying(string order, Action<string> send)
 {
-	Console.WriteLine($"已建立訂單：{order}");
-	send(order);// 呼叫委派
+    Console.WriteLine($"已建立訂單：{order}");
+    send(order);// 呼叫委派
 }
 
 static void Main(string[] args)
 {
-	CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
+    CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
 }
 ```
 
@@ -89,26 +89,26 @@ static void Main(string[] args)
 // 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同
 public static string SendNearDrinks(string drink)
 {
-	return $"您的{drink}送到囉";
+    return $"您的{drink}送到囉";
 }
 
 // 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同
 public static string SendFarDrinks(string drink)
 {
-	return $"您的{drink}送到囉，跟您收取外送費50元";
+    return $"您的{drink}送到囉，跟您收取外送費50元";
 }
 
 // 直接使用Func定義委派型態，簡化定義委派寫法
 public static void CreateGroupBuying(string order, Func<string, string> send)
 {
-	Console.WriteLine($"已建立訂單：{order}");
-	var result = send(order);// 呼叫委派
-	Console.WriteLine(result);
+    Console.WriteLine($"已建立訂單：{order}");
+    var result = send(order);// 呼叫委派
+    Console.WriteLine(result);
 }
 
 static void Main(string[] args)
 {
-	CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
+    CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
 }
 ```
 

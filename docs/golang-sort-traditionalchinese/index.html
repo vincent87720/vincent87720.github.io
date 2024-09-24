@@ -70,44 +70,44 @@
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#B392F0"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> (</span></span>
-<span class="line"><span style="color:#9ECBFF">	"</span><span style="color:#B392F0">fmt</span><span style="color:#9ECBFF">"</span></span>
-<span class="line"><span style="color:#9ECBFF">	"</span><span style="color:#B392F0">sort</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#9ECBFF">    "</span><span style="color:#B392F0">fmt</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#9ECBFF">    "</span><span style="color:#B392F0">sort</span><span style="color:#9ECBFF">"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#9ECBFF">	"</span><span style="color:#B392F0">golang.org/x/text/encoding/traditionalchinese</span><span style="color:#9ECBFF">"</span></span>
-<span class="line"><span style="color:#9ECBFF">	"</span><span style="color:#B392F0">golang.org/x/text/transform</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#9ECBFF">    "</span><span style="color:#B392F0">golang.org/x/text/encoding/traditionalchinese</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#9ECBFF">    "</span><span style="color:#B392F0">golang.org/x/text/transform</span><span style="color:#9ECBFF">"</span></span>
 <span class="line"><span style="color:#E1E4E8">)</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">func</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">	s </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> []</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">"毛隆青"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"劉雅君"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"陳嘉鴻"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"王育如"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"郭苡良"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"楊宗穎"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"李玉全"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"劉玉合"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"姚昶民"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"林欣麟"</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#E1E4E8">    s </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> []</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">"毛隆青"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"劉雅君"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"陳嘉鴻"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"王育如"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"郭苡良"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"楊宗穎"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"李玉全"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"劉玉合"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"姚昶民"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"林欣麟"</span><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">	s1 </span><span style="color:#F97583">:=</span><span style="color:#B392F0"> sortByStroke</span><span style="color:#E1E4E8">(s)</span></span>
-<span class="line"><span style="color:#E1E4E8">	fmt.</span><span style="color:#B392F0">Println</span><span style="color:#E1E4E8">(s1)</span></span>
+<span class="line"><span style="color:#E1E4E8">    s1 </span><span style="color:#F97583">:=</span><span style="color:#B392F0"> sortByStroke</span><span style="color:#E1E4E8">(s)</span></span>
+<span class="line"><span style="color:#E1E4E8">    fmt.</span><span style="color:#B392F0">Println</span><span style="color:#E1E4E8">(s1)</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">func</span><span style="color:#B392F0"> sortByStroke</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">input</span><span style="color:#E1E4E8"> []</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">) (</span><span style="color:#FFAB70">output</span><span style="color:#E1E4E8"> []</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">) {</span></span>
-<span class="line"><span style="color:#E1E4E8">	output </span><span style="color:#F97583">=</span><span style="color:#B392F0"> make</span><span style="color:#E1E4E8">([]</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    output </span><span style="color:#F97583">=</span><span style="color:#B392F0"> make</span><span style="color:#E1E4E8">([]</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">    </span></span>
-<span class="line"><span style="color:#6A737D">	//建立Encoder和Decoder</span></span>
-<span class="line"><span style="color:#E1E4E8">	utf8ToBig5 </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> traditionalchinese.Big5.</span><span style="color:#B392F0">NewEncoder</span><span style="color:#E1E4E8">()</span></span>
-<span class="line"><span style="color:#E1E4E8">	big5ToUtf8 </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> traditionalchinese.Big5.</span><span style="color:#B392F0">NewDecoder</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#6A737D">    //建立Encoder和Decoder</span></span>
+<span class="line"><span style="color:#E1E4E8">    utf8ToBig5 </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> traditionalchinese.Big5.</span><span style="color:#B392F0">NewEncoder</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    big5ToUtf8 </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> traditionalchinese.Big5.</span><span style="color:#B392F0">NewDecoder</span><span style="color:#E1E4E8">()</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">	//將UTF-8轉換為Big5</span></span>
-<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">:=</span><span style="color:#F97583"> range</span><span style="color:#E1E4E8"> input {</span></span>
-<span class="line"><span style="color:#E1E4E8">		big5, _, _ </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> transform.</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">(utf8ToBig5, input[index])</span></span>
-<span class="line"><span style="color:#E1E4E8">		input[index] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> big5</span></span>
-<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#6A737D">    //將UTF-8轉換為Big5</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">:=</span><span style="color:#F97583"> range</span><span style="color:#E1E4E8"> input {</span></span>
+<span class="line"><span style="color:#E1E4E8">        big5, _, _ </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> transform.</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">(utf8ToBig5, input[index])</span></span>
+<span class="line"><span style="color:#E1E4E8">        input[index] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> big5</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">	//使用轉換成Big5的編碼進行排序</span></span>
-<span class="line"><span style="color:#E1E4E8">	sort.</span><span style="color:#B392F0">Strings</span><span style="color:#E1E4E8">(input)</span></span>
+<span class="line"><span style="color:#6A737D">    //使用轉換成Big5的編碼進行排序</span></span>
+<span class="line"><span style="color:#E1E4E8">    sort.</span><span style="color:#B392F0">Strings</span><span style="color:#E1E4E8">(input)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">	//將排序過後的Big5碼轉回UTF-8並放入output slice</span></span>
-<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> _, value </span><span style="color:#F97583">:=</span><span style="color:#F97583"> range</span><span style="color:#E1E4E8"> input {</span></span>
-<span class="line"><span style="color:#E1E4E8">		utf8, _, _ </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> transform.</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">(big5ToUtf8, value)</span></span>
-<span class="line"><span style="color:#E1E4E8">		output </span><span style="color:#F97583">=</span><span style="color:#B392F0"> append</span><span style="color:#E1E4E8">(output, utf8)</span></span>
-<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#6A737D">    //將排序過後的Big5碼轉回UTF-8並放入output slice</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> _, value </span><span style="color:#F97583">:=</span><span style="color:#F97583"> range</span><span style="color:#E1E4E8"> input {</span></span>
+<span class="line"><span style="color:#E1E4E8">        utf8, _, _ </span><span style="color:#F97583">:=</span><span style="color:#E1E4E8"> transform.</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">(big5ToUtf8, value)</span></span>
+<span class="line"><span style="color:#E1E4E8">        output </span><span style="color:#F97583">=</span><span style="color:#B392F0"> append</span><span style="color:#E1E4E8">(output, utf8)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> output</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> output</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>D:\>go run main</span></span>
 <span class="line"><span>[毛隆青 王育如 李玉全 林欣麟 姚昶民 郭苡良 陳嘉鴻 楊宗穎 劉玉合 劉雅君]</span></span></code></pre>

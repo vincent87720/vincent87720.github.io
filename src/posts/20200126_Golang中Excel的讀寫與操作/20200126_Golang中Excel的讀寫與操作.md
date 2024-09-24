@@ -29,7 +29,7 @@ xlsx := excelize.NewFile()
 inputFilePath := "D:\Project"
 xlsx, err := excelize.OpenFile(inputFilePath)
 if err != nil {
-	fmt.Println("\rERROR:", err)
+    fmt.Println("\rERROR:", err)
 }
 ```
 
@@ -39,7 +39,7 @@ if err != nil {
 sheetName := "Sheet1"//指定要讀取的工作表名稱
 xlsxRows, err = xlsx.GetRows(sheetName)
 if err != nil {
-	fmt.Println("\rERROR:",err)
+    fmt.Println("\rERROR:",err)
 }
 ```
 

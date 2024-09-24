@@ -46,15 +46,15 @@
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
-<span class="line"><span style="color:#6A737D">	    // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
+<span class="line"><span style="color:#6A737D">        // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
 <span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 建置WebApplication，回傳WebApplication的物件</span></span>
+<span class="line"><span style="color:#6A737D">        // 建置WebApplication，回傳WebApplication的物件</span></span>
 <span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">MapGet</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#9ECBFF"> "Hello World!"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 執行應用程式</span></span>
+<span class="line"><span style="color:#6A737D">        // 執行應用程式</span></span>
 <span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
@@ -65,22 +65,22 @@
 <span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">    {</span></span>
-<span class="line"><span style="color:#6A737D">	    // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
+<span class="line"><span style="color:#6A737D">        // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
 <span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 建置WebApplication，回傳WebApplication的物件</span></span>
+<span class="line"><span style="color:#6A737D">        // 建置WebApplication，回傳WebApplication的物件</span></span>
 <span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 各種內建的Middleware Extension</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseHttpsRedirection</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseStaticFiles</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseRouting</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseAuthentication</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">UseAuthorization</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">MapRazorPages</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		app.</span><span style="color:#B392F0">MapControllers</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">		</span></span>
-<span class="line"><span style="color:#6A737D">		// 執行應用程式</span></span>
+<span class="line"><span style="color:#6A737D">        // 各種內建的Middleware Extension</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">UseHttpsRedirection</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">UseStaticFiles</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">UseRouting</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">UseAuthentication</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">UseAuthorization</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">MapRazorPages</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">MapControllers</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 執行應用程式</span></span>
 <span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
@@ -113,10 +113,10 @@
 <span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>middleware 1 in </span></span>
-<span class="line"><span>middleware 2 in </span></span>
-<span class="line"><span>terminal middleware </span></span>
-<span class="line"><span>middleware 2 out </span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span>middleware 1 in</span></span>
+<span class="line"><span>middleware 2 in</span></span>
+<span class="line"><span>terminal middleware</span></span>
+<span class="line"><span>middleware 2 out</span></span>
 <span class="line"><span>middleware 1 out</span></span></code></pre>
 <p>從輸出的結果可以觀察到Middleware的執行順序是由最前方的Middleware依序執行，直到terminal middleware（終端中介軟體）也就是<code>Run()</code>被執行為止。Middleware的執行順序是非常重要的，若Middleware之間有先後順序的話必須非常注意Middleware擺放順序是否正確。</p>
 <h2 id="分支">分支</h2>

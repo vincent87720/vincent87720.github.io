@@ -43,7 +43,7 @@
 <span class="line"><span>|--Foo.csproj //C#專案的專案設定檔</span></span>
 <span class="line"><span>|--Program.cs //主程式（程式進入點）</span></span>
 <span class="line"><span>|--Properties</span></span>
-<span class="line"><span>	|--launchSettings.json //程式的啟動設定</span></span>
+<span class="line"><span>    |--launchSettings.json //程式的啟動設定</span></span>
 <span class="line"><span></span></span></code></pre>
 <h2 id="進入點">進入點</h2>
 <p>其中程式進入點是一個名為<code>Program.cs</code>的檔案，檔案內預設會包含以下程式碼：</p>
@@ -51,61 +51,61 @@
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Program</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
-<span class="line"><span style="color:#E1E4E8">    {</span></span>
-<span class="line"><span style="color:#6A737D">	    // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
-<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#6A737D">            // 回傳一個類別為WebApplicationBuilder的物件，名稱為builder</span></span>
+<span class="line"><span style="color:#F97583">                var</span><span style="color:#B392F0"> builder</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WebApplication.</span><span style="color:#B392F0">CreateBuilder</span><span style="color:#E1E4E8">(args);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 建置WebApplication，回傳WebApplication的物件</span></span>
-<span class="line"><span style="color:#F97583">        var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">        // 建置WebApplication，回傳WebApplication的物件</span></span>
+<span class="line"><span style="color:#F97583">                var</span><span style="color:#B392F0"> app</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">Build</span><span style="color:#E1E4E8">();</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">MapGet</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#9ECBFF"> "Hello World!"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                app.</span><span style="color:#B392F0">MapGet</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#9ECBFF"> "Hello World!"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D">		// 執行應用程式</span></span>
-<span class="line"><span style="color:#E1E4E8">        app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
-<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">        // 執行應用程式</span></span>
+<span class="line"><span style="color:#E1E4E8">                app.</span><span style="color:#B392F0">Run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>使用<code>WebApplication.CreateBuilder</code>可以建立一個WebApplicationBuilder的物件，該物件包含許多屬性，例如用於管理服務的Services、用於記錄的Logging或是與設定相關的Configuration等，可以在需要時取用這些屬性。</p>
 <p>builder物件的<code>Build()</code>方法會建置並回傳WebApplication物件，該物件可以設定路由或請求的pipeline。ASP.NET Core 提供許多現成的Middleware可以使用，例如常見的<code>UseAuthentication()</code>、<code>MapControllers()</code>或<code>UseRouting()</code>等，使用<code>Use()</code>方法也可以加入自定義的Middleware。除了設定Middleware與路由外，在程式的最後執行<code>Run()</code>或其他相關的方法可以啟動應用程式。</p>
 <h2 id="啟動設定">啟動設定</h2>
 <p><code>launchSettings.json</code>是用來決定執行應用程式時所要套用的環境設定，使用範本建立的ASP.NET Core專案預設包含以下設定：</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#79B8FF">  "$schema"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://json.schemastore.org/launchsettings.json"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">  "iisSettings"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">    "windowsAuthentication"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">    "anonymousAuthentication"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">    "iisExpress"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">      "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://localhost:42581"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "sslPort"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">44374</span></span>
-<span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">  },</span></span>
-<span class="line"><span style="color:#79B8FF">  "profiles"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">    "http"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">      "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Project"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "dotnetRunMessages"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://localhost:5159"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">        "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
-<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#79B8FF">    "$schema"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://json.schemastore.org/launchsettings.json"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "iisSettings"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "windowsAuthentication"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "anonymousAuthentication"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "iisExpress"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">            "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://localhost:42581"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "sslPort"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">44374</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
 <span class="line"><span style="color:#E1E4E8">    },</span></span>
-<span class="line"><span style="color:#79B8FF">    "https"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">      "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Project"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "dotnetRunMessages"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"https://localhost:7084;http://localhost:5159"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">        "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
-<span class="line"><span style="color:#E1E4E8">      }</span></span>
-<span class="line"><span style="color:#E1E4E8">    },</span></span>
-<span class="line"><span style="color:#79B8FF">    "IIS Express"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">      "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"IISExpress"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">      "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">        "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
-<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#79B8FF">    "profiles"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "http"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">            "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Project"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "dotnetRunMessages"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"http://localhost:5159"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">                "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#79B8FF">        "https"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">            "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Project"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "dotnetRunMessages"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "applicationUrl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"https://localhost:7084;http://localhost:5159"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">                "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#79B8FF">        "IIS Express"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">            "commandName"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"IISExpress"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "launchBrowser"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">            "environmentVariables"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">                "ASPNETCORE_ENVIRONMENT"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Development"</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
 <span class="line"><span style="color:#E1E4E8">    }</span></span>
-<span class="line"><span style="color:#E1E4E8">  }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>檔案中的profiles區塊包含http、https及IIS Express三個設定，其中.NET CLI只支援commandName為Project的設定，其餘commandName設定為IIS Express、IIS或Executable皆無法以.NET CLI指定其作為啟動設定。</p>
 <h2 id="專案設定檔">專案設定檔</h2>

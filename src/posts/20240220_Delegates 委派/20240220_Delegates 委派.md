@@ -19,7 +19,7 @@ abstract: 我們可以把委派想像成是一個沒有內容的函式，可以�
 - 可以把一個函式當成參數傳遞到另一個函式去執行
 - 可以用來處理事件
 - 可以用在回呼函式
-	- 當某段程式需要在特定時間或是特定條件下執行時很好用
+    - 當某段程式需要在特定時間或是特定條件下執行時很好用
 - 可以用在函式的多播
 
 ## 名詞定義
@@ -46,13 +46,13 @@ public delegate void SendDrinks(string order);
 // 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendNearDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉");
+    Console.WriteLine($"您的{drink}送到囉");
 }
 
 // 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同
 public static void SendFarDrinks(string drink)
 {
-	Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
+    Console.WriteLine($"您的{drink}送到囉，跟您收取外送費50元");
 }
 ```
 範例中`SendNearDrinks`與`SendFarDrinks`的參數皆為一個字串，回傳值皆為`void`，與委派相同，可被指定給委派實體。
@@ -63,8 +63,8 @@ public static void SendFarDrinks(string drink)
 ```csharp
 public static void CreateGroupBuying(string order, SendDrinks send)
 {
-	Console.WriteLine($"已建立訂單：{order}");
-	send(order);
+    Console.WriteLine($"已建立訂單：{order}");
+    send(order);
 }
 ```
 
@@ -74,7 +74,7 @@ public static void CreateGroupBuying(string order, SendDrinks send)
 ```csharp
 static void Main(string[] args)
 {
-	CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
+    CreateGroupBuying("一杯鮮奶茶微微", SendFarDrinks);
 }
 ```
 

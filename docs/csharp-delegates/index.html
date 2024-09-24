@@ -73,27 +73,27 @@
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">// 定義一個名稱為SendNearDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendNearDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// 定義一個名稱為SendFarDrinks的方法，其參數及回傳值皆與委派相同</span></span>
 <span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> SendFarDrinks</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> drink</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"您的{</span><span style="color:#E1E4E8">drink</span><span style="color:#9ECBFF">}送到囉，跟您收取外送費50元"</span><span style="color:#E1E4E8">);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>範例中<code>SendNearDrinks</code>與<code>SendFarDrinks</code>的參數皆為一個字串，回傳值皆為<code>void</code>，與委派相同，可被指定給委派實體。</p>
 <h3 id="定義實際執行該委派的函式">定義實際執行該委派的函式</h3>
 <p>在<a href="#%E5%AE%9A%E7%BE%A9%E5%A7%94%E6%B4%BE">定義委派</a>中我們定義了名稱為<code>SendDrinks</code>的委派，我們可以將該委派作為某個函式（CreateGroupBuying）的參數。該參數（send）是一個委派實體，可以在函式內被調用，使用委派變數名稱加上參數即可執行該委派。</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> order</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">SendDrinks</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#E1E4E8">	Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
-<span class="line"><span style="color:#B392F0">	send</span><span style="color:#E1E4E8">(order);</span></span>
+<span class="line"><span style="color:#E1E4E8">    Console.</span><span style="color:#B392F0">WriteLine</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">$"已建立訂單：{</span><span style="color:#E1E4E8">order</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">    send</span><span style="color:#E1E4E8">(order);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h3 id="建立傳遞及呼叫委派實體">建立、傳遞及呼叫委派實體</h3>
 <p>當我們將與委派結構相同的函式（SendFarDrinks）傳遞給實際執行該委派的函式（CreateGroupBuying）時，會自動建立委派實體，並且該委派實體可以在實際執行該委派的函式內被調用。</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> Main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">args</span><span style="color:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#B392F0">	CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
+<span class="line"><span style="color:#B392F0">    CreateGroupBuying</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"一杯鮮奶茶微微"</span><span style="color:#E1E4E8">, SendFarDrinks);</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <h6 id="參考資料">參考資料</h6>
 <ul>
