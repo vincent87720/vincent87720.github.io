@@ -51,8 +51,8 @@ Race condition 可大致上分為五個現象，包含
 此現象是 Transaction A 改動的值在commit前沒有被受到保護造成的結果。
 
 ### Dirty Read 的解決辦法
-將交易隔離等級設定為`READ UNCOMMITTED`即可避免 Dirty Read 的發生。
-`READ UNCOMMITTED`會防止髒讀，即防止此交易讀取到其他交易尚未 commit 的資料。
+將交易隔離等級設定為`READ COMMITTED`即可避免 Dirty Read 的發生。
+`READ COMMITTED`會防止髒讀，即防止此交易讀取到其他交易尚未 commit 的資料。
 
 ## Non-repeatable Read (Read Skew)
 Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認為沒有很好懂，可能意思會比較接近「無重複讀」？
@@ -87,11 +87,9 @@ Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認
 這種情境下 Transaction A 改動的值有被妥善保護直到 commit，但 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成了 Non-repeatable Read 的現象。
 
 ### Non-repeatable Read 的解決辦法
-將交易隔離等級設定為`READ COMMITTED`即可避免以下情況發生：
+將交易隔離等級設定為`REPEATABLE READ`即可避免以下情況發生：
 - 防止目前的交易讀取其他交易已編輯但尚未 commit 的資料
 - 防止其他交易編輯目前交易會讀取到的資料
-
-也可以將交易隔離等級設定為`READ COMMITTED SNAPSHOT`，與 READ COMMITTED 的差異在於 READ COMMITTED SNAPSHOT 使用樂觀鎖的方式處理 race condition。而 READ COMMITTED 使用悲觀鎖處理 race condition 問題。
 
 ## Phantom
 在同一個交易中下達同樣的查詢式，但得到不同筆數的資料。
@@ -118,6 +116,9 @@ Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認
 |                  |     交易結束，commit      |
 
 這種現象為 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成取得的資料筆數不一致的問題，此現象稱為 Phantom。
+
+### Phantom 的解決辦法
+將交易隔離等級設定為`SERIALIZABLE`即可避免Phantom發生
 
 ## Lost update
 當更新的數值在 commit 前被其他 transaction 改動時稱為 lost update。

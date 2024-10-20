@@ -97,8 +97,8 @@
 <p>目前的狀態是資料庫中X的值依然是0，我們本來預期 Transaction B 也應該拿到 0，但 Transaction B 在 Transaction A 尚未 commit 就讀取 X 的值，拿到了錯誤的數值，我們把這個現象稱為 Dirty Read。</p>
 <p>此現象是 Transaction A 改動的值在commit前沒有被受到保護造成的結果。</p>
 <h3 id="dirty-read-的解決辦法">Dirty Read 的解決辦法</h3>
-<p>將交易隔離等級設定為<code>READ UNCOMMITTED</code>即可避免 Dirty Read 的發生。
-<code>READ UNCOMMITTED</code>會防止髒讀，即防止此交易讀取到其他交易尚未 commit 的資料。</p>
+<p>將交易隔離等級設定為<code>READ COMMITTED</code>即可避免 Dirty Read 的發生。
+<code>READ COMMITTED</code>會防止髒讀，即防止此交易讀取到其他交易尚未 commit 的資料。</p>
 <h2 id="non-repeatable-read-read-skew">Non-repeatable Read (Read Skew)</h2>
 <p>Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認為沒有很好懂，可能意思會比較接近「無重複讀」？
 用白話一點解釋就是在同一個交易中查詢相同的值兩次但得到不同的結果（在同一個交易中我們會期望如果沒有更動資料，使用相同條件進行查詢應該得到相同結果）。</p>
@@ -150,12 +150,11 @@
 <table><thead><tr><th align="center">Transaction A</th><th align="center">Transaction B</th></tr></thead><tbody><tr><td align="center">交易開始</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">交易開始</td></tr><tr><td align="center">將X變更為2</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">讀取到X的值為0（沒有Dirty Read的情況下讀到0是正常的）</td></tr><tr><td align="center">交易結束，commit</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">讀取到X的值為2</td></tr></tbody></table>
 <p>這種情境下 Transaction A 改動的值有被妥善保護直到 commit，但 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成了 Non-repeatable Read 的現象。</p>
 <h3 id="non-repeatable-read-的解決辦法">Non-repeatable Read 的解決辦法</h3>
-<p>將交易隔離等級設定為<code>READ COMMITTED</code>即可避免以下情況發生：</p>
+<p>將交易隔離等級設定為<code>REPEATABLE READ</code>即可避免以下情況發生：</p>
 <ul>
 <li>防止目前的交易讀取其他交易已編輯但尚未 commit 的資料</li>
 <li>防止其他交易編輯目前交易會讀取到的資料</li>
 </ul>
-<p>也可以將交易隔離等級設定為<code>READ COMMITTED SNAPSHOT</code>，與 READ COMMITTED 的差異在於 READ COMMITTED SNAPSHOT 使用樂觀鎖的方式處理 race condition。而 READ COMMITTED 使用悲觀鎖處理 race condition 問題。</p>
 <h2 id="phantom">Phantom</h2>
 <p>在同一個交易中下達同樣的查詢式，但得到不同筆數的資料。</p>
 <h3 id="phantom-的情境">Phantom 的情境</h3>
@@ -206,6 +205,8 @@
 
 <table><thead><tr><th align="center">Transaction A</th><th align="center">Transaction B</th></tr></thead><tbody><tr><td align="center">交易開始</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">交易開始</td></tr><tr><td align="center"></td><td align="center">查詢所有資料，得到1筆資料</td></tr><tr><td align="center">增加一筆資料</td><td align="center"></td></tr><tr><td align="center">交易結束，commit</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">查詢所有資料，得到2筆資料</td></tr><tr><td align="center"></td><td align="center">交易結束，commit</td></tr></tbody></table>
 <p>這種現象為 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成取得的資料筆數不一致的問題，此現象稱為 Phantom。</p>
+<h3 id="phantom-的解決辦法">Phantom 的解決辦法</h3>
+<p>將交易隔離等級設定為<code>SERIALIZABLE</code>即可避免Phantom發生</p>
 <h2 id="lost-update">Lost update</h2>
 <p>當更新的數值在 commit 前被其他 transaction 改動時稱為 lost update。</p>
 <h3 id="lost-update-的情境">Lost update 的情境</h3>

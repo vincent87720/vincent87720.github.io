@@ -166,6 +166,7 @@ export const bannerConfig = {
   "/asp-net-core-basic": `${postCoverPath}/VisualStudioGray.png`,
   "/middleware-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
   "/route-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
+  "/hello-deadlock": `${postCoverPath}/DiningPhilosophers'Problem_David Solis.png`,
 };
 
 export const seriesConfig = [
