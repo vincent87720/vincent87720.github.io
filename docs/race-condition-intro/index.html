@@ -206,7 +206,7 @@
 <table><thead><tr><th align="center">Transaction A</th><th align="center">Transaction B</th></tr></thead><tbody><tr><td align="center">交易開始</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">交易開始</td></tr><tr><td align="center"></td><td align="center">查詢所有資料，得到1筆資料</td></tr><tr><td align="center">增加一筆資料</td><td align="center"></td></tr><tr><td align="center">交易結束，commit</td><td align="center"></td></tr><tr><td align="center"></td><td align="center">查詢所有資料，得到2筆資料</td></tr><tr><td align="center"></td><td align="center">交易結束，commit</td></tr></tbody></table>
 <p>這種現象為 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成取得的資料筆數不一致的問題，此現象稱為 Phantom。</p>
 <h3 id="phantom-的解決辦法">Phantom 的解決辦法</h3>
-<p>將交易隔離等級設定為<code>SERIALIZABLE</code>即可避免Phantom發生</p>
+<p>將交易隔離等級設定為<code>SNAPSHOT</code>或<code>SERIALIZABLE</code>即可避免Phantom發生</p>
 <h2 id="lost-update">Lost update</h2>
 <p>當更新的數值在 commit 前被其他 transaction 改動時稱為 lost update。</p>
 <h3 id="lost-update-的情境">Lost update 的情境</h3>
@@ -267,6 +267,8 @@
 <h4 id="使用-select-for-update">使用 SELECT FOR UPDATE</h4>
 <p>InnoDB 可以使用 FOR UPDATE 語法解決 lost update 的問題。
 FOR UPDATE 是一種行級鎖，又稱為排他鎖，屬於悲觀鎖。</p>
+<h4 id="使用-repeatable-read-或-serializable">使用 REPEATABLE READ 或 SERIALIZABLE</h4>
+<p>將交易隔離等級設定為<code>REPEATABLE READ</code>或<code>SERIALIZABLE</code>即可避免Lost update發生</p>
 <h4 id="使用-snapshot">使用 SNAPSHOT</h4>
 <p>資料庫的 SNAPSHOT 可以自動檢查是否發生 Lost update，並終止出問題的交易。
 使用 SNAPSHOT 時要記得處理被終止的交易，重新執行就可以解決此問題。</p>

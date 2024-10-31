@@ -118,7 +118,7 @@ Non-repeatable Read 的中文翻譯是「不可重複讀」，但這翻譯我認
 這種現象為 Transaction B 的兩次讀取分別在 Transaction A 的 commit 前和 commit 後，造成取得的資料筆數不一致的問題，此現象稱為 Phantom。
 
 ### Phantom 的解決辦法
-將交易隔離等級設定為`SERIALIZABLE`即可避免Phantom發生
+將交易隔離等級設定為`SNAPSHOT`或`SERIALIZABLE`即可避免Phantom發生
 
 ## Lost update
 當更新的數值在 commit 前被其他 transaction 改動時稱為 lost update。
@@ -155,6 +155,9 @@ UPDATE record SET x=3 WHERE uid=1
 #### 使用 SELECT FOR UPDATE
 InnoDB 可以使用 FOR UPDATE 語法解決 lost update 的問題。
 FOR UPDATE 是一種行級鎖，又稱為排他鎖，屬於悲觀鎖。
+
+#### 使用 REPEATABLE READ 或 SERIALIZABLE
+將交易隔離等級設定為`REPEATABLE READ`或`SERIALIZABLE`即可避免Lost update發生
 
 #### 使用 SNAPSHOT
 資料庫的 SNAPSHOT 可以自動檢查是否發生 Lost update，並終止出問題的交易。

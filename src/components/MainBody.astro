@@ -33,7 +33,7 @@ const {
       {
         posts.map((post) => (
           <PostBox
-            href={"/" + (post.frontmatter.slug || "404")}
+            href={"/" + (post.frontmatter.slug+"/" || "404")}
             title={post.frontmatter.title}
             author="Katsuobushi"
             authorHref="author/katsuobushi/index.html"
