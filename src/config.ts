@@ -75,6 +75,7 @@ export const bannerConfig = {
   "/tag/Network": `${postCoverPath}/Communication.jpg`,
   "/tag/JavaScript": `${postCoverPath}/Javascript.png`,
   "/tag/Pattern": `${postCoverPath}/ABlackAndWhitePhotoOfAWall_Shapelined_unsplash.jpg`,
+  "/tag/SQLServer": `${postCoverPath}/BrownWoodenDrawer_JanAntoninKolar_unsplash.jpeg`,
   "/tag/Tools": `${postCoverPath}/Tools_ErikMclean_unsplash.jpg`,
   "/tag/Webpack": `${postCoverPath}/Webpack.png`,
   "/tag/API": `${postCoverPath}/Doors_MorenHsu_unsplash.jpg`,
@@ -167,6 +168,7 @@ export const bannerConfig = {
   "/middleware-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
   "/route-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
   "/hello-deadlock": `${postCoverPath}/DiningPhilosophers'Problem_David Solis.png`,
+  "/index-fragmentation": `${postCoverPath}/AGroupOfAbstractShapesFloatingInTheAir_SteveJohnson_unsplash.jpg`,
 };
 
 export const seriesConfig = [
