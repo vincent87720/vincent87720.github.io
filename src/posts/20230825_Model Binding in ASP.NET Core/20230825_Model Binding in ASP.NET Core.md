@@ -3,8 +3,8 @@ title: Model Binding in ASP.NET Core
 slug: model-binding-in-asp-net-core
 createAt: 2023-08-25T00:00:00+08:00
 tags:
-    - ASP.NET Core
-    - C#
+    - asp-net-core
+    - csharp
 abstract: controller會處理來自用戶端的HTTP Request，請求中會有一些資訊來往，這些資料會需要經過型別轉換、檢查必填、最大長度及正確性等步驟後我們才能使用，若手動處理這些步驟將會非常繁瑣。ASP.NET提供Model Binding的功能，可以處理來自使用者請求中的資料，將其綁定到指定型態的資料上，省去繁複的處理程序並提高正確性。
 ---
 controller會處理來自用戶端的HTTP Request，請求中會有一些資訊來往，這些資料會需要經過型別轉換、檢查必填、最大長度及正確性等步驟後我們才能使用，若手動處理這些步驟將會非常繁瑣。

@@ -3,8 +3,8 @@ title: 依賴注入 Dependency injection
 slug: aspnet-core-dependency-injection
 createAt: 2023-08-16T00:00:00+08:00
 tags:
-    - ASP.NET Core
-    - C#
+    - asp-net-core
+    - csharp
     - Pattern
 abstract: 依賴注入 Dependency injection
 ---

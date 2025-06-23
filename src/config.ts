@@ -45,14 +45,14 @@ export const subNavConfig: NavBarConfig = {
 };
 
 export const tagConfig = {
-  "ASP.NET Core": {
-    name: "ASP.NET Core",
-    url: "asp-net-core",
-  },
-  "C#": {
-    name: "C#",
-    url: "csharp",
-  },
+  // "ASP.NET Core": {
+  //   name: "ASP.NET Core",
+  //   url: "asp-net-core",
+  // },
+  // "C#": {
+  //   name: "csharp",
+  //   url: "csharp",
+  // },
 };
 
 const mainCoverPath = "/src/assets/Cover/MainCover";
@@ -169,6 +169,7 @@ export const bannerConfig = {
   "/route-in-asp-net-core": `${postCoverPath}/VisualStudioGray.png`,
   "/hello-deadlock": `${postCoverPath}/DiningPhilosophers'Problem_David Solis.png`,
   "/index-fragmentation": `${postCoverPath}/AGroupOfAbstractShapesFloatingInTheAir_SteveJohnson_unsplash.jpg`,
+  "/asp-net-core-authentication": `${postCoverPath}/VisualStudioGray.png`,
 };
 
 export const seriesConfig = [

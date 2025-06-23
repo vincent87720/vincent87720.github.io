@@ -3,7 +3,7 @@ title: 使用C#和Npgsql連接到PostgreSQL server
 slug: csharp-connect-to-postgresql
 createAt: 2020-09-03T00:00:00+08:00
 tags:
-    - C#
+    - csharp
 abstract: 使用C#和Npgsql連接到PostgreSQL server
 ---
 

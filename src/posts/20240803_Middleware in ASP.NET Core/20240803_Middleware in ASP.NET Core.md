@@ -3,8 +3,8 @@ title: Middleware in ASP.NET Core
 slug: middleware-in-asp-net-core
 createAt: 2024-08-03T19:25:00+08:00
 tags:
-  - ASP.NET Core
-  - C#
+  - asp-net-core
+  - csharp
 abstract: ASP.NET Core中，請求與回應會經過一連串的Middleware（中介軟體），每個Middleware都有各自的職責，例如用於驗證、授權或是錯誤處理等。當請求或回應流經Middleware時，Middleware會處理並選擇是否將請求傳遞到下一個Middleware，或者是將其短路。
 ---
 

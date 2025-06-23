@@ -3,7 +3,7 @@ title: Delegates 委派
 slug: csharp-delegates
 createAt: 2024-02-20T00:00:00+08:00
 tags:
-    - C#
+    - csharp
 abstract: 我們可以把委派想像成是一個沒有內容的函式，可以被用來當作是某個函式的臨時替身，當我們決定好要用哪個函式時再將真正的函式變成委派實體，並呼叫委派實體以執行該函式。
 ---
 

@@ -4,7 +4,7 @@ slug: difference-between-ienumerable-iqueryable-linq
 createAt: 2023-09-25T00:00:00+08:00
 tags:
     - LINQ
-    - C#
+    - csharp
 abstract: 當使用LINQ查詢時，執行對象是IEnumerable或是IQueryable有很大的差異。
 ---
 

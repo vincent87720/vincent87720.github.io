@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-Hant"> <head><meta charset="UTF-8"><meta name="description" content="請求的驗證是很多系統都會需要實作的功能之一，本篇筆記介紹在 ASP.NET Core 中驗證的機制以及在驗證中各個角色的負責項目。本篇筆記會介紹 Authentication middleware、authentication scheme 及 authentication handler 之間的關係，以及 authentication handler 中 Authenticate、Challenge 及 Forbid 分別代表的意義以及觸發的時機。"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><meta name="generator" content="Astro v4.2.1"><title>ASP.NET Core 中的驗證 - 柴魚筆記</title><meta name="google-site-verification" content="2IBowwEd6BLzhCDp1tolkz_388wjn2Vtwr9FedCaH_g"><link rel="preload" href="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" as="image"><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-C1T2SE8P95"></script><link rel="stylesheet" href="/assets/style.kBBADmmz.css" /><script type="module" src="/assets/hoisted.E2jjHYdj.js"></script><style>[data-astro-transition-scope="astro-4vhbyfto-1"] { view-transition-name: astro-4vhbyfto-1; }@layer astro { ::view-transition-old(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-4vhbyfto-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4vhbyfto-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4vhbyfto-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-transition-scope="astro-4vhbyfto-1">   <custom-astro-element data-astro-cid-pux6a34n> <div id="navOuter" class="nav-outer" data-astro-cid-pux6a34n> <nav class="nav-inner" data-astro-cid-pux6a34n> <span class="logo" data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <img src="/favicon.svg" data-astro-cid-pux6a34n> </a> </span> <ul data-astro-cid-pux6a34n> <li data-astro-cid-pux6a34n> <a href="/" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Home</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/author/Katsuobushi" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Author</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/tags" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Tags</span> </a> </li><li data-astro-cid-pux6a34n> <a href="/series" data-astro-cid-pux6a34n> <span data-astro-cid-pux6a34n>Series</span> </a> </li> </ul> </nav> <div class="nav-control" data-astro-cid-pux6a34n> <a id="MenuBtn" class="nav-control-inner" data-astro-cid-pux6a34n> <span class="icon icon-menu" data-astro-cid-pux6a34n>Menu</span> </a> </div> </div> <div id="navOverlay" data-astro-cid-pux6a34n></div> </custom-astro-element>     <progress-bar-element data-astro-cid-dkeyiay5> <div id="progress-container" class="progress-container" data-astro-cid-dkeyiay5> <span id="progress-bar" class="progress-bar" data-astro-cid-dkeyiay5></span> </div> </progress-bar-element> <header class="main-header has-cover" data-astro-cid-yl355ysp> <div class="content" data-astro-cid-yl355ysp> <div class="header-box" data-astro-cid-yl355ysp>  <div class="post-info" data-astro-cid-qwcrhz7j> <div class="post-type" data-astro-cid-qwcrhz7j> <span data-astro-cid-qwcrhz7j>Article</span>  <span class="post-type-dash" data-astro-cid-qwcrhz7j>－</span> <span data-astro-cid-qwcrhz7j>asp-net-core</span>  </div> <h1 class="post-title" data-astro-cid-qwcrhz7j>ASP.NET Core 中的驗證</h1> <div class="post-metadata" data-astro-cid-qwcrhz7j> <span class="author-avatar" data-astro-cid-qwcrhz7j> <img src="/favicon.svg" data-astro-cid-qwcrhz7j> </span> <div class="metadata-right" data-astro-cid-qwcrhz7j> <h4 class="metadata-author" data-astro-cid-qwcrhz7j>Katsuobushi</h4> <span class="metadata-datetime" data-astro-cid-qwcrhz7j> 2025-06-20T10:34:14+08:00 </span> </div> </div> </div>   </div> <div class="main-cover" data-astro-cid-yl355ysp> <img src="/assets/VisualStudioGray.TS9KzOt__Z20LzVa.webp" alt="" data-astro-cid-yl355ysp width="3840" height="2160" loading="lazy" decoding="async"> </div> </div> </header>  <article data-astro-cid-dkeyiay5> <div class="content" data-astro-cid-dkeyiay5> <div class="markdown">  <p>想像我們接手管理一棟大樓，我們都知道大樓裡有很多項工作，例如驗證訪客身份、收包裹或澆花，因為我們很懶我們決定請一個管理員來幫我們處理這些事。</p>
+<p>這個管理員很敬業，我們可以指定他要做什麼工作，而且他都會依照需求、規格及流程執行。</p>
+<p>當我們跟這個管理員說我們需要他在人員進入大樓時驗證訪客的身份，這個要求就相當於我們把 authentication middleware 加入到程式中。管理員現在看到訪客要進入大樓時就會去驗證這個訪客的身份，就相當於執行 authentication service。</p>
+<p>當然，我們需要告訴管理員有哪些驗證的方法，不然他不會曉得有哪些驗證方法可以用，例如可以用大樓發放的磁卡或是用通關密語驗證使用者。只要告訴管理員有哪些方法可以驗證訪客的身份他就會知道在哪種情況下有哪些 SOP 可以用來驗證訪客身份。</p>
+<p>給管理員的驗證方法就相當於 authentication scheme，例如「用大樓發放的磁卡」驗證，這種方法就是一個 scheme。而實際驗證時遇到哪種情況該如何處理，就會定義在一個驗證的指南並交給管理員，這個指南就是 authentication handler。</p>
+<h2 id="設定驗證機制">設定驗證機制</h2>
+<p>在 ASP.NET Core 中，驗證由 authentication middleware 負責處理，authentication middleware 使用 authentication service 執行驗證。</p>
+<p>在程式中時常會有驗證請求的需求，而驗證請求又有許多種不同的方法或方案，在 ASP.NET Core 中我們將驗證方案稱呼為 authentication scheme。一個程式中可以有很多種不同的 authentication scheme，例如使用 cookie 驗證的 scheme、使用 JWTBearer 驗證的 Scheme或是自訂驗證方式的 Scheme。當我們決定選用某種 scheme 時，需將該 scheme 註冊到 authentication service（在 Program.cs 中使用AddAuthentication()及需要的 scheme）。</p>
+<p>Authentication scheme 包含了 authentication handler 和其他相關設定（例如由外部傳入要用於 handler 的設定值）。authentication handler 負責驗證使用者是否合法，並且需定義當使用者合法或不合法時該如何處理。</p>
+<p>要使用 authentication middleware 除了要設定 authentication service 以外，還需要將 UseAuthentication 註冊到程式中，UseAuthentication 必須放在任何需要驗證才能使用的 middleware 之前才能有效保護資源。</p>
+<p>當只有一個 scheme 被註冊，該 scheme 會自動變成 default scheme。如果有多個 scheme 被註冊但是沒有指定 default scheme，則需要在每個 authorize attribute 或任何需要用到 scheme 的地方明確指定要使用的 scheme，否則會拋出 InvalidOperationException 錯誤。</p>
+<h2 id="執行驗證">執行驗證</h2>
+<p>在需要驗證的地方使用 authorization attributes 指定一個或多個 scheme。</p>
+<h2 id="authentication-scheme">Authentication Scheme</h2>
+<p>Authentication Scheme 是一個包含 authentication handler 和 authentication scheme option 的驗證方案。每個方案內會描述 authentication、challenge 及 forbid 等行為。</p>
+<p>每個 authentication Scheme 都有一個名稱，當要使用 authorization policy 指定要用哪些驗證計畫時會用到。</p>
+<h3 id="authenticate">Authenticate</h3>
+<p>Authenticate 負責建立請求中的使用者ID，若驗證成功會將使用者ID放在 authentication ticket 中並返回 AuthenticateResult。</p>
+<h3 id="challenge">Challenge</h3>
+<p>當尚未被授權的使用者嘗試存取需要授權才能存取的資源時，Authorization（授權）會呼叫 Challenge（IAuthenticationService.ChallengeAsync） 並告知使用者這個 Scheme 需要符合哪些驗證機制才可以存取該受保護的資源。</p>
+<h3 id="forbid">Forbid</h3>
+<p>當一個已通過驗證的使用者嘗試存取他無權限存取的資源時，Authorization（授權）會呼叫 Forbid（IAuthenticationService.ForbidAsync），forbid action 需要讓使用者知道他的操作是未經授權的，例如使用 cookie authentication scheme 時把使用者導向 forbidden 頁面，或是使用 JWT bearer scheme 時回覆403，或是使用自訂授權時將使用者導向可以要求或取得授權的頁面。</p>
+<h6 id="參考資料">參考資料</h6>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-9.0">Overview of ASP.NET Core authentication</a></li>
+<li><a href="https://blog.tigernaxo.com/posts/dotnet/startup-auth/auth_guild_1/">[.NET Core] ASP .NET Core 3.1 驗證與授權(一)-驗證與授權</a></li>
+<li><a href="https://www.cnblogs.com/RainingNight/p/authentication-in-asp-net-core.html#authenticationhttpcontextextensions">ASP.NET Core 运行原理解剖5:Authentication</a></li>
+</ul>  </div>  <div class="post-footer" data-astro-cid-ctzdi7mj> <div class="post-tags" data-astro-cid-ctzdi7mj> <span class="post-tags-label" data-astro-cid-ctzdi7mj>Topic</span> <div class="post-tags-list" data-astro-cid-ctzdi7mj> <a class="post-tag-badge" href="/tag/asp-net-core" data-astro-cid-ctzdi7mj> asp-net-core </a><a class="post-tag-badge" href="/tag/csharp" data-astro-cid-ctzdi7mj> csharp </a> </div> </div> <div class="post-nav" data-astro-cid-ctzdi7mj> <div class="post-nav-half" data-astro-cid-ctzdi7mj>  </div> <div class="post-nav-half" data-astro-cid-ctzdi7mj> <a class="post-nav-next" href="/index-fragmentation" data-astro-cid-ctzdi7mj> <span class="post-nav-icon-right" data-astro-cid-ctzdi7mj></span> <h2 class="post-nav-title" data-astro-cid-ctzdi7mj>Index fragmentation 索引碎片化</h2> <p class="post-nav-abstract" data-astro-cid-ctzdi7mj>在對資料庫進行異動時，資料庫會將資料寫入 Page、在 Page 之間移動或是從 Page 中移除，資料庫會決定資料要放在既有的 Page 或是多開一個新的 Page 儲存，在資料異動的過程中會有 Page 沒有被放滿的情況出現，在 Page 裡面留有空白的地方即稱之為 Internal fragmentation。</p> <p class="post-nav-metadata" data-astro-cid-ctzdi7mj> 2025-05-06T23:32:00+08:00 </p> </a> </div> </div> <div class="post-comments" data-astro-cid-ctzdi7mj> <script src="https://utteranc.es/client.js" repo="vincent87720/BlogComments" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script> </div> </div>  </div> </article>  <div class="nav-outer" data-astro-cid-bpgok6sl> <nav class="nav-inner" data-astro-cid-bpgok6sl> <div class="nav-inner-left" data-astro-cid-bpgok6sl> <span class="nav-copyright nav-margin" data-astro-cid-bpgok6sl> 柴魚筆記 © 2019-2025 </span> <div class="nav-external-link nav-margin" data-astro-cid-bpgok6sl> <a href="https://github.com/vincent87720" data-astro-cid-bpgok6sl>Github</a><a href="https://www.linkedin.com/in/vincent87720" data-astro-cid-bpgok6sl>LinkedIn</a> </div> </div> <span class="nav-pubinfo" data-astro-cid-bpgok6sl> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Published with
+<a href="https://astro.build" target="_blank" data-astro-cid-bpgok6sl>Astro</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Theme modified from
+<a href="https://github.com/zutrinken/attila" target="_blank" data-astro-cid-bpgok6sl>Attila</a> </div> <div class="dot" data-astro-cid-bpgok6sl>・</div> <div class="nav-mb-sm" data-astro-cid-bpgok6sl>
+Tech support by
+<a href="https://my-attic-millieqiuuuu.vercel.app/" target="_blank" data-astro-cid-bpgok6sl>Millie</a> </div> </span> </nav> </div>   <meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"> </body></html>  

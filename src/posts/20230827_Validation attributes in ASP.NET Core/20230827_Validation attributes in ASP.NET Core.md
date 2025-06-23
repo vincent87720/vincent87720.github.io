@@ -3,8 +3,8 @@ title: Validation attributes in ASP.NET Core
 slug: validation-attributes-in-asp-net-core
 createAt: 2023-08-27T00:00:00+08:00
 tags:
-    - ASP.NET Core
-    - C#
+    - asp-net-core
+    - csharp
 abstract: ASP.NET Core 裡的 Validation attributes 用於設定欄位的規則，當收到 HTTP 請求時依照規則檢查請求的資料是否符合 Validation attributes 設定的規則，以此過濾掉不符合規則的請求。
 ---
 

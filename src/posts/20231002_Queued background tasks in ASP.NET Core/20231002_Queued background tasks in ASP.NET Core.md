@@ -3,8 +3,8 @@ title: Queued background tasks in ASP.NET Core
 slug: queued-background-tasks-in-asp-net-core
 createAt: 2023-10-02T00:00:00+08:00
 tags:
-    - ASP.NET Core
-    - C#
+    - asp-net-core
+    - csharp
 abstract: 在實務上有時候會遇到某些需要花費大量時間執行的任務，像我就是在寫公司專案時遇到需要產生縮圖和轉檔的需求，若不想讓使用者一直轉圈圈等待的話，我們必須採用一些方法讓我們可以先回覆使用者，之後再來慢慢處理這些需求，在背景中讓這些任務排隊執行就是其中一個方法。
 ---
 

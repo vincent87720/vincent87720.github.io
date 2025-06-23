@@ -3,7 +3,7 @@ title: Generic Delegates 泛型委派
 slug: generic-delegates
 createAt: 2024-06-13T00:00:00+08:00
 tags:
-    - C#
+    - csharp
 abstract: 泛型允許我們在定義時先不決定型別，在實例化時才依照呼叫者傳入的型別決定其型別。而泛型委派就是將委派以泛型的方式實作，使得委派可以在實例化時才指定其回傳值及型別。.NET提供兩個好用的泛型委派，分別是 System.Action 和 System.Func，多數情況下不需要自定義泛型委派。
 ---
 
