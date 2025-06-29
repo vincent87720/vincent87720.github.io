@@ -170,6 +170,7 @@ export const bannerConfig = {
   "/hello-deadlock": `${postCoverPath}/DiningPhilosophers'Problem_David Solis.png`,
   "/index-fragmentation": `${postCoverPath}/AGroupOfAbstractShapesFloatingInTheAir_SteveJohnson_unsplash.jpg`,
   "/asp-net-core-authentication": `${postCoverPath}/VisualStudioGray.png`,
+  "/asp-net-core-custom-authentication-scheme": `${postCoverPath}/VisualStudioGray.png`,
 };
 
 export const seriesConfig = [
